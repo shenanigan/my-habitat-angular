@@ -1,0 +1,34 @@
+/* For use in src/lib/core/theming/_palette.scss */
+$my-habitat-primary-palette: (
+    50 : #e1eaed,
+    100 : #b4cbd1,
+    200 : #83a9b3,
+    300 : #518795,
+    400 : #2b6d7e,
+    500 : #065367,
+    600 : #054c5f,
+    700 : #044254,
+    800 : #03394a,
+    900 : #022939,
+    A100 : #6fceff,
+    A200 : #3cbdff,
+    A400 : #09abff,
+    A700 : #009def,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #ffffff,
+    )
+);
+
