@@ -1,42 +1,9 @@
-<!-- <div style="width:100% ; height:100%" > 
-    <div style="width:100% ; height:50%"><img [src]="photos" ></div> 
-   <div class="container" id="box" style="border-radius: 25px; width:100% ; height:50%">
-     <div class="row justify-content-center" >
-       <div class="col-lg-12 ">
-      
-          <form [formGroup]="loginform" (ngSubmit)="loginUser()">
-             <div >
-             <div class="form-group mt-2" style="text-align: center ;">
-                 <label for="mobile" >Mobile Number</label><br>
-                 <input type="number" class="form-control" id="mobile" formControlName="mobile" placeholder="Enter Mobile Number"  >
-             </div>
-            <i><span style="color: crimson;" *ngIf="user && user.invalid &&  user.touched">Enter Valid Number</span></i>
-              <div  >
-               
-             <button class="btn btn-success   rounded-pill" style="width: 90%; border-radius: 20px;" id="ok" [disabled]="loginform.invalid">LogIn</button><br>
-            </div>
-                  </div>
-   
-               
-                <div>
-                     <pre style="margin:0;display:inline; text-align: center;">Don't Have an Account?</pre>
-                     <pre  style="margin:0;display:inline; text-align: left; border-radius: 10px; "  class="btn-success" >Sigin</pre>
-                </div>
-          </form>
-          
-       </div>
-      </div>
-   </div>
-   </div> -->
-
-
 
 <div class="login-container">
 
   <div class="d-flex justify-content-between p-3">
-    <span>Back</span>
+    <span class="header-label">Back</span>
     <span class="header-label">Login</span>
-    <span>Close</span>
 
   </div>
 
