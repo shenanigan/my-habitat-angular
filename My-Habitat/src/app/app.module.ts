@@ -16,6 +16,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { NoticeboardComponent } from './noticeboard/noticeboard.component';
 import { SocietyIssueComponent } from './society-issue/society-issue.component';
 import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
   
@@ -28,7 +29,8 @@ import { HomeComponent } from './home/home.component';
     PageNotFoundComponent,
     NoticeboardComponent,
     SocietyIssueComponent,
-    HomeComponent
+    HomeComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

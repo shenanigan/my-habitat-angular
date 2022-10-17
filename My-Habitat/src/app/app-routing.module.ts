@@ -5,6 +5,7 @@ import { NoticeboardComponent } from './noticeboard/noticeboard.component';
 import { OtpComponent } from './otp/otp.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PhoneNuberComponent } from './phone-nuber/phone-nuber.component';
+import { ProfileComponent } from './profile/profile.component';
 import { SocietyIssueComponent } from './society-issue/society-issue.component';
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'otp', component: OtpComponent },  
   {path: 'Noticeboard', component:NoticeboardComponent},
   {path:'Home', component:HomeComponent},
+  {path:'Profile', component:ProfileComponent},
   {path:'SocietyIssue', component:SocietyIssueComponent},
   { path: '**', component: PageNotFoundComponent }, 
 
