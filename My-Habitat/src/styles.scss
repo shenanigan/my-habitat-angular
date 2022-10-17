@@ -11,7 +11,6 @@
 @import './my-habitat-palette.scss';
 @import './theme/label/label.scss';
 @import './theme/form-field/form-field.scss';
-@import './theme/button/button.scss';
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -35,7 +34,8 @@ $My-Habitat-theme: mat.define-light-theme((
     accent: $My-Habitat-accent,
     warn: $My-Habitat-warn,
   ),
-  typography: ()
+  typography: (), 
+  style: ()
 ));
 
 // Include theme styles for core and each component used in your app.

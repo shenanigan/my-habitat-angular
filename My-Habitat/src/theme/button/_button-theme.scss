@@ -6,6 +6,10 @@
 
     $primary-palette: map.get($color-config, 'primary');
 
+    .filter-btn {
+        color: mat.get-color-from-palette($primary-palette, 1100) !important;
+    }
+
 }
 
 @mixin typography($theme) {
@@ -15,6 +19,45 @@
         font-weight: 100 !important;
         font-size: 16px !important;
     }
+
+    .mat-stroke-button {
+        font-weight: 200 !important;
+        font-size: 12px !important;
+
+    }
+
+    .filter-btn {
+        font-size: 14px !important;
+        font-weight: 700 !important;
+    }
+}
+
+
+
+@mixin style($theme) {
+    $style-config: mat.get-color-config($theme);
+
+    $primary-palette: map.get($style-config, 'primary');
+
+
+    .mat-flat-button {
+        border-radius: 25px !important;
+        height: 50px !important;
+    }
+
+    .filter-btn {
+        background-color: transparent;
+        border-radius: 17px !important;
+        height: 34px !important;
+        line-height: 10px !important;
+    }
+
+    .filter-btn.active {
+        background-color: mat.get-color-from-palette($primary-palette, 1000) !important;
+    }
+    .filter-btn.warn {
+        background-color: mat.get-color-from-palette($primary-palette, 900) !important;
+    }
 }
 
 @mixin theme($theme) {
@@ -22,6 +65,7 @@
 
     @if $color-config !=null {
         @include color($theme);
+        @include style($theme);
     }
 
     $typography-config: mat.get-typography-config($theme);

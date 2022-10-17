@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -13,13 +12,5 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  Signinform=new FormGroup({
-    name: new FormControl('',[Validators.required])
-
-  })
-
-  url(){
-    return    ""
-  }
-
+ 
 }
