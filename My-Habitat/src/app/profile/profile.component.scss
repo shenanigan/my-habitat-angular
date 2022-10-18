@@ -1,0 +1,63 @@
+.top-conatainer{
+    height: 160px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('https://img.freepik.com/free-vector/colorful-palm-silhouettes-background_23-2148541792.jpg?w=2000');
+}
+
+.bottom-container{
+    background-color:  #f2f2f2;
+    position: fixed;
+    box-shadow: 0px -10px 15px #33333333;
+    padding: 16px;
+    top:  140px;
+    right: 0%;
+    left: 0%;
+    bottom: 0%;
+    border-radius: 20px;
+}
+
+.user-info{ display: flex;
+  text-align: center;  
+  justify-content: center;
+  flex-direction: column;
+}
+
+.faded-mail{opacity: 0.63;
+  padding-bottom: 40px;
+}
+
+
+.middle-container{padding: 17px;
+  background-color: white; 
+   border-radius: 10px;
+} 
+
+.subcontainer{display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flex-item { display: flex;
+  text-align: center;  
+  justify-content: center;
+}
+
+.circular-img{
+height: 60px; ;
+width: 60px;
+border-radius: 50%;
+
+}
+
+.img-center{text-align: center;
+  margin-top: -45px;
+}
+
+.scrollbar{
+  float: right;
+  width: 10px;
+  height: 100%;
+  overflow-y: scroll;
+  background: #b1c3db;
+}

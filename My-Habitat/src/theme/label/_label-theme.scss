@@ -7,11 +7,14 @@
     $primary-palette: map.get($color-config, 'primary');
      
     .small-label,
+    .smallest-label,
     .opacity-label,
     .title-label,
     .description-label,
     .header-label,
-    .paragraph-label {
+    .paragraph-label,
+    .sub-label
+     {
         color: mat.get-color-from-palette($primary-palette, 500) !important;
     }
 
@@ -43,7 +46,13 @@
     .small-label{
         font-size: 14px !important;
     }
-
+    .sub-label{
+        font-size: 15px !important;
+    }
+    .smallest-label{
+        font-size: 12px !important;
+    }
+    
 }
 
 @mixin theme($theme) {
