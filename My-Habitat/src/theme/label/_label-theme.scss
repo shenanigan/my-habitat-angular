@@ -7,13 +7,16 @@
     $primary-palette: map.get($color-config, 'primary');
      
     .small-label,
-    .smallest-label,
+    .smallest-opacity-label,
     .opacity-label,
     .title-label,
     .description-label,
     .header-label,
     .paragraph-label,
-    .sub-label
+    .sub-label,
+    .sub-heading-label,
+    .header2-label
+
      {
         color: mat.get-color-from-palette($primary-palette, 500) !important;
     }
@@ -36,6 +39,10 @@
         font-weight: 700 !important;
         font-size: 18px !important;
     }
+    .header2-label{
+        font-weight: 700 !important;
+        font-size: 17px !important;
+    }
     .paragraph-label{
         font-weight: 500 !important;
         font-size: 17px !important;
@@ -45,12 +52,20 @@
     }
     .small-label{
         font-size: 14px !important;
+        font-weight: 600 !important;
     }
     .sub-label{
         font-size: 15px !important;
     }
-    .smallest-label{
+    .smallest-opacity-label{
         font-size: 12px !important;
+        font-weight: 600 !important;
+        opacity: 0.50 !important;
+    }
+
+    .sub-heading-label{
+        font-size: 17px !important;
+        font-weight: 600 !important;
     }
     
 }

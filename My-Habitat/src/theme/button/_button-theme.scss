@@ -30,6 +30,12 @@
         font-size: 14px !important;
         font-weight: 700 !important;
     }
+    
+    .mat-button-small{
+        font-size: 12px !important;
+        font-weight: 500 !important;
+    }
+
 }
 
 
@@ -40,6 +46,7 @@
     $primary-palette: map.get($style-config, 'primary');
 
 
+    
     .mat-flat-button {
         border-radius: 25px !important;
         height: 50px !important;
@@ -58,6 +65,12 @@
     .filter-btn.warn {
         background-color: mat.get-color-from-palette($primary-palette, 900) !important;
     }
+ 
+   .mat-button-small{
+    color: mat.get-color-from-palette($primary-palette, 900) !important;
+   }
+
+
 }
 
 @mixin theme($theme) {

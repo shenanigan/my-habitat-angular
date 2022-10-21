@@ -17,6 +17,8 @@ import { NoticeboardComponent } from './noticeboard/noticeboard.component';
 import { SocietyIssueComponent } from './society-issue/society-issue.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
+import { TermsComponent } from './terms/terms.component';
+import { ResidentComponent } from './resident/resident.component';
 
 
   
@@ -30,7 +32,9 @@ import { ProfileComponent } from './profile/profile.component';
     NoticeboardComponent,
     SocietyIssueComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    TermsComponent,
+    ResidentComponent
   ],
   imports: [
     BrowserModule,

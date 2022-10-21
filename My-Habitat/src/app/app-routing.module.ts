@@ -6,7 +6,9 @@ import { OtpComponent } from './otp/otp.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PhoneNuberComponent } from './phone-nuber/phone-nuber.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ResidentComponent } from './resident/resident.component';
 import { SocietyIssueComponent } from './society-issue/society-issue.component';
+import { TermsComponent } from './terms/terms.component';
 
 const routes: Routes = [
   {path: '', component:PhoneNuberComponent},
@@ -16,6 +18,8 @@ const routes: Routes = [
   {path:'Home', component:HomeComponent},
   {path:'Profile', component:ProfileComponent},
   {path:'SocietyIssue', component:SocietyIssueComponent},
+  {path:'Terms' , component:TermsComponent},
+  {path:'Resident', component:ResidentComponent},
   { path: '**', component: PageNotFoundComponent }, 
 
 ];
