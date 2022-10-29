@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddFamilyComponent } from './add-family/add-family.component';
 import { HomeComponent } from './home/home.component';
 import { NoticeboardComponent } from './noticeboard/noticeboard.component';
 import { OtpComponent } from './otp/otp.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path:'SocietyIssue', component:SocietyIssueComponent},
   {path:'Terms' , component:TermsComponent},
   {path:'Resident', component:ResidentComponent},
+  {path:'AddFamily', component:AddFamilyComponent},
   { path: '**', component: PageNotFoundComponent }, 
 
 ];

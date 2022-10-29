@@ -19,6 +19,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TermsComponent } from './terms/terms.component';
 import { ResidentComponent } from './resident/resident.component';
+import { AddFamilyComponent } from './add-family/add-family.component';
 
 
   
@@ -34,7 +35,8 @@ import { ResidentComponent } from './resident/resident.component';
     HomeComponent,
     ProfileComponent,
     TermsComponent,
-    ResidentComponent
+    ResidentComponent,
+    AddFamilyComponent
   ],
   imports: [
     BrowserModule,
