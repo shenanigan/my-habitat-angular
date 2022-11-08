@@ -20,8 +20,11 @@ import { ProfileComponent } from './profile/profile.component';
 import { TermsComponent } from './terms/terms.component';
 import { ResidentComponent } from './resident/resident.component';
 import { AddFamilyComponent } from './add-family/add-family.component';
-
-
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { AddKidComponent } from './add-kid/add-kid.component';
+import {MatChipsModule} from '@angular/material/chips';
+import { EditFamilyComponent } from './edit-family/edit-family.component';
   
 @NgModule({
   declarations: [
@@ -36,7 +39,9 @@ import { AddFamilyComponent } from './add-family/add-family.component';
     ProfileComponent,
     TermsComponent,
     ResidentComponent,
-    AddFamilyComponent
+    AddFamilyComponent,
+    AddKidComponent,
+    EditFamilyComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +53,9 @@ import { AddFamilyComponent } from './add-family/add-family.component';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-
+    MatCardModule,
+    MatButtonToggleModule,
+    MatChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

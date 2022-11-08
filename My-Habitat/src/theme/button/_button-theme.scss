@@ -10,6 +10,10 @@
         color: mat.get-color-from-palette($primary-palette, 1100) !important;
     }
 
+    .mat-button-toggle-appearance-standard .mat-button-toggle-label-content{
+        color: mat.get-color-from-palette($primary-palette, 1100) !important;
+    }
+
 }
 
 @mixin typography($theme) {
@@ -35,7 +39,8 @@
         font-size: 12px !important;
         font-weight: 500 !important;
     }
-
+  
+    
 }
 
 
@@ -45,8 +50,18 @@
 
     $primary-palette: map.get($style-config, 'primary');
 
-
+    .toggle-button{
+        font-size: 15px !important;
+        font-weight: 500 !important;
+        border-radius: 18px !important;
+        border-width: 0 !important;
+        height: 36px   !important;
+       line-height: 37px !important;
+    }
+  
     
+
+
     .mat-flat-button {
         border-radius: 25px !important;
         height: 50px !important;
@@ -69,7 +84,10 @@
    .mat-button-small{
     color: mat.get-color-from-palette($primary-palette, 900) !important;
    }
-
+   .toggle-button{
+    color: mat.get-color-from-palette($primary-palette, 800) !important;
+   }
+   
 
 }
 

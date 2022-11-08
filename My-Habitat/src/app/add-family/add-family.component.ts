@@ -12,4 +12,8 @@ export class AddFamilyComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
+  addmember(){
+    console.log('member added')
+  }
 }

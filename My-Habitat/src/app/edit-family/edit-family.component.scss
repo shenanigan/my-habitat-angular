@@ -1,0 +1,41 @@
+.main-container{
+    background-color: #f2f2f2 ;
+    height: 100%;
+}
+
+.hr{  margin-top: 0em;
+   margin-bottom: 1em;
+   border-width: 2px;
+} 
+
+.family-member-photo {
+    height: 80px;
+    width: 80px;
+    border-radius: 10px;
+}
+.countrycode{
+    border-radius: 30px;
+    width: 20%;
+    height: 48px;
+}
+
+.phone-number{
+    width:78% ;
+    border-radius: 30px;
+    margin-left: 2%;
+}
+
+.mat-icon{
+    vertical-align: bottom;
+    font-size: 24px !important;
+  }
+
+  .input-name{
+    font-size: 17px;
+  }
+   
+
+  .update{
+    position: absolute;
+    bottom: 0px;
+  }
