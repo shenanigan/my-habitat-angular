@@ -1,0 +1,51 @@
+<div class="main-container">
+    <div class="d-flex justify-content-between p-3">
+        <span class="header2-label">Back</span>
+        <span class="header2-label">Household</span>
+        <span></span>
+    </div>
+    <hr class="hr">
+    <div class="bottom-container p-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="sub-heading-label">My Family</span>
+            <span> <button mat-button class="mat-button-small "  routerLink="/AddFamily">ADD FAMILY</button></span>
+        </div>
+        <div class="d-flex flex-wrap justify-content-between">
+            <div *ngFor="let member of members"
+                class="p-1 d-flex flex-column align-items-center justify-content-center">
+                <img class="member-photo" src="{{member.img}}">
+                <div class="small-label">{{member.Name}}</div>
+                <div class="smallest-opacity-label">{{member.position}}</div>
+            </div>
+        </div>
+        <hr class="">
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="sub-heading-label">Daily Help</span>
+            <span> <button mat-button class="mat-button-small">ADD DAILY HELP</button></span>
+        </div>
+        <div *ngFor="let helper of helpers" class="daily-helper d-flex p-2">
+            <img class="member-photo me-3" src="{{helper.img}}">
+            <span class="flex-grow-1">
+                <div class="sub-heading-label">{{helper.Name}}</div>
+                <div class="sub-label">{{helper.Work}}</div>
+                <div class="sub-label">{{helper.visits}}</div>
+            </span>
+            <span class="align-self-center">{{helper.logo}}</span>
+        </div>
+        <hr>
+        <div>
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="sub-heading-label">Frequent Visitors</span>
+                <span> <button mat-button class="mat-button-small">ADD VISITOR</button></span>
+            </div>
+            <div class="d-flex flex-wrap justify-content-between">
+                <div *ngFor="let visitor of visitors"
+                    class="p-1 d-flex flex-column align-items-center justify-content-center">
+                    <img class="member-photo" src="{{visitor.img}}">
+                    <div class="small-label">{{visitor.Name}}</div>
+                    <div class="smallest-opacity-label">{{visitor.relation}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

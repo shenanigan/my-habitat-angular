@@ -1,0 +1,25 @@
+<div class="login-container">
+
+  <div class="d-flex justify-content-between p-3">
+    <span class="header-label">Back</span>
+    <span class="header-label">Login</span>
+  </div>
+
+
+  <form [formGroup]="loginFormGroup" (submit)="sendVerificationCode()">
+    <div class="d-flex flex-column parent-container p-4">
+      <span class="title-label">Login</span>
+      <span class="description-label mt-3">Enter your phone number to login.</span>
+
+      <mat-form-field appearance="outline" class="w-100 mt-4" hideRequiredMarker>
+        <input matInput formControlName="phoneNumber" class="Phone Number" placeholder="Phone Number" maxlength="12"
+          minlength="7">
+      </mat-form-field>
+
+      <div class="flex-grow-1 align-items-end d-flex w-100">
+        <button mat-flat-button color="primary" [disabled]="!loginFormGroup.valid" class="w-100">Send Verification
+          Code</button>
+      </div>
+    </div>
+  </form>
+</div>

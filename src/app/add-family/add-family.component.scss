@@ -1,0 +1,53 @@
+
+.main-container{
+  background-color: #f2f2f2 ;
+  border-top-left-radius: 25px;
+ border-top-right-radius: 25px;
+  bottom: 0px;
+  height: 100%;
+}
+.hr{
+  margin-top: -5px;
+}
+
+.photo-container{
+  background-color: white;
+  border-radius: 10px;
+  width: 120px;
+  height: 120px;
+}
+
+.togle-container{
+border-radius: 30px;
+background-color: white;
+}
+
+.togle-group{
+  border-width:0px;
+  height: 48px;
+  align-items: center;
+}
+.middle-container{height: 48px;}
+
+.countrycode{
+  border-radius: 30px;
+  width: 20%;
+  height: 48px;
+}
+.phone-number{
+  width:78% ;
+  border-radius: 30px;
+  margin-left: 2%;
+}
+
+.add-buuton{
+  position: absolute;
+  bottom: 0px;
+}
+
+.mat-icon{
+  vertical-align: bottom;
+  font-size: 21px !important;
+}
+.input-name{font-size:21px;
+  line-height:24px;}
