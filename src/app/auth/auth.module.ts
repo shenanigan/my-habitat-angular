@@ -12,9 +12,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './+state/auth.effects';
 import { StoreModule } from '@ngrx/store';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { OtpComponent } from './presentation/ui/otp/otp.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [PhoneNumberComponent],
+  declarations: [PhoneNumberComponent, OtpComponent],
   imports: [
     AuthRoutingModule,
     ReactiveFormsModule,
@@ -24,6 +26,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatInputModule,
     CommonModule,
     MatSnackBarModule,
+    MatIconModule,
     EffectsModule.forFeature([AuthEffects])
   ],
   providers:

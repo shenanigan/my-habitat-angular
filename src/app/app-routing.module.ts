@@ -6,7 +6,6 @@ import { AddKidComponent } from './add-kid/add-kid.component';
 import { EditFamilyComponent } from './edit-family/edit-family.component';
 import { HomeComponent } from './home/home.component';
 import { NoticeboardComponent } from './noticeboard/noticeboard.component';
-import { OtpComponent } from './otp/otp.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ResidentComponent } from './resident/resident.component';
@@ -15,9 +14,8 @@ import { TermsComponent } from './terms/terms.component';
 
 const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
-  { path: 'otp', component: OtpComponent },
-  { path: 'Noticeboard', component: NoticeboardComponent },
-  { path: 'Home', component: HomeComponent },
+  { path: 'noticeboard', component: NoticeboardComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'Profile', component: ProfileComponent },
   { path: 'SocietyIssue', component: SocietyIssueComponent },
   { path: 'Terms', component: TermsComponent },

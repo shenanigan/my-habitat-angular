@@ -12,14 +12,17 @@ import { sendOtp, sendOtpSuccess } from 'src/app/auth/+state/auth.actions';
 })
 export class PhoneNumberComponent implements OnInit, OnDestroy {
   private _actionsSubscription: Subscription;
-
+  
+  loginFormGroup = new FormGroup({
+    phoneNumber: new FormControl('', [Validators.required, Validators.pattern("^\\d{7,12}$")]),
+  })
   constructor(private _router: Router,
     private _actions$: ActionsSubject,
     private _store: Store) {
 
     this._actionsSubscription = this._actions$.pipe(
       ofType(sendOtpSuccess)).subscribe(_ => {
-        this._router.navigate(['/otp'], {
+        this._router.navigate(['/auth/otp'], {
           state: {
             phoneNumber: this.loginFormGroup.get('phoneNumber')?.value
           }
@@ -33,9 +36,7 @@ export class PhoneNumberComponent implements OnInit, OnDestroy {
     this._actionsSubscription.unsubscribe()
   }
 
-  loginFormGroup = new FormGroup({
-    phoneNumber: new FormControl('', [Validators.required, Validators.pattern("^\\d{7,12}$")]),
-  })
+
 
   sendVerificationCode() {
     const phoneNumber = this.loginFormGroup.get('phoneNumber')?.value

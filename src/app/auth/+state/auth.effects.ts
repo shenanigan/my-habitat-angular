@@ -46,10 +46,10 @@ export class AuthEffects {
                     const request: IVerifyOtpRequest = {
                         countryCode: d.countryCode,
                         phoneNumber: d.phoneNumber,
-                        otp: d.otp
+                        code: d.otp
                     }
-                    return this._authService.sendOtp(request).
-                        pipe(map(_ => verifyOtpSuccess()),
+                    return this._authService.verifyOtp(request).
+                        pipe(map(token => verifyOtpSuccess({ token })),
                             catchError(err => {
                                 this._snackBarService.open(err.message, 'CANCEL');
                                 return of(failed(err))

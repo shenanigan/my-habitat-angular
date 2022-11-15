@@ -1,0 +1,25 @@
+<div class="otp-container">
+
+    <div class="d-flex justify-content-between otp-container p-3">
+        <span class="header-label" routerLink="/auth/phone">Back</span>
+        <span class="header-label">Verify</span>
+    </div>
+
+    <form [formGroup]="otpFormGroup" (submit)="verify()">
+        <div class="d-flex flex-column parent-container p-4">
+            <div class="title-label mb-2">Enter recovery code</div>
+            <div class="description-label"> We have sent it on your mobile</div>
+            <mat-form-field appearance="outline" class="mt-4">
+                <input matInput [type]="hide ? 'password' : 'text'" placeholder="Verification Code" formControlName="otp">
+                <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon class="customIconSize"> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <div class="flex-grow-1 align-items-end d-flex w-100">
+                <button mat-flat-button color="primary" [disabled]="!otpFormGroup.valid" class="w-100"> Verify</button>
+            </div>
+        </div>
+    </form>
+</div>
