@@ -1,0 +1,67 @@
+.main-container{
+ background-color: #f2f2f2 ;
+    border-top-left-radius: 25px;
+   border-top-right-radius: 25px;
+    bottom: 0px;
+    height: 100%;
+}
+.hr{
+    margin-top: -5px;
+}
+
+.photo-container{
+    background-color: white;
+    border-radius: 10px;
+    width: 120px;
+    height: 120px;
+}
+
+.mat-button-toggle-group-appearance-standard, .mat-button-toggle-standalone.mat-button-toggle-appearance-standard{
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    border-radius: 30px !important;
+    border-width:0px !important;
+    line-height: 24px;
+    align-items: center !important;
+
+ 
+}
+
+.ruleActionOnOffButton .mat-button-toggle-appearance-standard .mat-button-toggle-label-content{
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    border-radius: 18px !important;
+    border-width: 0 !important;
+    
+}
+
+
+
+
+
+.togle-container{
+    border-radius: 30px;
+    background-color: white;
+  padding-left: 3;
+  padding-right: 3;
+}
+.togle-group{
+    border-width:0px;
+    height: 44px;
+    align-items: center;
+}
+
+.mat-standard-chip{
+    min-height: 36px;
+    border-radius: 30px;
+}
+.mat-chip{
+    font-size: 15px;
+    font-weight: 400;
+}
+
+
+.add-buuton{
+    position: absolute;
+    bottom: 0px;
+}

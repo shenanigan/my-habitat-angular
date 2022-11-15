@@ -1,0 +1,39 @@
+<div class="main-container">
+    <div class="d-flex justify-content-between p-3">
+        <span class="header2-label">arow </span>
+        <span class="header2-label">Edit Family</span>
+        <span style="visibility:hidden ;">hdbbh</span>
+    </div>
+    <hr class="hr">
+   <div class="d-flex  justify-content-center">
+      <img class="family-member-photo " src="http://bluegalaxy.info/images/sea_captain.jpg">
+   </div> 
+    <form>
+        <div class="p-3 justify-content-center w-100 ">
+            <div class="sub-mini-label">Phone Number</div>
+            <span>
+                <select name="countryCode" class="countrycode">
+                   <option data-countryCode="QT" value="+974" Selected>Qatar +974</option>
+                   <option data-countryCode="BH" value="+973">Bhrin +973</option>
+                </select>
+            </span>
+           <span>
+                <mat-form-field appearance="outline" class="phone-number " hideRequiredMarker>
+                   <input matInput class="input-number" placeholder="Phone Number" maxlength="12"  minlength="7">
+               </mat-form-field>
+            </span>
+            <div class="sub-mini-label name">Name</div>
+           <mat-form-field  class="w-100" appearance="outline"  hideRequiredMarker>
+            <input  matInput class="input-name"  type="text">
+            <mat-icon class="mat-icon" matSuffix>perm_contact_calendar</mat-icon>
+            </mat-form-field> 
+        
+        </div>
+        <div class="flex-grow-1 align-items-end update p-3  d-flex w-100">
+            <button mat-button color="warn">Delete</button>
+            <button mat-flat-button color="primary" class="w-100">Update</button>
+        </div>
+    </form>
+   
+
+</div>
