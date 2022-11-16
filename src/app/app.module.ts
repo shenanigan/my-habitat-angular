@@ -11,7 +11,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { NoticeboardComponent } from './noticeboard/noticeboard.component';
 import { SocietyIssueComponent } from './society-issue/society-issue.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -33,7 +32,6 @@ import { StoreModule } from '@ngrx/store';
     AppComponent,
     SignInComponent,
     PageNotFoundComponent,
-    NoticeboardComponent,
     SocietyIssueComponent,
     HomeComponent,
     ProfileComponent,

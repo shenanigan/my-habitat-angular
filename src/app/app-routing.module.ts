@@ -5,7 +5,6 @@ import { AddFamilyComponent } from './add-family/add-family.component';
 import { AddKidComponent } from './add-kid/add-kid.component';
 import { EditFamilyComponent } from './edit-family/edit-family.component';
 import { HomeComponent } from './home/home.component';
-import { NoticeboardComponent } from './noticeboard/noticeboard.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ResidentComponent } from './resident/resident.component';
@@ -14,7 +13,7 @@ import { TermsComponent } from './terms/terms.component';
 
 const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
-  { path: 'noticeboard', component: NoticeboardComponent },
+  { path: 'noticeboard', loadChildren: () => import('./society/society.module').then(m => m.SocietyModule) },
   { path: 'home', component: HomeComponent },
   { path: 'Profile', component: ProfileComponent },
   { path: 'SocietyIssue', component: SocietyIssueComponent },
