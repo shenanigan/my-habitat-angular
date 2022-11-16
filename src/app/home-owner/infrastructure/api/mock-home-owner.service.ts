@@ -27,13 +27,13 @@ export class MockHomeOwnerService extends BaseService implements IHomeOwnerServi
 
             var householdWife = new Household('123456789')
             householdWife.countryCode = 91
-            householdWife.name = 'Test WifeName'
+            householdWife.name = 'Test W.'
             householdWife.role = 'Wife'
             householdWife.phoneNumber = '1234567890'
             householdWife.type = 'FAMILY_ADULT'
 
             var householdKid = new Household('Test_Kid_Id')
-            householdKid.name = 'Test KidName'
+            householdKid.name = 'Test K.'
             householdKid.role = 'Kid'
             householdKid.permission = 'SEND_NOTIFICATION'
             householdKid.type = 'FAMILY_KID'
@@ -54,14 +54,14 @@ export class MockHomeOwnerService extends BaseService implements IHomeOwnerServi
 
             var householdVisitor1 = new Household('Test_Visitor1_Id')
             householdVisitor1.countryCode = 91
-            householdVisitor1.name = 'Test Visitor1'
+            householdVisitor1.name = 'Test V.'
             householdVisitor1.role = 'Friend'
             householdVisitor1.phoneNumber = '1234567890'
             householdVisitor1.type = 'FREQUENT_VISITOR'
 
             var householdVisitor2 = new Household('Test_Visitor2_Id')
             householdVisitor2.countryCode = 91
-            householdVisitor2.name = 'Test Visitor2'
+            householdVisitor2.name = 'Test V.'
             householdVisitor2.role = 'Colleague'
             householdVisitor2.phoneNumber = '1234567890'
             householdVisitor2.type = 'FREQUENT_VISITOR'

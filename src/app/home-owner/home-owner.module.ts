@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { homeOwnerFeatureName, homeOwnerReducer } from './+state/home-owner.reducer';
@@ -16,10 +17,12 @@ import { MockHomeOwnerService } from './infrastructure/api/mock-home-owner.servi
 import { HomeOwnerEffects } from './+state/home-owner.effects';
 import { ResidentComponent } from './presentation/ui/resident/resident.component';
 import { HomeOwnerService } from './infrastructure/api/home-owner.service';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { AddFamilyComponent } from './presentation/ui/add-family/add-family.component';
 
 
 @NgModule({
-  declarations: [ResidentComponent],
+  declarations: [ResidentComponent, AddFamilyComponent],
   imports: [
     CommonModule,
     HomeOwnerRoutingModule,
@@ -30,13 +33,16 @@ import { HomeOwnerService } from './infrastructure/api/home-owner.service';
     MatInputModule,
     MatSnackBarModule,
     MatIconModule,
+    MatBottomSheetModule,
+    MatButtonToggleModule,
+    MatIconModule,
     StoreModule.forFeature(homeOwnerFeatureName, homeOwnerReducer),
     EffectsModule.forFeature([HomeOwnerEffects])
   ],
   providers: [
     {
       provide: AbstractHomeOwnerService,
-      useClass: HomeOwnerService
+      useClass: MockHomeOwnerService
     }
   ]
 })

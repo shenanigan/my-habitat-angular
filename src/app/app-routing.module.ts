@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 
 import { RouterModule, Routes } from '@angular/router';
-import { AddFamilyComponent } from './add-family/add-family.component';
 import { AddKidComponent } from './add-kid/add-kid.component';
 import { EditFamilyComponent } from './edit-family/edit-family.component';
 import { HomeComponent } from './home/home.component';
@@ -18,7 +17,6 @@ const routes: Routes = [
   { path: 'Profile', component: ProfileComponent },
   { path: 'SocietyIssue', component: SocietyIssueComponent },
   { path: 'Terms', component: TermsComponent },
-  { path: 'AddFamily', component: AddFamilyComponent },
   { path: 'AddKid', component: AddKidComponent },
   { path: 'EditFamily', component: EditFamilyComponent },
   { path: '**', component: PageNotFoundComponent },

@@ -1,18 +1,46 @@
 .mat-form-field-outline-start {
-    border-radius: 28px 0 0 28px !important;
-    min-width: 28px !important;
+    border-radius: 30px 0 0 30px !important;
+    min-width: 30px !important;
 }
 
 .mat-form-field-outline-end {
-    border-radius: 0 28px 28px 0 !important;
+    border-radius: 0 30px 30px 0 !important;
 }
 
 .mat-form-field-appearance-outline .mat-form-field-outline {
     background-color: white !important;
-    border-radius: 28px !important;
-    box-shadow: 0px 0px 15px #33333333;
+    border-radius: 30px !important;
+    box-shadow: 0px 5px 10px #0000000D;
+    top: 0.75em !important;
+    color: transparent !important;
 }
 
 .mat-form-field-infix {
     border-top: 0px !important;
+}
+
+
+input.mat-input-element {
+    margin-top: 6px !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 1em 0 0.5em 0 !important;
+}
+
+.mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-flex {
+    padding: 0 1.2em 0 1.2em !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0 !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-prefix,
+.mat-form-field-appearance-outline .mat-form-field-suffix {
+    top: 0.18em !important;
 }
