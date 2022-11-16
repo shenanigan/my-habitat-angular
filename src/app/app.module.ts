@@ -15,7 +15,6 @@ import { SocietyIssueComponent } from './society-issue/society-issue.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TermsComponent } from './terms/terms.component';
-import { ResidentComponent } from './resident/resident.component';
 import { AddFamilyComponent } from './add-family/add-family.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -36,7 +35,6 @@ import { StoreModule } from '@ngrx/store';
     HomeComponent,
     ProfileComponent,
     TermsComponent,
-    ResidentComponent,
     AddFamilyComponent,
     AddKidComponent,
     EditFamilyComponent

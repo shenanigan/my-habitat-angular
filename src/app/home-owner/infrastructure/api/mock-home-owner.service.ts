@@ -1,0 +1,81 @@
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { BaseService } from "src/app/shared/infrastructure/api/base.service";
+import { Apollo } from "apollo-angular";
+import { IHomeOwnerService } from "../../domain/services/ihome-owner.service";
+import { HomeOwner } from "../../domain/entities/home-owner";
+import { Home } from "../../domain/entities/home";
+import { Household } from "../../domain/entities/household";
+
+@Injectable()
+export class MockHomeOwnerService extends BaseService implements IHomeOwnerService {
+
+    constructor(private _apollo: Apollo) {
+        super();
+    }
+    getHomeOwner(): Observable<HomeOwner> {
+        return new Observable(subscriber => {
+            var homeOwner = new HomeOwner('1234-5678-90')
+            homeOwner.name = 'Test Name'
+            homeOwner.countryCode = 91
+            homeOwner.email = 'email@myhabitat.com'
+            homeOwner.phoneNumber = '123-456-789'
+
+            var home = new Home('123-456-789')
+            home.unit = 'Test 1A'
+            homeOwner.home = home
+
+            var householdWife = new Household('123456789')
+            householdWife.countryCode = 91
+            householdWife.name = 'Test WifeName'
+            householdWife.role = 'Wife'
+            householdWife.phoneNumber = '1234567890'
+            householdWife.type = 'FAMILY_ADULT'
+
+            var householdKid = new Household('Test_Kid_Id')
+            householdKid.name = 'Test KidName'
+            householdKid.role = 'Kid'
+            householdKid.permission = 'SEND_NOTIFICATION'
+            householdKid.type = 'FAMILY_KID'
+
+            var householdMaid = new Household('Test_Maid_Id')
+            householdMaid.countryCode = 91
+            householdMaid.name = 'Test MaidName'
+            householdMaid.role = 'Maid'
+            householdMaid.phoneNumber = '1234567890'
+            householdMaid.type = 'DAILY_HELP'
+
+            var householdHelp = new Household('Test_Help_Id')
+            householdHelp.countryCode = 91
+            householdHelp.name = 'Test HelpName'
+            householdHelp.role = 'Driver'
+            householdHelp.phoneNumber = '1234567890'
+            householdHelp.type = 'DAILY_HELP'
+
+            var householdVisitor1 = new Household('Test_Visitor1_Id')
+            householdVisitor1.countryCode = 91
+            householdVisitor1.name = 'Test Visitor1'
+            householdVisitor1.role = 'Friend'
+            householdVisitor1.phoneNumber = '1234567890'
+            householdVisitor1.type = 'FREQUENT_VISITOR'
+
+            var householdVisitor2 = new Household('Test_Visitor2_Id')
+            householdVisitor2.countryCode = 91
+            householdVisitor2.name = 'Test Visitor2'
+            householdVisitor2.role = 'Colleague'
+            householdVisitor2.phoneNumber = '1234567890'
+            householdVisitor2.type = 'FREQUENT_VISITOR'
+
+            homeOwner.households?.push(householdWife)
+            homeOwner.households?.push(householdKid)
+            homeOwner.households?.push(householdMaid)
+            homeOwner.households?.push(householdHelp)
+            homeOwner.households?.push(householdVisitor1)
+            homeOwner.households?.push(householdVisitor2)
+
+
+            subscriber.next(homeOwner)
+            subscriber.complete()
+        })
+    }
+}

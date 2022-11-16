@@ -1,0 +1,11 @@
+import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { IState, homeOwnerFeatureName } from "./home-owner.reducer";
+
+const getHomeOwnerModule = createFeatureSelector<IState>(homeOwnerFeatureName);
+
+export const selectHomeOwner = () => createSelector(
+    getHomeOwnerModule,
+    state => {
+        return state.homeOwner
+    }
+);

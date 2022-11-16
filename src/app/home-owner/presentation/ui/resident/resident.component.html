@@ -1,0 +1,57 @@
+<div class="main-container">
+    <div class="d-flex justify-content-between p-3">
+        <span class="header2-label" routerLink="/home">Back</span>
+        <span class="header2-label">Household</span>
+        <span></span>
+    </div>
+    <hr class="hr">
+    <div class="bottom-container p-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="sub-heading-label">My Family</span>
+            <span> <button mat-button class="mat-button-small " routerLink="/AddFamily">ADD FAMILY</button></span>
+        </div>
+        <div class="d-flex flex-wrap justify-content-start">
+            <ng-container *ngFor="let member of (homeOwner$ | async)?.households">
+                <div class="p-1 d-flex flex-column align-items-center me-2"
+                    *ngIf="member.type === 'FAMILY_ADULT' ||  member.type === 'FAMILY_KID'">
+                    <img class="member-photo" src="http://bluegalaxy.info/images/sea_captain.jpg">
+                    <div class="small-label">{{member.name}}</div>
+                    <div class="smallest-opacity-label">{{member.role}}</div>
+                </div>
+            </ng-container>
+        </div>
+        <hr class="">
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="sub-heading-label">Daily Help</span>
+            <span> <button mat-button class="mat-button-small">ADD DAILY HELP</button></span>
+        </div>
+        <ng-container *ngFor="let helper of (homeOwner$ | async)?.households" class="daily-helper d-flex p-2">
+            <div class="daily-helper d-flex p-2" *ngIf="helper.type === 'DAILY_HELP'">
+                <img class="member-photo me-3" src="{{'http://bluegalaxy.info/images/sea_captain.jpg'}}">
+                <span class="flex-grow-1 justify-content-center d-flex flex-column">
+                    <div class="sub-heading-label">{{helper.name}}</div>
+                    <div class="sub-label">{{helper.role}}</div>
+                    <div class="sub-label">{{'0'}}</div>
+                </span>
+                <!-- <span class="align-self-center">{{helper.logo}}</span> -->
+            </div>
+        </ng-container>
+        <hr>
+        <div>
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="sub-heading-label">Frequent Visitors</span>
+                <span> <button mat-button class="mat-button-small">ADD VISITOR</button></span>
+            </div>
+            <div class="d-flex flex-wrap justify-content-start">
+                <ng-container *ngFor="let member of (homeOwner$ | async)?.households">
+                    <div class="p-1 d-flex flex-column align-items-center me-2"
+                        *ngIf="member.type === 'FREQUENT_VISITOR'">
+                        <img class="member-photo" src="http://bluegalaxy.info/images/sea_captain.jpg">
+                        <div class="small-label">{{member.name}}</div>
+                        <div class="smallest-opacity-label">{{member.role}}</div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
