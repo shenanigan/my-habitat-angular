@@ -5,39 +5,46 @@
    </div>
    <hr class="hr pb-1">
    <div class="p-3">
-      <form (submit)="addmember()">
+      <form [formGroup]="addHouseholeFormGroup" (submit)="addHousehold()">
          <div class="d-flex justify-content-center">
             <img class="photo-container" src="http://bluegalaxy.info/images/sea_captain.jpg">
          </div>
-         <div class="d-flex mt-4 type-container">
-            <button mat-stroked-button class="filter-btn active m-1 flex-grow-1"
-               style="border: transparent !important;">Adult</button>
-            <button mat-stroked-button class="filter-btn m-1 flex-grow-1"
-               style="border: transparent !important;">Kid</button>
-         </div>
 
-         <div class="sub-mini-label mt-4">Phone Number</div>
-         <div class="d-flex">
-            <mat-form-field appearance="outline" class="w-100 flex-grow-1 " hideRequiredMarker>
-               <input matInput placeholder="Phone Number" maxlength="12" minlength="7">
-            </mat-form-field>
-         </div>
+         <ng-container *ngIf="showAdultSelection">
+            <div class="d-flex mt-4 type-container">
+               <button type="button" mat-stroked-button class="filter-btn m-1 flex-grow-1"
+                  [ngClass]="{'active': isAdultSelected}" style="border: transparent !important;"
+                  (click)="toggleAdult()">Adult</button>
+               <button type="button" mat-stroked-button class="filter-btn m-1 flex-grow-1"
+                  [ngClass]="{'active': !isAdultSelected}" style="border: transparent !important;"
+                  (click)="toggleAdult()">Kid</button>
+            </div>
+         </ng-container>
+         <ng-container *ngIf="showPhoneNumber">
+            <div class="sub-mini-label mt-4">Phone Number</div>
+            <div class="d-flex">
+               <mat-form-field appearance="outline" class="w-100 flex-grow-1">
+                  <input formControlName="phoneNumber" matInput placeholder="Phone Number" maxlength="12">
+               </mat-form-field>
+            </div>
+         </ng-container>
          <div class="sub-mini-label mt-4">Name</div>
          <mat-form-field class="w-100" appearance="outline" hideRequiredMarker>
-            <input matInput placeholder="Name">
+            <input matInput placeholder="Name" formControlName="name">
             <mat-icon class="mat-icon " matSuffix>perm_contact_calendar</mat-icon>
          </mat-form-field>
 
          <div class="d-flex my-4 flex-wrap">
-            <button mat-stroked-button class="filter-btn active mb-2">Wife</button>
-            <!-- <button mat-stroked-button class="filter-btn ms-1">Son</button>
-            <button mat-stroked-button class="filter-btn ms-1">Daughter</button> -->
-            <button mat-stroked-button class="filter-btn ms-1">Father</button>
-            <button mat-stroked-button class="filter-btn ms-1">Mother</button>
-            <!-- <button mat-stroked-button class="filter-btn ms-1">Other</button> -->
+            <mat-chip-list>
+               <mat-chip *ngFor="let role of roles$ | async" class="selection-chip"
+                  [ngClass]="{'active': activeRole === role}" (click)="activeRole = role">
+                  {{role.name}}
+               </mat-chip>
+            </mat-chip-list>
          </div>
 
-         <button mat-flat-button color="primary" class="mat-flat-button w-100">Add</button>
+         <button [disabled]="!addHouseholeFormGroup.valid" mat-flat-button color="primary"
+            class="mat-flat-button w-100">Add</button>
       </form>
    </div>
 </div>

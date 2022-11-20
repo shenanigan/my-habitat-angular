@@ -3,8 +3,9 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { createEffect, ofType } from "@ngrx/effects";
 import { ActionsSubject } from "@ngrx/store";
 import { catchError, map, of, switchMap } from "rxjs";
+import { failed } from "src/app/shared/+state/shared.actions";
 import { AbstractHomeOwnerService } from "../domain/services/ihome-owner.service";
-import { failed, getHomeOwner, getHomeOwnerSuccess } from "./home-owner.actions";
+import { addHousehold, addHouseholdSuccess, getHomeOwner, getHomeOwnerSuccess } from "./home-owner.actions";
 
 @Injectable()
 export class HomeOwnerEffects {
@@ -22,6 +23,22 @@ export class HomeOwnerEffects {
                 switchMap(_ => {
                     return this._homeOwnerService.getHomeOwner().
                         pipe(map(homeOwner => getHomeOwnerSuccess({ homeOwner })),
+                            catchError(err => {
+                                this._snackBarService.open(err.message, 'CANCEL');
+                                return of(failed(err))
+                            })
+                        )
+                })
+            )
+        )
+
+    addHousehold$ =
+        createEffect(() =>
+            this._actions$.pipe(
+                ofType(addHousehold),
+                switchMap(d => {
+                    return this._homeOwnerService.addHousehold(d.household).
+                        pipe(map(household => addHouseholdSuccess({ household })),
                             catchError(err => {
                                 this._snackBarService.open(err.message, 'CANCEL');
                                 return of(failed(err))

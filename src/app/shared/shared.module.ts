@@ -4,6 +4,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { sharedFeatureName, sharedReducer, initialState } from './+state/shared.reducer';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [],
@@ -12,8 +14,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    MatInputModule
-
+    MatInputModule,
+    StoreModule.forFeature(sharedFeatureName, sharedReducer, { initialState })
   ],
 })
 export class SharedModule { }

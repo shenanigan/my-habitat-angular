@@ -16,9 +16,10 @@ import { AbstractHomeOwnerService } from './domain/services/ihome-owner.service'
 import { MockHomeOwnerService } from './infrastructure/api/mock-home-owner.service';
 import { HomeOwnerEffects } from './+state/home-owner.effects';
 import { ResidentComponent } from './presentation/ui/resident/resident.component';
-import { HomeOwnerService } from './infrastructure/api/home-owner.service';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AddFamilyComponent } from './presentation/ui/add-family/add-family.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -36,6 +37,8 @@ import { AddFamilyComponent } from './presentation/ui/add-family/add-family.comp
     MatBottomSheetModule,
     MatButtonToggleModule,
     MatIconModule,
+    MatChipsModule,
+    SharedModule,
     StoreModule.forFeature(homeOwnerFeatureName, homeOwnerReducer),
     EffectsModule.forFeature([HomeOwnerEffects])
   ],

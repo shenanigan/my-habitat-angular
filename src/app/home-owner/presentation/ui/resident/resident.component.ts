@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { getHomeOwner } from 'src/app/home-owner/+state/home-owner.actions';
 import { selectHomeOwner } from 'src/app/home-owner/+state/home-owner.selector';
 import { AddFamilyComponent } from '../add-family/add-family.component';
@@ -10,26 +11,38 @@ import { AddFamilyComponent } from '../add-family/add-family.component';
   templateUrl: './resident.component.html',
   styleUrls: ['./resident.component.scss']
 })
-export class ResidentComponent implements OnInit {
+export class ResidentComponent implements OnInit, OnDestroy {
 
   homeOwner$ = this._store.select(selectHomeOwner());
   members: any;
   helpers: any;
   visitors: any;
-  constructor(private _store: Store, 
+  subscription: Subscription;
+
+  constructor(private _store: Store,
     private _bottomSheet: MatBottomSheet
-    ) {
+  ) {
+
+    this.subscription = this.homeOwner$.subscribe(x => {
+      this._bottomSheet.dismiss();
+    })
+
     this._store.dispatch(getHomeOwner());
   }
 
   openBottomSheet(): void {
-    
+
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe()
+  }
 
   ngOnInit() { }
 
-  openDailyHelp() {
-    this._bottomSheet.open(AddFamilyComponent);
+  openAddHousehold(type: string) {
+    this._bottomSheet.open(AddFamilyComponent, {
+      data: [{ type: type }]
+    });
   }
 }

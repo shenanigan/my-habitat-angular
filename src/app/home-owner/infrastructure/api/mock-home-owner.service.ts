@@ -6,6 +6,8 @@ import { IHomeOwnerService } from "../../domain/services/ihome-owner.service";
 import { HomeOwner } from "../../domain/entities/home-owner";
 import { Home } from "../../domain/entities/home";
 import { Household } from "../../domain/entities/household";
+import { subscribe } from "graphql";
+import { AddHouseholdRequest } from "../../domain/contracts/requests/add-household";
 
 @Injectable()
 export class MockHomeOwnerService extends BaseService implements IHomeOwnerService {
@@ -75,6 +77,14 @@ export class MockHomeOwnerService extends BaseService implements IHomeOwnerServi
 
 
             subscriber.next(homeOwner)
+            subscriber.complete()
+        })
+    }
+
+    addHousehold(householdRequest: AddHouseholdRequest): Observable<Household> {
+        return new Observable(subscriber => {
+            const household = new Household('123-456-789', householdRequest)
+            subscriber.next(household)
             subscriber.complete()
         })
     }

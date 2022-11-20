@@ -13,5 +13,4 @@ export class Household extends Entity {
     role?: string
     permission?: string
     countryCode?: number
-    householdId?: string
 }

@@ -8,6 +8,11 @@ export class HomeOwner extends Entity {
         super(homeOwnerId);
         if (obj) {
             Object.assign(this, obj);
+            this.households = []
+            const households = obj.households?.map(household => new Household(household.entityId, household))
+            if (households) {
+                this.households = households
+            }
         }
     }
     societyId?: string

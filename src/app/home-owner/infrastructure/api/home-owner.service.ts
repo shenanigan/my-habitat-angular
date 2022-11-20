@@ -4,12 +4,18 @@ import { BaseService } from "src/app/shared/infrastructure/api/base.service";
 import { Apollo, gql } from "apollo-angular";
 import { IHomeOwnerService } from "../../domain/services/ihome-owner.service";
 import { HomeOwner } from "../../domain/entities/home-owner";
+import { Household } from "../../domain/entities/household";
+import { AddHouseholdRequest } from "../../domain/contracts/requests/add-household";
 
 @Injectable()
 export class HomeOwnerService extends BaseService implements IHomeOwnerService {
 
   constructor(private _apollo: Apollo) {
     super();
+  }
+  
+  addHousehold(household: AddHouseholdRequest): Observable<Household> {
+    throw new Error("Method not implemented.");
   }
   getHomeOwner(): Observable<HomeOwner> {
     const GET_HOME_OWNER = gql`query GetHomeOwner {

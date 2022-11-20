@@ -8,7 +8,8 @@
     <div class="bottom-container p-3">
         <div class="d-flex justify-content-between align-items-center">
             <span class="sub-heading-label">My Family</span>
-            <span> <button mat-button class="mat-button-small " routerLink="/AddFamily">ADD FAMILY</button></span>
+            <span> <button mat-button class="mat-button-small " (click)="openAddHousehold('FAMILY_ADULT')">ADD
+                    FAMILY</button></span>
         </div>
         <div class="d-flex flex-wrap justify-content-start gap-3">
             <ng-container *ngFor="let member of (homeOwner$ | async)?.households">
@@ -23,7 +24,8 @@
         <hr class="">
         <div class="d-flex justify-content-between align-items-center">
             <span class="sub-heading-label">Daily Help</span>
-            <span> <button mat-button class="mat-button-small" (click)="openDailyHelp()">ADD DAILY HELP</button></span>
+            <span> <button mat-button class="mat-button-small" (click)="openAddHousehold('DAILY_HELP')">ADD DAILY
+                    HELP</button></span>
         </div>
         <ng-container *ngFor="let helper of (homeOwner$ | async)?.households" class="daily-helper d-flex p-2">
             <div class="daily-helper d-flex p-2" *ngIf="helper.type === 'DAILY_HELP'">
@@ -40,7 +42,8 @@
         <div>
             <div class="d-flex justify-content-between align-items-center">
                 <span class="sub-heading-label">Frequent Visitors</span>
-                <span> <button mat-button class="mat-button-small">ADD VISITOR</button></span>
+                <span> <button mat-button class="mat-button-small" (click)="openAddHousehold('FREQUENT_VISITOR')">ADD
+                        VISITOR</button></span>
             </div>
             <div class="d-flex flex-wrap justify-content-start  gap-3">
                 <ng-container *ngFor="let member of (homeOwner$ | async)?.households">
