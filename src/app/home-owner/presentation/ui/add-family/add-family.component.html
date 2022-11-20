@@ -34,7 +34,17 @@
             <mat-icon class="mat-icon " matSuffix>perm_contact_calendar</mat-icon>
          </mat-form-field>
 
-         <div class="d-flex my-4 flex-wrap">
+         <ng-container *ngIf="showPermissions">
+            <div class="sub-mini-label mt-4 mb-1">When they exit society</div>
+            <mat-chip-list>
+               <mat-chip *ngFor="let permission of permissions" class="selection-chip"
+                  [ngClass]="{'active': currentPermission === permission}" (click)="currentPermission = permission">
+                  {{permission}}
+               </mat-chip>
+            </mat-chip-list>
+         </ng-container>
+
+         <div class="d-flex my-5 flex-wrap">
             <mat-chip-list>
                <mat-chip *ngFor="let role of roles$ | async" class="selection-chip"
                   [ngClass]="{'active': activeRole === role}" (click)="activeRole = role">

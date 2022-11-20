@@ -1,0 +1,10 @@
+// Import material theming functions
+@import '~@angular/material/theming';
+@import './my-habitat-palette.scss';
+
+// Copy the palettes from your selected theme (usually theme.scss).
+
+$app-primary: mat-palette($my-habitat-primary-palette);
+
+// Create your Sass color vars (will be available in all the project)
+$primary: mat-color($app-primary);

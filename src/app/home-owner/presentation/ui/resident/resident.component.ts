@@ -26,8 +26,6 @@ export class ResidentComponent implements OnInit, OnDestroy {
     this.subscription = this.homeOwner$.subscribe(x => {
       this._bottomSheet.dismiss();
     })
-
-    this._store.dispatch(getHomeOwner());
   }
 
   openBottomSheet(): void {

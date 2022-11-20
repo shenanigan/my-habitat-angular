@@ -40,6 +40,12 @@ export class MockHomeOwnerService extends BaseService implements IHomeOwnerServi
             householdKid.permission = 'SEND_NOTIFICATION'
             householdKid.type = 'FAMILY_KID'
 
+            var householdKid2 = new Household('Test_Kid_Id_2')
+            householdKid2.name = 'Test C.'
+            householdKid2.role = 'Kid'
+            householdKid2.permission = 'SEND_NOTIFICATION'
+            householdKid2.type = 'FAMILY_KID'
+
             var householdMaid = new Household('Test_Maid_Id')
             householdMaid.countryCode = 91
             householdMaid.name = 'Test MaidName'
@@ -70,6 +76,7 @@ export class MockHomeOwnerService extends BaseService implements IHomeOwnerServi
 
             homeOwner.households?.push(householdWife)
             homeOwner.households?.push(householdKid)
+            homeOwner.households?.push(householdKid2)
             homeOwner.households?.push(householdMaid)
             homeOwner.households?.push(householdHelp)
             homeOwner.households?.push(householdVisitor1)

@@ -9,3 +9,9 @@ export const selectHomeOwner = () => createSelector(
         return state.homeOwner
     }
 );
+
+
+export const selectKids = () => createSelector(
+    getHomeOwnerModule,
+    state => state.homeOwner.households.filter(x => x.type === 'FAMILY_KID')
+);

@@ -5,7 +5,7 @@
     $color-config: mat.get-color-config($theme);
 
     $primary-palette: map.get($color-config, 'primary');
-     
+
     .small-label,
     .smallest-opacity-label,
     .opacity-label,
@@ -15,9 +15,8 @@
     .paragraph-label,
     .sub-label,
     .sub-heading-label,
-    .header2-label
-
-     {
+    .header2-label,
+    .label-24-100 {
         color: mat.get-color-from-palette($primary-palette, 500) !important;
     }
 
@@ -31,6 +30,11 @@
         font-size: 24px !important;
     }
 
+    .label-24-100 {
+        font-weight: 100 !important;
+        font-size: 24px !important;
+    }
+
     .description-label {
         font-size: 18px !important;
     }
@@ -39,39 +43,51 @@
         font-weight: 700 !important;
         font-size: 18px !important;
     }
-    .header2-label{
+
+    .header2-label {
         font-weight: 700 !important;
         font-size: 17px !important;
     }
-    .paragraph-label{
+
+    .paragraph-label {
         font-weight: 500 !important;
         font-size: 17px !important;
     }
-    .opacity-label{
+
+    .opacity-label {
         opacity: 0.63;
     }
-    .small-label{
+
+    .small-label {
         font-size: 14px !important;
         font-weight: 600 !important;
     }
-    .sub-label{
+
+    .label-20-300 {
+        font-size: 20px !important;
+        font-weight: 300 !important;
+    }
+
+    .sub-label {
         font-size: 15px !important;
     }
-    .smallest-opacity-label{
+
+    .smallest-opacity-label {
         font-size: 12px !important;
         font-weight: 300 !important;
         opacity: 0.50 !important;
     }
 
-    .sub-heading-label{
+    .sub-heading-label {
         font-size: 17px !important;
         font-weight: 600 !important;
     }
-    .sub-mini-label{
+
+    .sub-mini-label {
         font-size: 15px !important;
         font-weight: 400 !important;
     }
-    
+
 }
 
 @mixin theme($theme) {

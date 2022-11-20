@@ -12,12 +12,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SocietyIssueComponent } from './society-issue/society-issue.component';
-import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TermsComponent } from './terms/terms.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { AddKidComponent } from './add-kid/add-kid.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { EditFamilyComponent } from './edit-family/edit-family.component';
 import { GraphQLModule } from './graphql.module';
@@ -31,10 +29,8 @@ import { StoreModule } from '@ngrx/store';
     SignInComponent,
     PageNotFoundComponent,
     SocietyIssueComponent,
-    HomeComponent,
     ProfileComponent,
     TermsComponent,
-    AddKidComponent,
     EditFamilyComponent
   ],
   imports: [

@@ -1,6 +1,6 @@
 <div class="main-container">
     <div class="d-flex justify-content-between p-3">
-        <span class="header2-label" routerLink="/home">Back</span>
+        <span class="header2-label" routerLink="/home-owner">Back</span>
         <span class="header2-label">Household</span>
         <span></span>
     </div>
@@ -16,7 +16,7 @@
                 <div class="p-1 d-flex flex-column align-items-center" style="width: 80px;"
                     *ngIf="member.type === 'FAMILY_ADULT' ||  member.type === 'FAMILY_KID'">
                     <img class="member-photo" src="http://bluegalaxy.info/images/sea_captain.jpg">
-                    <div class="small-label mt-1">{{member.name}}</div>
+                    <div class="small-label mt-1">{{member.truncatedName}}</div>
                     <div class="smallest-opacity-label">{{member.role}}</div>
                 </div>
             </ng-container>
@@ -49,7 +49,7 @@
                 <ng-container *ngFor="let member of (homeOwner$ | async)?.households">
                     <div class="p-1 d-flex flex-column align-items-center" *ngIf="member.type === 'FREQUENT_VISITOR'">
                         <img class="member-photo" src="http://bluegalaxy.info/images/sea_captain.jpg">
-                        <div class="small-label mt-1">{{member.name}}</div>
+                        <div class="small-label mt-1">{{member.truncatedName}}</div>
                         <div class="smallest-opacity-label">{{member.role}}</div>
                     </div>
                 </ng-container>

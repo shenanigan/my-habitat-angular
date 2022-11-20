@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddKidComponent } from './add-kid.component';
+import { KidExitComponent } from './kid-exit.component';
 
-describe('AddKidComponent', () => {
-  let component: AddKidComponent;
-  let fixture: ComponentFixture<AddKidComponent>;
+describe('KidExitComponent', () => {
+  let component: KidExitComponent;
+  let fixture: ComponentFixture<KidExitComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddKidComponent ]
+      declarations: [ KidExitComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AddKidComponent);
+    fixture = TestBed.createComponent(KidExitComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

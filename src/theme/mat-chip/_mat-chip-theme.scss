@@ -16,12 +16,11 @@
     $primary-palette: map.get($color-config, 'primary');
 
     .selection-chip.active {
-        border: none !important;
-        background-color: mat.get-color-from-palette($primary-palette, 1000) !important;
+        background-color: mat.get-color-from-palette($primary-palette, 1000, 0.5) !important;
     }
 
     .selection-chip {
-        border: 1px solid #E2E2E2 !important;
+        border: 1px solid mat.get-color-from-palette($primary-palette, 1000) !important;
         color: mat.get-color-from-palette($primary-palette, 1100) !important;
         background-color: transparent !important;
     }

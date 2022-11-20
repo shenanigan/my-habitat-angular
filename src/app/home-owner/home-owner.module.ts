@@ -20,10 +20,13 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AddFamilyComponent } from './presentation/ui/add-family/add-family.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { SharedModule } from '../shared/shared.module';
+import { KidExitComponent } from './presentation/ui/kid-exit/kid-exit.component';
+import { HomeComponent } from './presentation/ui/home/home.component';
 
 
 @NgModule({
-  declarations: [ResidentComponent, AddFamilyComponent],
+  declarations: [ResidentComponent, AddFamilyComponent, KidExitComponent,
+    HomeComponent],
   imports: [
     CommonModule,
     HomeOwnerRoutingModule,

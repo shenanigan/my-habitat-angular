@@ -23,11 +23,17 @@ export class AddFamilyComponent implements OnInit {
     return this.type !== 'FAMILY_KID'
   }
 
+  get showPermissions(): boolean {
+    return this.type === 'FAMILY_KID'
+  }
+
   get showAdultSelection(): boolean {
     return this.type === 'FAMILY_ADULT' || this.type === 'FAMILY_KID'
   }
 
   roles$: Observable<Role[]> = this._store.select(selectFamilyAdultRoles())
+  permissions: string[] = ['Require Permission', 'Send Notification', 'Permission Not Required']
+  currentPermission?: string
 
   addHouseholeFormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -60,9 +66,11 @@ export class AddFamilyComponent implements OnInit {
     this.isAdultSelected = !this.isAdultSelected
 
     if (this.isAdultSelected) {
+      this.currentPermission = undefined
       this.type = 'FAMILY_ADULT'
       this.roles$ = this._store.select(selectFamilyAdultRoles())
     } else {
+      this.currentPermission = this.permissions[0]
       this.type = 'FAMILY_KID'
       this.roles$ = this._store.select(selectFamilyKidRoles())
     }
@@ -80,6 +88,7 @@ export class AddFamilyComponent implements OnInit {
       role: this.activeRole?.name ?? '',
       type: this.type,
       countryCode: 973,
+      permission: this.currentPermission,
       phoneNumber: this.addHouseholeFormGroup.get('phoneNumber')?.value ?? '',
     }
     this._store.dispatch(addHousehold({ household: householdRequest }))

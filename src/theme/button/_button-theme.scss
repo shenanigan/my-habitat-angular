@@ -75,7 +75,7 @@
     }
 
     .filter-btn.active {
-        background-color: mat.get-color-from-palette($primary-palette, 1000) !important;
+        background-color: mat.get-color-from-palette($primary-palette, 1000, 0.5) !important;
     }
     .filter-btn.warn {
         background-color: mat.get-color-from-palette($primary-palette, 900) !important;
