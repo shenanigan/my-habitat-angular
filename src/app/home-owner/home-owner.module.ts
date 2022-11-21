@@ -19,10 +19,13 @@ import { ResidentComponent } from './presentation/ui/resident/resident.component
 import { HomeOwnerService } from './infrastructure/api/home-owner.service';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AddFamilyComponent } from './presentation/ui/add-family/add-family.component';
+import { VisitorsComponent } from './presentation/ui/visitors/visitors.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 
 @NgModule({
-  declarations: [ResidentComponent, AddFamilyComponent],
+  declarations: [ResidentComponent, AddFamilyComponent,
+  VisitorsComponent],
   imports: [
     CommonModule,
     HomeOwnerRoutingModule,
@@ -36,6 +39,7 @@ import { AddFamilyComponent } from './presentation/ui/add-family/add-family.comp
     MatBottomSheetModule,
     MatButtonToggleModule,
     MatIconModule,
+    MatChipsModule,
     StoreModule.forFeature(homeOwnerFeatureName, homeOwnerReducer),
     EffectsModule.forFeature([HomeOwnerEffects])
   ],

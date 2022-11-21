@@ -18,7 +18,6 @@ import { TermsComponent } from './terms/terms.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AddKidComponent } from './add-kid/add-kid.component';
-import { MatChipsModule } from '@angular/material/chips';
 import { EditFamilyComponent } from './edit-family/edit-family.component';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -49,7 +48,6 @@ import { StoreModule } from '@ngrx/store';
     MatIconModule,
     MatCardModule,
     MatButtonToggleModule,
-    MatChipsModule,
     GraphQLModule,
     HttpClientModule,
     StoreModule.forRoot({}),
