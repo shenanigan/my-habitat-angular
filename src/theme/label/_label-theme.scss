@@ -16,10 +16,20 @@
     .sub-label,
     .sub-heading-label,
     .header2-label,
-    .label-24-100 {
+    .label-24-100,
+    .smallest-yello-label,
+    .opacity-mini-label {
         color: mat.get-color-from-palette($primary-palette, 500) !important;
     }
 
+    ;
+
+    // $primary-palette: map.get($color-config, 'primary');
+
+    // .smallest-yello-label
+    // {        color: mat.get-color-from-palette($primary-palette, 700) !important;
+
+    // };
 }
 
 @mixin typography($theme) {
@@ -55,7 +65,13 @@
     }
 
     .opacity-label {
-        opacity: 0.63;
+        opacity: 0.63 !important;
+    }
+
+    .opacity-mini-label {
+        opacity: 0.50 !important;
+        font-weight: 400 !important;
+        font-size: 12px !important;
     }
 
     .small-label {
@@ -88,6 +104,10 @@
         font-weight: 400 !important;
     }
 
+    .smallest-yello-label {
+        font-size: 10px !important;
+        font-weight: 700 !important;
+    }
 }
 
 @mixin theme($theme) {

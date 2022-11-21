@@ -22,11 +22,12 @@ import { MatChipsModule } from '@angular/material/chips';
 import { SharedModule } from '../shared/shared.module';
 import { KidExitComponent } from './presentation/ui/kid-exit/kid-exit.component';
 import { HomeComponent } from './presentation/ui/home/home.component';
+import { VisitorsComponent } from './presentation/ui/visitors/visitors.component';
 
 
 @NgModule({
   declarations: [ResidentComponent, AddFamilyComponent, KidExitComponent,
-    HomeComponent],
+    HomeComponent, VisitorsComponent],
   imports: [
     CommonModule,
     HomeOwnerRoutingModule,
