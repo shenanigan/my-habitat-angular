@@ -1,0 +1,36 @@
+@import "src/theme/_variables.scss";
+
+.main-container {
+    background-color: #f2f2f2;
+}
+
+.hr {
+    margin-top: -5px;
+}
+
+.mat-icon {
+    vertical-align: bottom;
+    font-size: 21px !important;
+}
+
+.hours-label {
+    padding: 20px;
+    text-align: center;
+    background-color: white;
+}
+
+.time-capsule {
+    border-radius: 30px;
+    background-color: $primary;
+}
+
+
+.photo-container {
+    border-radius: 10px;
+    width: 80px;
+    height: 80px;
+}
+
+.active {
+    border: 4px solid $primary;
+}

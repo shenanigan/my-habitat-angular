@@ -28,7 +28,11 @@ export const initialState: IMetadataState = {
         new Role('Friend', 'FREQUENT_VISITOR'),
         new Role('Colleague', 'FREQUENT_VISITOR'),
         new Role('Relative', 'FREQUENT_VISITOR'),
-        new Role('Guest', 'FREQUENT_VISITOR')
+        new Role('Guest', 'FREQUENT_VISITOR'),
+        new Role('Friend', 'VISITOR'),
+        new Role('Colleague', 'VISITOR'),
+        new Role('Relative', 'VISITOR'),
+        new Role('Guest', 'VISITOR')
     ]
 }
 

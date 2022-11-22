@@ -1,0 +1,29 @@
+<div class="main-container">
+
+    <div class="d-flex justify-content-center py-3">
+        <span class="header2-label">Allow Kid Exit</span>
+    </div>
+    <hr class="hr pb-1">
+    <div class="p-3 d-flex justify-content-center flex-column">
+        <div class="label-24-100 text-center">
+            <span *ngIf="selectedKid?.permission === 'REQUEST_PERMISSION'">Request permission for the kid to exit</span>
+            <span *ngIf="selectedKid?.permission !== 'REQUEST_PERMISSION'">Allow the kid to exit</span>
+        </div>
+
+        <div class="mt-4 mb-5 d-flex flex-wrap justify-content-center">
+            <div *ngFor="let kid of kids$ | async" class="d-flex mx-2  flex-column align-items-center"
+                (click)="selectedKid = kid">
+                <div class="d-flex justify-content-center">
+                    <img [ngClass]="{'active': selectedKid === kid}" class="mb-1 photo-container"
+                        src="http://bluegalaxy.info/images/sea_captain.jpg">
+                </div>
+                <label class="small-label">{{kid.truncatedName}}</label>
+            </div>
+        </div>
+
+        <button *ngIf="selectedKid?.permission === 'REQUEST_PERMISSION'" mat-flat-button color="primary"
+            class="mat-flat-button w-100">Request Permission</button>
+        <button *ngIf="selectedKid?.permission !== 'REQUEST_PERMISSION'" mat-flat-button color="primary"
+            class="mat-flat-button w-100">Allow Exit</button>
+    </div>
+</div>

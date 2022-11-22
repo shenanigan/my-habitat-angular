@@ -1,0 +1,30 @@
+<div class="main-container h-100">
+    <div class="d-flex justify-content-between px-3 pt-3">
+        <mat-icon (click)="back()">chevron_left</mat-icon>
+        <span class="title-label">Search</span>
+        <span></span>
+    </div>
+    <div class="p-3">
+        <form [formGroup]="searchFormGroup">
+            <mat-form-field appearance="outline" class="pe-1 w-100" hideRequiredMarker>
+                <input matInput class="ms-2 subtitle-label" formControlName="unit" name="unit"
+                    placeholder="Unit Number" />
+            </mat-form-field>
+        </form>
+
+        <div class="mt-5">
+            <ng-container *ngFor="let homeOwner of homeOwners$ | async">
+                <mat-card (click)="selectHomeOwner(homeOwner)" style="border-radius: 10px; box-shadow: none"
+                    class="mt-3">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <div class="header-label">{{homeOwner.home?.unit}}</div>
+                            <div class="small-label mt-2">{{homeOwner.name}}</div>
+                        </div>
+                        <mat-icon>chevron_right</mat-icon>
+                    </div>
+                </mat-card>
+            </ng-container>
+        </div>
+    </div>
+</div>

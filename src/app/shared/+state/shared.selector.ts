@@ -22,3 +22,9 @@ export const selectDailyHelpRoles = () => createSelector(
     getMetadataModule,
     state => state.roles.filter(x => x.type === 'DAILY_HELP')
 );
+
+
+export const selectVisitorRoles = () => createSelector(
+    getMetadataModule,
+    state => state.roles.filter(x => x.type === 'VISITOR')
+);

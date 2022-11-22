@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
   { path: 'noticeboard', loadChildren: () => import('./society/society.module').then(m => m.SocietyModule) },
   { path: 'home-owner', loadChildren: () => import('./home-owner/home-owner.module').then(m => m.HomeOwnerModule) },
+  { path: 'security-guard', loadChildren: () => import('./security-guard/security-guard.module').then(m => m.SecurityGuardModule) },
   { path: 'Profile', component: ProfileComponent },
   { path: 'SocietyIssue', component: SocietyIssueComponent },
   { path: 'Terms', component: TermsComponent },
