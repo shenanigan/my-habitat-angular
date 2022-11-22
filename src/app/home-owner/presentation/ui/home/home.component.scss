@@ -1,34 +1,41 @@
-.home-container{
-    height: 166px;
+.home-container {
+    height: 200px;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url('https://img.freepik.com/free-vector/colorful-palm-silhouettes-background_23-2148541792.jpg?w=2000');
+    background-image: url('/assets/images/art_cardtop.svg');
+    background-position-y: 40px;
 }
-.profile-pic{ 
+
+.profile-pic {
     height: 36px;
     width: 36px;
     border-radius: 50%;
 }
 
-.middle-container{background-color:  #f2f2f2;
+.middle-container {
+    background-color: #f2f2f2;
     margin-top: -20px;
-box-shadow: 0px -10px 15px #33333333;
-padding: 16px;
-top:  150px;
-right: 0%;
-left: 0%;
-bottom: 0%;
-border-radius: 25px;
+    box-shadow: 0px -10px 15px #33333333;
+    padding: 16px;
+    top: 150px;
+    right: 0%;
+    left: 0%;
+    bottom: 0%;
+    border-radius: 25px;
 }
-.span-background{background-color: white;
-flex-direction: column; 
-border-radius: 10px;
-height: 70px;
-width: 70px;
-display: flex;
-justify-content: center;
-align-items: center;
+
+.span-background {
+    background-color: white;
+    flex-direction: column;
+    border-radius: 10px;
+    height: 70px;
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
- 
-.columncount{
-margin-left: 9px;}
+
+.columncount {
+    margin-left: 9px;
+    margin-top: 10px;;
+}

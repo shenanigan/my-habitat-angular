@@ -14,6 +14,8 @@ import { StoreModule } from '@ngrx/store';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { OtpComponent } from './presentation/ui/otp/otp.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MockAuthService } from './infrastructure/api/mock-auth.service copy';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [PhoneNumberComponent, OtpComponent],
@@ -25,14 +27,16 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatInputModule,
     CommonModule,
+    MatIconModule,
     MatSnackBarModule,
+    SharedModule,
     MatIconModule,
     EffectsModule.forFeature([AuthEffects])
   ],
   providers:
     [
       {
-        provide: AbstractAuthService, useClass: AuthService
+        provide: AbstractAuthService, useClass: MockAuthService
       }]
 })
 export class AuthModule { }

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36" height="36" viewBox="0 0 36 36">
+  <defs>
+    <clipPath id="clip-card_ic_payments">
+      <rect width="36" height="36"/>
+    </clipPath>
+  </defs>
+  <g id="card_ic_payments" clip-path="url(#clip-card_ic_payments)">
+    <g id="Group_3276" data-name="Group 3276" transform="translate(-1154 -672)">
+      <path id="ic_receipt_24px" d="M3,26l1.8-1.8L6.6,26l1.8-1.8L10.2,26,12,24.2,13.8,26l1.8-1.8L17.4,26l1.8-1.8L21,26l1.8-1.8L24.6,26V2L22.8,3.8,21,2,19.2,3.8,17.4,2,15.6,3.8,13.8,2,12,3.8,10.2,2,8.4,3.8,6.6,2,4.8,3.8,3,2Z" transform="translate(1158 676)" fill="#5761b2"/>
+      <text id="_.د.ب" data-name=".د.ب" transform="translate(1172 692)" fill="#fff" font-size="10" font-family="Al-Jazeera-Arabic-Bold, Al-Jazeera-Arabic" font-weight="700" letter-spacing="-0.02em"><tspan x="-9.525" y="0">.د.ب</tspan></text>
+    </g>
+  </g>
+</svg>

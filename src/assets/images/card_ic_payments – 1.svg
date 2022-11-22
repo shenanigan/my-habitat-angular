@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36" height="36" viewBox="0 0 36 36">
+  <defs>
+    <clipPath id="clip-card_ic_payments_1">
+      <rect width="36" height="36"/>
+    </clipPath>
+  </defs>
+  <g id="card_ic_payments_1" data-name="card_ic_payments – 1" clip-path="url(#clip-card_ic_payments_1)">
+    <g id="Group_3278" data-name="Group 3278" transform="translate(-307 -507)">
+      <circle id="Ellipse_8" data-name="Ellipse 8" cx="18" cy="18" r="18" transform="translate(307 507)" fill="#5761b2" opacity="0.2"/>
+      <path id="ic_call_24px" d="M6.218,9.924a13.465,13.465,0,0,0,5.858,5.858l1.956-1.956a.884.884,0,0,1,.907-.213,10.14,10.14,0,0,0,3.173.507.892.892,0,0,1,.889.889v3.1a.892.892,0,0,1-.889.889A15.11,15.11,0,0,1,3,3.889.892.892,0,0,1,3.889,3H7a.892.892,0,0,1,.889.889A10.1,10.1,0,0,0,8.4,7.062a.892.892,0,0,1-.222.907Z" transform="translate(314 514)" fill="#5761b2"/>
+    </g>
+  </g>
+</svg>

@@ -18,7 +18,8 @@
     .header2-label,
     .label-24-100,
     .smallest-yello-label,
-    .opacity-mini-label {
+    .opacity-mini-label,
+    .color-primary {
         color: mat.get-color-from-palette($primary-palette, 500) !important;
     }
 
@@ -38,6 +39,11 @@
     .title-label {
         font-weight: 700 !important;
         font-size: 24px !important;
+    }
+
+    .label-10-100 {
+        font-weight: 100 !important;
+        font-size: 10px !important;
     }
 
     .label-24-100 {

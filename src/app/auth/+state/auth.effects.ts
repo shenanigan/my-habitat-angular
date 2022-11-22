@@ -3,6 +3,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { createEffect, ofType } from "@ngrx/effects";
 import { ActionsSubject } from "@ngrx/store";
 import { catchError, map, of, switchMap } from "rxjs";
+import { StorageService } from "src/app/shared/infrastructure/storage/storage.service";
 import { ISendOtpRequest } from "../domain/contracts/requests/send-otp-request";
 import { IVerifyOtpRequest } from "../domain/contracts/requests/verify-otp-request";
 import { AbstractAuthService } from "../domain/services/iauth.service";
@@ -14,6 +15,7 @@ export class AuthEffects {
     constructor(
         private _actions$: ActionsSubject,
         private _authService: AbstractAuthService,
+        private _storageService: StorageService,
         private _snackBarService: MatSnackBar) { }
 
 
@@ -49,7 +51,11 @@ export class AuthEffects {
                         code: d.otp
                     }
                     return this._authService.verifyOtp(request).
-                        pipe(map(token => verifyOtpSuccess({ token })),
+                        pipe(map(token => {
+                            // TODO: Store in the local storage
+                            this._storageService.setToken(token)
+                            return verifyOtpSuccess({ token })
+                        }),
                             catchError(err => {
                                 this._snackBarService.open(err.message, 'CANCEL');
                                 return of(failed(err))

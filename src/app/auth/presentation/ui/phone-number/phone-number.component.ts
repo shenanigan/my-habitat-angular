@@ -12,7 +12,7 @@ import { sendOtp, sendOtpSuccess } from 'src/app/auth/+state/auth.actions';
 })
 export class PhoneNumberComponent implements OnInit, OnDestroy {
   private _actionsSubscription: Subscription;
-  
+
   loginFormGroup = new FormGroup({
     phoneNumber: new FormControl('', [Validators.required, Validators.pattern("^\\d{7,12}$")]),
   })

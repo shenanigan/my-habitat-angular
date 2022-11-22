@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36" height="36" viewBox="0 0 36 36">
+  <defs>
+    <clipPath id="clip-ic_tab_visitor_idle">
+      <rect width="36" height="36"/>
+    </clipPath>
+  </defs>
+  <g id="ic_tab_visitor_idle" clip-path="url(#clip-ic_tab_visitor_idle)">
+    <g id="Group_2567" data-name="Group 2567" transform="translate(290.349 -2298.395)">
+      <path id="Path_4445" data-name="Path 4445" d="M528.01,10.4h.261q6.385,0,12.77,0a1.113,1.113,0,0,1,1.026.473,1.311,1.311,0,0,1,.205.606c.029.543.011,1.088.011,1.632q0,7.927,0,15.854a3.308,3.308,0,0,1-1.124,2.619,3.218,3.218,0,0,1-2.2.811q-5.384,0-10.769,0a1.7,1.7,0,0,1-.187-.021Zm9.866,15.379a3.267,3.267,0,0,0-3.648-3.25,3.2,3.2,0,0,0-2.884,3.25Zm-5.469-6.58A2.193,2.193,0,1,0,534.6,17a2.2,2.2,0,0,0-2.2,2.192" transform="translate(-804.841 2295)" fill="#ccd1da"/>
+      <path id="Path_4446" data-name="Path 4446" d="M426.759,32.516c-.07.006-.138.018-.206.018-.632,0-1.264.007-1.9,0a1.109,1.109,0,0,1-1.184-1.164c0-.053,0-.105,0-.158q0-8.571,0-17.142a3.406,3.406,0,0,1,1.155-2.716,3.239,3.239,0,0,1,2.134-.808Z" transform="translate(-705.818 2294.858)" fill="#ccd1da"/>
+    </g>
+  </g>
+</svg>

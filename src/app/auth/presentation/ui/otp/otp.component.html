@@ -1,8 +1,8 @@
 <div class="otp-container">
 
     <div class="d-flex justify-content-between otp-container p-3">
-        <span class="header-label" routerLink="/auth/phone">Back</span>
-        <span class="header-label">Verify</span>
+        <mat-icon routerLink="/auth/phone">arrow_back</mat-icon>
+        <span class="header-label"></span>
     </div>
 
     <form [formGroup]="otpFormGroup" (submit)="verify()">
@@ -10,9 +10,10 @@
             <div class="title-label mb-2">Enter recovery code</div>
             <div class="description-label"> We have sent it on your mobile</div>
             <mat-form-field appearance="outline" class="mt-4">
-                <input matInput [type]="hide ? 'password' : 'text'" placeholder="Verification Code" formControlName="otp">
-                <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide">
+                <input matInput autocomplete="on" [type]="hide ? 'password' : 'text'" placeholder="Verification Code"
+                    formControlName="otp">
+                <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                     <mat-icon class="customIconSize"> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
             </mat-form-field>

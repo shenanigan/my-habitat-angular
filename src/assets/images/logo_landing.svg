@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="152" height="28" viewBox="0 0 152 28">
+  <defs>
+    <clipPath id="clip-logo_landing">
+      <rect width="152" height="28"/>
+    </clipPath>
+  </defs>
+  <g id="logo_landing" clip-path="url(#clip-logo_landing)">
+    <g id="Group_3275" data-name="Group 3275" transform="translate(-830 -341)">
+      <path id="Path_4682" data-name="Path 4682" d="M92.486,0V13.889a14,14,0,1,1-28,.111,14,14,0,0,1,14-14ZM73.457,14a5.03,5.03,0,1,1,8.584,3.554l2.221,2.221a1.242,1.242,0,0,0,1.875-.134,9.516,9.516,0,1,0-15.3,0,1.242,1.242,0,0,0,1.874.134l2.224-2.222A5.011,5.011,0,0,1,73.457,14" transform="translate(765.514 341)" fill="#5761b2" fill-rule="evenodd"/>
+      <text id="myhabitat" transform="translate(866 363)" fill="#5761b2" font-size="24" font-family="Ubuntu-Bold, Ubuntu" font-weight="700"><tspan x="0" y="0">myhabitat</tspan></text>
+    </g>
+  </g>
+</svg>
