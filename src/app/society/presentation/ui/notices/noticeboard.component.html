@@ -5,11 +5,11 @@
         <span class="header-label"></span>
     </div>
     <hr class="hr">
-    <div class="px-3 py-2">
+    <!-- <div class="px-3 py-2">
         <button mat-stroked-button class="filter-btn active ms-1 "><b>All</b></button>
         <button mat-stroked-button class="filter-btn  ms-1"> Society</button>
         <button mat-stroked-button class="filter-btn  ms-1">Payment</button>
-    </div>
+    </div> -->
 
     <ng-container *ngFor="let notice of (society$ | async)?.notices">
         <div class="flex-container p-3 m-3">

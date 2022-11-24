@@ -69,6 +69,10 @@ export class StorageService {
 
     const obj = JSON.parse(window.localStorage['token']);
     return obj.token;
+  }
 
+  getSocietyId(): string | undefined {
+    var decodedToken = this.getDecodedAccessToken()
+    return decodedToken?.['SocietyId'];
   }
 }

@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../shared/infrastructure/storage/storage.service';
@@ -10,7 +11,8 @@ import { StorageService } from '../shared/infrastructure/storage/storage.service
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private _storageService: StorageService, 
+  constructor(private _storageService: StorageService,
+    private _location: Location,
     private _router: Router) { }
 
   ngOnInit(): void {
@@ -19,6 +21,10 @@ export class ProfileComponent implements OnInit {
   logout() {
     this._storageService.logout()
     this._router.navigate(['/auth/phone'])
+  }
+
+  back() {
+    this._location.back()
   }
 
 }

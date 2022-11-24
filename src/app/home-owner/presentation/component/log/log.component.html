@@ -1,10 +1,19 @@
 <div class="visitor-detail">
     <div class="d-flex justify-content-between px-3 py-2">
         <div class="condition px-2 label-10-700"
-            [ngClass]="{pending: log?.status === 'PENDING', approved: log?.status === 'APPROVED'} ">{{log?.status}}
+            [ngClass]="{pending: log?.status === 'PENDING', approved: log?.status === 'APPROVED', rejected: log?.status === 'REJECTED'} ">
+            {{log?.status}}
         </div>
         <hr class="hr">
-        <div class="opacity-mini-label">{{log?.requestTime | date: 'short'}}</div>
+        <ng-container *ngIf="log?.status === 'PENDING'">
+            <div class="opacity-mini-label">{{log?.requestTime | date: 'short'}}</div>
+        </ng-container>
+        <ng-container *ngIf="log?.status === 'APPROVED'">
+            <div class="opacity-mini-label">{{log?.approvedTime | date: 'short'}}</div>
+        </ng-container>
+        <ng-container *ngIf="log?.status === 'REJECTED'">
+            <div class="opacity-mini-label">{{log?.rejectedTime | date: 'short'}}</div>
+        </ng-container>
     </div>
     <hr class="hr">
     <div class="p-1  d-flex flex-column align-items-center"></div>

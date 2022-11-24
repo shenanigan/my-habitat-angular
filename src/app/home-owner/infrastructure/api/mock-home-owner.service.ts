@@ -10,6 +10,7 @@ import { subscribe } from "graphql";
 import { AddHouseholdRequest } from "../../domain/contracts/requests/add-household";
 import { StorageService } from "src/app/shared/infrastructure/storage/storage.service";
 import { KidExitRequest } from "../../domain/contracts/requests/kid-exit";
+import { UpdateLogRequest } from "../../domain/contracts/requests/update-log";
 
 @Injectable()
 export class MockHomeOwnerService extends BaseService implements IHomeOwnerService {
@@ -99,6 +100,13 @@ export class MockHomeOwnerService extends BaseService implements IHomeOwnerServi
     }
 
     allowKidExit(request: KidExitRequest): Observable<void> {
+        return new Observable(subscriber => {
+            subscriber.next()
+            subscriber.complete()
+        })
+    }
+
+    updateLog(request: UpdateLogRequest): Observable<void> {
         return new Observable(subscriber => {
             subscriber.next()
             subscriber.complete()

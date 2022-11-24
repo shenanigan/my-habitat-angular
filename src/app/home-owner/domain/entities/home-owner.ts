@@ -15,7 +15,7 @@ export class HomeOwner extends Entity {
                 this.households = households
             }
 
-            const logs = obj.logs?.map(log => new Log('test_id', log))
+            const logs = obj.logs?.map(log => new Log(log.entityId, log))
             if (logs) {
                 this.logs = logs
             }

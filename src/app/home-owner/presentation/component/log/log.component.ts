@@ -9,8 +9,8 @@ import { Log } from 'src/app/home-owner/domain/entities/log';
 export class LogComponent implements OnInit {
 
   @Input() log?: Log
-  @Output() onDeny = new EventEmitter<void>()
-  @Output() onApprove = new EventEmitter<void>()
+  @Output() onDeny = new EventEmitter<Log>()
+  @Output() onApprove = new EventEmitter<Log>()
 
   constructor() { }
 
@@ -18,11 +18,11 @@ export class LogComponent implements OnInit {
   }
 
   deny() {
-    this.onDeny.emit()
+    this.onDeny.emit(this.log)
   }
 
   approve() {
-    this.onApprove.emit()
+    this.onApprove.emit(this.log)
   }
 
 }

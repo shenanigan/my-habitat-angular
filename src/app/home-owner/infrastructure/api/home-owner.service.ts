@@ -10,6 +10,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { StorageService } from "src/app/shared/infrastructure/storage/storage.service";
 import { KidExitRequest } from "../../domain/contracts/requests/kid-exit";
+import { UpdateLogRequest } from "../../domain/contracts/requests/update-log";
 
 @Injectable()
 export class HomeOwnerService extends BaseService implements IHomeOwnerService {
@@ -33,6 +34,12 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
         catchError(this.handleError));
   }
 
+  updateLog(request: UpdateLogRequest): Observable<void> {
+    return this._http.post<void>(environment.homeOwnerURL + `HomeOwner/UpdateLog`, request, super.headers())
+      .pipe(map(_ => _),
+        catchError(this.handleError));
+  }
+
   getHomeOwner(): Observable<HomeOwner> {
     const GET_HOME_OWNER = gql`query GetHomeOwner {
       homeOwner {
@@ -47,6 +54,7 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
           createdAt
         }
         logs{
+          entityId: logId
           reason
           status
           isExit
