@@ -4,6 +4,7 @@ import { createEffect, ofType } from "@ngrx/effects";
 import { ActionsSubject } from "@ngrx/store";
 import { catchError, map, of, switchMap } from "rxjs";
 import { failed } from "src/app/shared/+state/shared.actions";
+import { Household } from "../domain/entities/household";
 import { AbstractHomeOwnerService } from "../domain/services/ihome-owner.service";
 import { addHousehold, addHouseholdSuccess, getHomeOwner, getHomeOwnerSuccess } from "./home-owner.actions";
 
@@ -38,7 +39,10 @@ export class HomeOwnerEffects {
                 ofType(addHousehold),
                 switchMap(d => {
                     return this._homeOwnerService.addHousehold(d.household).
-                        pipe(map(household => addHouseholdSuccess({ household })),
+                        pipe(map(householdId => {
+                            var household = new Household(householdId, d.household)
+                            return addHouseholdSuccess({ household })
+                        }),
                             catchError(err => {
                                 this._snackBarService.open(err.message, 'CANCEL');
                                 return of(failed(err))

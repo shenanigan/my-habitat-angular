@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Store } from '@ngrx/store';
+import { selectHomeOwner } from 'src/app/home-owner/+state/home-owner.selector';
 import { getHomeOwner } from '../../../+state/home-owner.actions';
 import { KidExitComponent } from '../kid-exit/kid-exit.component';
 
@@ -11,8 +12,9 @@ import { KidExitComponent } from '../kid-exit/kid-exit.component';
 })
 export class HomeComponent implements OnInit {
 
+  homeOwner$ = this._store.select(selectHomeOwner());
   constructor(private _bottomSheet: MatBottomSheet,
-    private _store: Store) { 
+    private _store: Store) {
     this._store.dispatch(getHomeOwner());
   }
 
@@ -21,6 +23,14 @@ export class HomeComponent implements OnInit {
 
   openKidExit() {
     this._bottomSheet.open(KidExitComponent)
+  }
+
+  deny() {
+
+  }
+
+  approve() {
+
   }
 
 }

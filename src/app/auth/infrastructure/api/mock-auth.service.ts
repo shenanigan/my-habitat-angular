@@ -9,12 +9,13 @@ import { ISendOtpRequest } from "../../domain/contracts/requests/send-otp-reques
 import { IVerifyOtpRequest } from "../../domain/contracts/requests/verify-otp-request";
 import { Token } from "../../domain/entities/token";
 import { subscribe } from "graphql";
+import { StorageService } from "src/app/shared/infrastructure/storage/storage.service";
 
 @Injectable()
 export class MockAuthService extends BaseService implements IAuthService {
 
-  constructor() {
-    super();
+  constructor(_storageService: StorageService) {
+    super(_storageService);
   }
   sendOtp(request: ISendOtpRequest): Observable<void> {
     return new Observable(subscriber => {

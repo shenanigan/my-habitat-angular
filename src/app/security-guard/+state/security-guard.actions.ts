@@ -12,8 +12,14 @@ export const getSecurityGuardSuccess = createAction('[SecurityGuard] Get Home Ow
 export const searchUnit = createAction('[SecurityGuard] Search Unit', props<{ unit: string }>())
 export const searchUnitSuccess = createAction('[SecurityGuard] Search Unit Success', props<{ homeOwners: HomeOwner[] }>())
 
-export const addHousehold = createAction('[HomeOwner] Add Household', props<{ household: AddHouseholdRequest }>())
-export const addHouseholdSuccess = createAction('[HomeOwner] Add Household Success', props<{ household: Household }>())
+export const addHousehold = createAction('[SecurityGuard] Add Household', props<{ household: AddHouseholdRequest }>())
+export const addHouseholdSuccess = createAction('[SecurityGuard] Add Household Success', props<{ homeOwnerId: string, household: Household }>())
+
+export const requestVisit = createAction('[SecurityGuard] Request Visit', props<{ homeOwnerId: string, householdId: string }>())
+export const requestVisitSuccess = createAction('[SecurityGuard] Request Visit Success')
+
+export const requestKidExit = createAction('[SecurityGuard] Request Kid Exit', props<{ homeOwnerId: string, householdId: string }>())
+export const requestKidExitSuccess = createAction('[SecurityGuard] Request Kid Exit Success')
 
 export const allowKidExit = createAction('[SecurityGuard] Allow Kid Exit', props<{ kidExitRequest: KidExitRequest }>())
 export const allowKidExitSuccess = createAction('[SecurityGuard]  Allow Kid Exit Success')

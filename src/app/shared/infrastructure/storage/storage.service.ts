@@ -53,17 +53,15 @@ export class StorageService {
 
   isHomeOwner() {
     var decodedToken = this.getDecodedAccessToken()
-    // return decodedToken?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'HomeOwner';
-    return false
+    return decodedToken?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'HomeOwner';
   }
 
   isSecurityGuard() {
     var decodedToken = this.getDecodedAccessToken()
-    // return decodedToken?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'SecurityGuard';
-    return true;
+    return decodedToken?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'SecurityGuard';
   }
 
-  private getToken(): string | undefined {
+  getToken(): string | undefined {
 
     if (!this.isAuthenticated()) {
       return undefined

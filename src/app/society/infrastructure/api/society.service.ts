@@ -4,12 +4,14 @@ import { BaseService } from "src/app/shared/infrastructure/api/base.service";
 import { Apollo, gql } from "apollo-angular";
 import { ISocietyService } from "../../domain/services/isociety.service";
 import { Society } from "../../domain/entities/society";
+import { StorageService } from "src/app/shared/infrastructure/storage/storage.service";
 
 @Injectable()
 export class SocietyService extends BaseService implements ISocietyService {
 
-  constructor(private _apollo: Apollo) {
-    super();
+  constructor(_storageService: StorageService,
+    private _apollo: Apollo) {
+    super(_storageService);
   }
   getSociety(societyId: string): Observable<Society> {
     const GET_SOCIETY = gql`query GetSociety($societyId: String!) {

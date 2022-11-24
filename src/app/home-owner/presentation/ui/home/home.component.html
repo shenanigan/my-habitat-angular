@@ -6,7 +6,7 @@
     </div>
 </div>
 <div class="d-flex flex-column p-3  middle-container">
-    <div class="title-label">Hi, Ali
+    <div class="title-label">Hi, {{(homeOwner$ | async)?.truncatedName}}
     </div>
     <p class="mt-2 paragraph-label">Welcome to Bahrain's Smart Community <br> Management System</p>
     <div class="d-flex justify-content-flex-start flex-wrap p-2">
@@ -26,7 +26,7 @@
             <img src="assets/images/card_ic_kidexit.svg">
             <div class="label-10-100 color-primary">Kid Exit</div>
         </span>
-    
+
         <span class="span-background columncount ">
             <img src="assets/images/card_ic_societymanager.svg">
             <div class="label-10-100 color-primary">Management</div>
@@ -36,5 +36,11 @@
             <div class="label-10-100 color-primary">Household</div>
         </span>
         <span></span>
+    </div>
+
+    <div class="flex-column-reverse d-flex">
+        <div *ngFor="let log of (homeOwner$ | async)?.logs" class="mt-3">
+            <app-log [log]="log" (onApprove)="approve()" (onDeny)="deny()"></app-log>
+        </div>
     </div>
 </div>

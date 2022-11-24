@@ -23,11 +23,13 @@ import { SharedModule } from '../shared/shared.module';
 import { KidExitComponent } from './presentation/ui/kid-exit/kid-exit.component';
 import { HomeComponent } from './presentation/ui/home/home.component';
 import { VisitorsComponent } from './presentation/ui/visitors/visitors.component';
+import { HomeOwnerService } from './infrastructure/api/home-owner.service';
+import { LogComponent } from './presentation/component/log/log.component';
 
 
 @NgModule({
   declarations: [ResidentComponent, AddFamilyComponent, KidExitComponent,
-    HomeComponent, VisitorsComponent],
+    HomeComponent, VisitorsComponent, LogComponent],
   imports: [
     CommonModule,
     HomeOwnerRoutingModule,
@@ -49,7 +51,7 @@ import { VisitorsComponent } from './presentation/ui/visitors/visitors.component
   providers: [
     {
       provide: AbstractHomeOwnerService,
-      useClass: MockHomeOwnerService
+      useClass: HomeOwnerService
     }
   ]
 })

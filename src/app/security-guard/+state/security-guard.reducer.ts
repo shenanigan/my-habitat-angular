@@ -28,12 +28,15 @@ export const securityGuardReducer = createReducer(
             searchHomeOwners: homeOwners
         }
     }),
-    on(addHouseholdSuccess, (state, { household }) => {
-        var updatedSecurityGuard = new SecurityGuard(state.securityGuard.entityId, state.securityGuard)
-        updatedSecurityGuard.households.push(household);
+    on(addHouseholdSuccess, (state, { homeOwnerId, household }) => {
+        var updatedHomeOwners = state.searchHomeOwners.map(x => new HomeOwner(x.entityId, x));
+        var filteredHomeOwners = updatedHomeOwners.filter(x => x.entityId === homeOwnerId);
+        if (filteredHomeOwners.length > 0) {
+            filteredHomeOwners[0].households.push(household);
+        }
         return {
             ...state,
-            securityGuard: updatedSecurityGuard
+            searchHomeOwners: updatedHomeOwners
         }
     }),
     on(failed, (state, { error }) => ({

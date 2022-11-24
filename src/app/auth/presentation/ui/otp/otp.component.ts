@@ -28,7 +28,7 @@ export class OtpComponent {
       ofType(verifyOtpSuccess)).subscribe(action => {
         if (this._storageService.isHomeOwner()) {
           this._router.navigate(['/home-owner'])
-        }else if (this._storageService.isHomeOwner()) {
+        } else if (this._storageService.isSecurityGuard()) {
           this._router.navigate(['/security-guard'])
         } else {
           this._router.navigate(['/auth/phone'])

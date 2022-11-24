@@ -5,12 +5,13 @@ import { Apollo } from "apollo-angular";
 import { ISocietyService } from "../../domain/services/isociety.service";
 import { Notice } from "../../domain/entities/notice";
 import { Society } from "../../domain/entities/society";
+import { StorageService } from "src/app/shared/infrastructure/storage/storage.service";
 
 @Injectable()
 export class MockSocietyService extends BaseService implements ISocietyService {
 
-    constructor(private _apollo: Apollo) {
-        super();
+    constructor(private _apollo: Apollo, _storageService: StorageService) {
+        super(_storageService);
     }
     getSociety(societyId: string): Observable<Society> {
         return new Observable(subscriber => {

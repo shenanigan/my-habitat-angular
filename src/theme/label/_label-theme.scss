@@ -23,7 +23,13 @@
         color: mat.get-color-from-palette($primary-palette, 500) !important;
     }
 
-    ;
+    .color-success {
+        color: mat.get-color-from-palette($primary-palette, 1000) !important;
+    }
+
+    .color-warn {
+        color: mat.get-color-from-palette($primary-palette, 900) !important;
+    }
 
     // $primary-palette: map.get($color-config, 'primary');
 
@@ -40,14 +46,29 @@
         font-weight: 700 !important;
         font-size: 24px !important;
     }
-
     .label-10-100 {
         font-weight: 100 !important;
         font-size: 10px !important;
     }
 
+
+    .label-10-700 {
+        font-weight: 700 !important;
+        font-size: 10px !important;
+    }
+
+    .label-15-400 {
+        font-weight: 400 !important;
+        font-size: 15px !important;
+    }
+
     .label-24-100 {
         font-weight: 100 !important;
+        font-size: 24px !important;
+    }
+
+    .label-24-700 {
+        font-weight: 700 !important;
         font-size: 24px !important;
     }
 

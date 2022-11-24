@@ -8,12 +8,13 @@ import { Home } from "../../domain/entities/home";
 import { Household } from "../../domain/entities/household";
 import { subscribe } from "graphql";
 import { AddHouseholdRequest } from "../../domain/contracts/requests/add-household";
+import { StorageService } from "src/app/shared/infrastructure/storage/storage.service";
 
 @Injectable()
 export class MockHomeOwnerService extends BaseService implements IHomeOwnerService {
 
-    constructor(private _apollo: Apollo) {
-        super();
+    constructor(private _apollo: Apollo, _storageService: StorageService) {
+        super(_storageService);
     }
     getHomeOwner(): Observable<HomeOwner> {
         return new Observable(subscriber => {
@@ -88,10 +89,9 @@ export class MockHomeOwnerService extends BaseService implements IHomeOwnerServi
         })
     }
 
-    addHousehold(householdRequest: AddHouseholdRequest): Observable<Household> {
+    addHousehold(householdRequest: AddHouseholdRequest): Observable<string> {
         return new Observable(subscriber => {
-            const household = new Household('123-456-789', householdRequest)
-            subscriber.next(household)
+            subscriber.next('123-456-789')
             subscriber.complete()
         })
     }

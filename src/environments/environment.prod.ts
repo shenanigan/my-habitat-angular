@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  authURL: 'https://localhost:7021/'
+  authURL: 'https://my-habitat-dotnet-write.azurewebsites.net/',
+  homeOwnerURL: 'https://my-habitat-dotnet-write.azurewebsites.net/'
 };

@@ -14,7 +14,7 @@ import { StoreModule } from '@ngrx/store';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { OtpComponent } from './presentation/ui/otp/otp.component';
 import { MatIconModule } from '@angular/material/icon';
-import { MockAuthService } from './infrastructure/api/mock-auth.service copy';
+import { MockAuthService } from './infrastructure/api/mock-auth.service';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -36,7 +36,7 @@ import { SharedModule } from '../shared/shared.module';
   providers:
     [
       {
-        provide: AbstractAuthService, useClass: MockAuthService
+        provide: AbstractAuthService, useClass: AuthService
       }]
 })
 export class AuthModule { }

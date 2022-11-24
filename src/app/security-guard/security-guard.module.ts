@@ -26,6 +26,8 @@ import { AddFamilyComponent } from './presentation/ui/add-family/add-family.comp
 import { SearchUnitComponent } from './presentation/ui/search-unit/search-unit.component';
 import { MatCardModule } from '@angular/material/card';
 import { SelectVisitorComponent } from './presentation/ui/select-visitor/select-visitor.component';
+import { SecurityGuardService } from './infrastructure/api/security-guard.service';
+import { RequestStatusComponent } from './presentation/ui/request-status/request-status.component';
 
 
 @NgModule({
@@ -33,7 +35,8 @@ import { SelectVisitorComponent } from './presentation/ui/select-visitor/select-
     KidExitComponent,
     AddFamilyComponent,
     SearchUnitComponent,
-    SelectVisitorComponent],
+    SelectVisitorComponent,
+    RequestStatusComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -55,7 +58,7 @@ import { SelectVisitorComponent } from './presentation/ui/select-visitor/select-
   ], providers: [
     {
       provide: AbstractSecurityGuardService,
-      useClass: MockSecurityGuardService
+      useClass: SecurityGuardService
     }
   ]
 })

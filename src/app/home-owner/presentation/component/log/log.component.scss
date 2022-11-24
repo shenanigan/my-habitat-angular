@@ -1,0 +1,52 @@
+.main-container {
+    background-color: #f2f2f2;
+    height: 100%;
+}
+
+.visitor-detail {
+    background-color: white;
+    border-radius: 10px;
+}
+
+.condition {
+    text-align: center;
+    border-radius: 3px;
+}
+
+.pending {
+    background-color: #FDB63F44;
+    color: #FDB63F;
+}
+
+.approved {
+    background-color: #11854E44;
+    color: #11854E;
+}
+
+
+
+.daily-helper {
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.member-photo {
+    height: 72px;
+    width: 72px;
+    border-radius: 10px;
+}
+
+.hr {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.call-logo {
+    align-self: center;
+}
+
+.btn-approve {
+    font-weight: 700;
+    border-left: 1px solid #f2f2f2;
+}

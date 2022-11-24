@@ -3,8 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
-import { addHousehold } from 'src/app/home-owner/+state/home-owner.actions';
-import { AddHouseholdRequest } from 'src/app/home-owner/domain/contracts/requests/add-household';
+import { addHousehold } from 'src/app/security-guard/+state/security-guard.actions';
+import { AddHouseholdRequest } from 'src/app/security-guard/domain/contracts/requests/add-household';
 import { selectDailyHelpRoles, selectFamilyAdultRoles, selectFamilyKidRoles, selectFrequentVisitorRoles, selectVisitorRoles } from 'src/app/shared/+state/shared.selector';
 import { Role } from 'src/app/shared/domain/role';
 
@@ -18,6 +18,7 @@ export class AddFamilyComponent implements OnInit {
   @Input() type: string = 'FAMILY_ADULT'
   activeRole?: Role
   isAdultSelected = true
+  homeOwnerId?: string;
 
   get showPhoneNumber(): boolean {
     return this.type !== 'FAMILY_KID'
@@ -44,6 +45,7 @@ export class AddFamilyComponent implements OnInit {
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
 
     this.type = data[0].type
+    this.homeOwnerId = data[0].homeOwnerId;
 
     if (this.type === 'DAILY_HELP') {
       this.roles$ = this._store.select(selectDailyHelpRoles())
@@ -87,14 +89,17 @@ export class AddFamilyComponent implements OnInit {
   }
 
   addHousehold() {
-    const householdRequest: AddHouseholdRequest = {
-      name: this.addHouseholeFormGroup.get('name')?.value ?? '',
-      role: this.activeRole?.name ?? '',
-      type: this.type,
-      countryCode: 973,
-      permission: this.currentPermission,
-      phoneNumber: this.addHouseholeFormGroup.get('phoneNumber')?.value ?? '',
+    if (this.homeOwnerId) {
+      const householdRequest: AddHouseholdRequest = {
+        homeOwnerId: this.homeOwnerId,
+        name: this.addHouseholeFormGroup.get('name')?.value ?? '',
+        role: this.activeRole?.name ?? '',
+        type: this.type,
+        countryCode: 973,
+        permission: this.currentPermission,
+        phoneNumber: this.addHouseholeFormGroup.get('phoneNumber')?.value ?? '',
+      }
+      this._store.dispatch(addHousehold({ household: householdRequest }))
     }
-    this._store.dispatch(addHousehold({ household: householdRequest }))
   }
 }

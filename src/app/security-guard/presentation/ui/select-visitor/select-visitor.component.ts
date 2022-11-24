@@ -4,6 +4,7 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { Household } from 'src/app/home-owner/domain/entities/household';
 import { selectHomeOwner } from 'src/app/security-guard/+state/security-guard.selector';
 import { HomeOwner } from 'src/app/security-guard/domain/entities/home-owner';
 import { AddFamilyComponent } from '../add-family/add-family.component';
@@ -19,7 +20,8 @@ export class SelectVisitorComponent implements OnInit, OnDestroy {
   members: any;
   helpers: any;
   visitors: any;
-  // subscription: Subscription;
+  homeOwnerId?: string;
+  subscription?: Subscription;
 
   constructor(private _store: Store,
     private _bottomSheet: MatBottomSheet,
@@ -27,14 +29,15 @@ export class SelectVisitorComponent implements OnInit, OnDestroy {
     private _location: Location
   ) {
 
-    const homeOwnerId = this._router.getCurrentNavigation()?.extras?.state?.['homeOwnerId'];
+    this.homeOwnerId = this._router.getCurrentNavigation()?.extras?.state?.['homeOwnerId'];
 
-    // this.subscription = this.homeOwner$.subscribe(x => {
-    //   this._bottomSheet.dismiss();
-    // })
 
-    if (homeOwnerId) {
-      this.homeOwner$ = this._store.select(selectHomeOwner(homeOwnerId));
+
+    if (this.homeOwnerId) {
+      this.homeOwner$ = this._store.select(selectHomeOwner(this.homeOwnerId));
+      this.subscription = this.homeOwner$.subscribe(x => {
+        this._bottomSheet.dismiss();
+      })
     }
   }
 
@@ -43,18 +46,27 @@ export class SelectVisitorComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.subscription.unsubscribe()
+    this.subscription?.unsubscribe()
   }
 
   ngOnInit() { }
 
   openAddHousehold(type: string) {
     this._bottomSheet.open(AddFamilyComponent, {
-      data: [{ type: type }]
+      data: [{ type: type, homeOwnerId: this.homeOwnerId }]
     });
   }
 
   back() {
     this._location.back()
+  }
+
+  requestVisit(household: Household) {
+    this._router.navigate(['/security-guard/request-status'], {
+      state: {
+        homeOwnerId: this.homeOwnerId,
+        household: household
+      }
+    })
   }
 }

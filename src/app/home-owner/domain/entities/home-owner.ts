@@ -1,6 +1,7 @@
 import { Entity } from "src/app/shared/domain/entity";
 import { Home } from "./home";
 import { Household } from "./household";
+import { Log } from "./log";
 
 export class HomeOwner extends Entity {
 
@@ -13,6 +14,11 @@ export class HomeOwner extends Entity {
             if (households) {
                 this.households = households
             }
+
+            const logs = obj.logs?.map(log => new Log('test_id', log))
+            if (logs) {
+                this.logs = logs
+            }
         }
     }
     societyId?: string
@@ -22,4 +28,14 @@ export class HomeOwner extends Entity {
     countryCode?: number
     home?: Home
     households: Household[] = []
+    logs: Log[] = []
+
+    get truncatedName(): string | undefined {
+        const names = this.name?.split(' ')
+        var name = this.name
+        if ((names?.length ?? 0) > 1) {
+            name = `${names?.[0]} ${names?.[1].substring(0, 1)}.`
+        }
+        return name
+    }
 }

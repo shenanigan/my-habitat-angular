@@ -36,7 +36,7 @@ import { MockSocietyService } from './infrastructure/api/mock-society.service';
   providers: [
     {
       provide: AbstractSocietyService,
-      useClass: MockSocietyService
+      useClass: SocietyService
     }
   ]
 })

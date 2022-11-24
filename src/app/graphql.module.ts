@@ -3,12 +3,12 @@ import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { ApolloClientOptions, ApolloLink, DefaultOptions, InMemoryCache } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
 import { setContext } from '@apollo/client/link/context';
+import { StorageService } from './shared/infrastructure/storage/storage.service';
 
 const uri = 'https://localhost:7022/graphql'; // <-- add the URL of the GraphQL server here
-export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
+export function createApollo(httpLink: HttpLink, storageService: StorageService): ApolloClientOptions<any> {
   const auth = setContext((operation, context) => {
-    // const token = localStorage.getItem('token');
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJIb21lT3duZXIiLCJTb2NpZXR5SWQiOiI0ZmFmMTdjMy1jOWQ0LTQxNmEtYWU3Mi0zYzVkZjk5YjE3NDQiLCJ1c2VySWQiOiIxN2JkNjExNi02MzE4LTRlNjItYTQ1Zi03NWFjODhkYzIzZjMiLCJleHAiOjE5Mjc3MjgwNjYsImlzcyI6Imh0dHBzOi8vbXloYWJpdGF0LmNvbSIsImF1ZCI6Imh0dHBzOi8vbXloYWJpdGF0LmNvbSJ9.AJ45F25olcBiK9s7uYvr_KnUSt1wBygKnYy-pdGzeME';
+    const token = storageService.getToken()
 
     if (token === null) {
       return {};
@@ -50,7 +50,7 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
     {
       provide: APOLLO_OPTIONS,
       useFactory: createApollo,
-      deps: [HttpLink],
+      deps: [HttpLink, StorageService],
     },
   ],
 })

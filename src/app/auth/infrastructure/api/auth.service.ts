@@ -8,12 +8,13 @@ import { IAuthService } from "../../domain/services/iauth.service";
 import { ISendOtpRequest } from "../../domain/contracts/requests/send-otp-request";
 import { IVerifyOtpRequest } from "../../domain/contracts/requests/verify-otp-request";
 import { Token } from "../../domain/entities/token";
+import { StorageService } from "src/app/shared/infrastructure/storage/storage.service";
 
 @Injectable()
 export class AuthService extends BaseService implements IAuthService {
 
-  constructor(private _http: HttpClient) {
-    super();
+  constructor(private _http: HttpClient, _storageService: StorageService) {
+    super(_storageService);
   }
   sendOtp(request: ISendOtpRequest): Observable<void> {
     return this._http.post<any>(environment.authURL + `users/sendOtp`, request, super.headers())
