@@ -6,7 +6,7 @@ import { catchError, map, of, switchMap } from "rxjs";
 import { failed } from "src/app/shared/+state/shared.actions";
 import { Household } from "../domain/entities/household";
 import { AbstractHomeOwnerService } from "../domain/services/ihome-owner.service";
-import { addHousehold, addHouseholdSuccess, getHomeOwner, getHomeOwnerSuccess } from "./home-owner.actions";
+import { addHousehold, addHouseholdSuccess, allowKidExit, allowKidExitSuccess, getHomeOwner, getHomeOwnerSuccess } from "./home-owner.actions";
 
 @Injectable()
 export class HomeOwnerEffects {
@@ -43,6 +43,22 @@ export class HomeOwnerEffects {
                             var household = new Household(householdId, d.household)
                             return addHouseholdSuccess({ household })
                         }),
+                            catchError(err => {
+                                this._snackBarService.open(err.message, 'CANCEL');
+                                return of(failed(err))
+                            })
+                        )
+                })
+            )
+        )
+
+    allowKidExit$ =
+        createEffect(() =>
+            this._actions$.pipe(
+                ofType(allowKidExit),
+                switchMap(d => {
+                    return this._homeOwnerService.allowKidExit(d.kidExitRequest).
+                        pipe(map(_ => allowKidExitSuccess),
                             catchError(err => {
                                 this._snackBarService.open(err.message, 'CANCEL');
                                 return of(failed(err))

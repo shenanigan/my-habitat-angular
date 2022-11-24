@@ -21,9 +21,7 @@
             </div>
         </div>
 
-        <button *ngIf="selectedKid?.permission === 'REQUEST_PERMISSION'" mat-flat-button color="primary"
-            (click)="requestExit()" class="mat-flat-button w-100">Request Permission</button>
-        <button *ngIf="selectedKid?.permission !== 'REQUEST_PERMISSION'" mat-flat-button color="primary"
-            (click)="requestExit()" class="mat-flat-button w-100">Allow Exit</button>
+        <button mat-flat-button color="primary" (click)="requestExit()" class="mat-flat-button w-100">Request
+            Permission</button>
     </div>
 </div>

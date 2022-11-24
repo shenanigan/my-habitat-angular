@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
 import { allowKidExit } from 'src/app/home-owner/+state/home-owner.actions';
@@ -17,7 +18,7 @@ export class KidExitComponent implements OnInit {
   hours = 4
   kids$: Observable<Household[]> = this._store.select(selectKids())
 
-  constructor(private _store: Store) {
+  constructor(private _store: Store, private _sheet: MatBottomSheetRef<KidExitComponent>) {
     this.kids$.pipe(take(1)).subscribe(kids => {
       if (kids.length > 0) {
         this.selectedKid = kids[0]
@@ -43,10 +44,11 @@ export class KidExitComponent implements OnInit {
   allowExit() {
     if (this.selectedKid) {
       const kidExitRequest: KidExitRequest = {
-        household: this.selectedKid,
+        householdId: this.selectedKid.entityId,
         hours: this.hours
       }
       this._store.dispatch(allowKidExit({ kidExitRequest }))
+      this._sheet.dismiss()
     }
   }
 }

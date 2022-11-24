@@ -9,6 +9,7 @@ import { AddHouseholdRequest } from "../../domain/contracts/requests/add-househo
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { StorageService } from "src/app/shared/infrastructure/storage/storage.service";
+import { KidExitRequest } from "../../domain/contracts/requests/kid-exit";
 
 @Injectable()
 export class HomeOwnerService extends BaseService implements IHomeOwnerService {
@@ -19,9 +20,16 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
     super(_storageService);
   }
 
+
   addHousehold(request: AddHouseholdRequest): Observable<string> {
     return this._http.post<Household>(environment.homeOwnerURL + `HomeOwner/AddHousehold`, request, super.headers())
       .pipe(map(response => response.entityId),
+        catchError(this.handleError));
+  }
+
+  allowKidExit(request: KidExitRequest): Observable<void> {
+    return this._http.post<void>(environment.homeOwnerURL + `HomeOwner/AllowKidExit`, request, super.headers())
+      .pipe(map(_ => _),
         catchError(this.handleError));
   }
 
@@ -42,6 +50,9 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
           reason
           status
           isExit
+          requestTime
+          approvedTime
+          rejectedTime
           household {
             name
             role 
@@ -55,7 +66,7 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
           role
           permission
           countryCode
-          householdId
+          entityId: householdId
         }
       }
     }`

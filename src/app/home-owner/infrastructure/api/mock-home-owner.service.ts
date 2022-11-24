@@ -9,6 +9,7 @@ import { Household } from "../../domain/entities/household";
 import { subscribe } from "graphql";
 import { AddHouseholdRequest } from "../../domain/contracts/requests/add-household";
 import { StorageService } from "src/app/shared/infrastructure/storage/storage.service";
+import { KidExitRequest } from "../../domain/contracts/requests/kid-exit";
 
 @Injectable()
 export class MockHomeOwnerService extends BaseService implements IHomeOwnerService {
@@ -16,6 +17,7 @@ export class MockHomeOwnerService extends BaseService implements IHomeOwnerServi
     constructor(private _apollo: Apollo, _storageService: StorageService) {
         super(_storageService);
     }
+
     getHomeOwner(): Observable<HomeOwner> {
         return new Observable(subscriber => {
             var homeOwner = new HomeOwner('1234-5678-90')
@@ -92,6 +94,13 @@ export class MockHomeOwnerService extends BaseService implements IHomeOwnerServi
     addHousehold(householdRequest: AddHouseholdRequest): Observable<string> {
         return new Observable(subscriber => {
             subscriber.next('123-456-789')
+            subscriber.complete()
+        })
+    }
+
+    allowKidExit(request: KidExitRequest): Observable<void> {
+        return new Observable(subscriber => {
+            subscriber.next()
             subscriber.complete()
         })
     }

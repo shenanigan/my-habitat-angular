@@ -1,6 +1,4 @@
-import { Household } from "../../entities/household";
-
 export interface KidExitRequest {
-    household: Household
+    householdId: string
     hours: number
 }

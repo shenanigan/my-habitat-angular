@@ -14,6 +14,10 @@ export class Household extends Entity {
     permission?: string
     countryCode?: number
 
+    get formattedType(): string | undefined {
+        return this.type?.replace('_', ' ').toLocaleLowerCase()
+    }
+
     get truncatedName(): string | undefined {
         const names = this.name?.split(' ')
         var name = this.name

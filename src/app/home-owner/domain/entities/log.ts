@@ -6,6 +6,9 @@ export class Log extends Entity {
         super(visitId)
         if (obj) {
             Object.assign(this, obj)
+            if (obj.household) {
+                this.household = new Household(obj.household.entityId, obj.household)
+            }
         }
     }
 

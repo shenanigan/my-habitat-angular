@@ -78,9 +78,9 @@ export class SecurityGuardService extends BaseService implements ISecurityGuardS
       }
     }`
     return this._apollo
-      .watchQuery<any>({
+      .query<any>({
         query: GET_HOME_OWNER
-      }).valueChanges.pipe(map(res => {
+      }).pipe(map(res => {
         var securityGuard = new SecurityGuard(res.data.securityGuard.securityGuardId, res.data.securityGuard);
         return securityGuard
       }))

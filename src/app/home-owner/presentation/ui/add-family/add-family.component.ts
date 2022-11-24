@@ -32,7 +32,8 @@ export class AddFamilyComponent implements OnInit {
   }
 
   roles$: Observable<Role[]> = this._store.select(selectFamilyAdultRoles())
-  permissions: string[] = ['Require Permission', 'Send Notification', 'Permission Not Required']
+  permissions: string[] = ['Require Permission', 'Permission Not Required']
+  permissionValues: string[] = ['REQUIRE_PERMISSION', 'NO_PERMISSION_REQUIRED']
   currentPermission?: string
 
   addHouseholeFormGroup = new FormGroup({
@@ -83,12 +84,19 @@ export class AddFamilyComponent implements OnInit {
   }
 
   addHousehold() {
+    var permission: string | undefined
+    if (this.currentPermission) {
+      const index = this.permissions.indexOf(this.currentPermission);
+      if (index >= 0) {
+        permission = this.permissionValues[index]
+      }
+    }
     const householdRequest: AddHouseholdRequest = {
       name: this.addHouseholeFormGroup.get('name')?.value ?? '',
       role: this.activeRole?.name ?? '',
       type: this.type,
       countryCode: 973,
-      permission: this.currentPermission,
+      permission: permission,
       phoneNumber: this.addHouseholeFormGroup.get('phoneNumber')?.value ?? '',
     }
     this._store.dispatch(addHousehold({ household: householdRequest }))

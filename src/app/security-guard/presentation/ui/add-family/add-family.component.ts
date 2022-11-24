@@ -33,7 +33,7 @@ export class AddFamilyComponent implements OnInit {
   }
 
   roles$: Observable<Role[]> = this._store.select(selectFamilyAdultRoles())
-  permissions: string[] = ['Require Permission', 'Send Notification', 'Permission Not Required']
+  permissions: string[] = ['Require Permission', 'Permission Not Required']
   currentPermission?: string
 
   addHouseholeFormGroup = new FormGroup({

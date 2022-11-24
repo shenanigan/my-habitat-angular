@@ -30,10 +30,10 @@ export class SocietyService extends BaseService implements ISocietyService {
       }
     }`
     return this._apollo
-      .watchQuery<any>({
+      .query<any>({
         query: GET_SOCIETY,
         variables: { societyId }
-      }).valueChanges.pipe(map(res => {
+      }).pipe(map(res => {
         var society = new Society(res.data.society);
         return society
       }))

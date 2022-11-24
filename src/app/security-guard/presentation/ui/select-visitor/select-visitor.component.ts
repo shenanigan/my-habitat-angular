@@ -4,9 +4,9 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { Household } from 'src/app/home-owner/domain/entities/household';
 import { selectHomeOwner } from 'src/app/security-guard/+state/security-guard.selector';
 import { HomeOwner } from 'src/app/security-guard/domain/entities/home-owner';
+import { Household } from 'src/app/security-guard/domain/entities/household';
 import { AddFamilyComponent } from '../add-family/add-family.component';
 
 @Component({
