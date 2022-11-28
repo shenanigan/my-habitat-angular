@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Household } from 'src/app/home-owner/domain/entities/household';
 import { requestVisit } from 'src/app/security-guard/+state/security-guard.actions';
+import * as Ably from 'ably';
+import { Log } from 'src/app/home-owner/domain/entities/log';
+
 
 @Component({
   selector: 'app-request-status',
@@ -23,18 +26,33 @@ export class RequestStatusComponent implements OnInit {
     this.household = this._router.getCurrentNavigation()?.extras?.state?.['household'];
     if (this.household?.entityId && this.homeOwnerId) {
       this._store.dispatch(requestVisit({ homeOwnerId: this.homeOwnerId, householdId: this.household?.entityId }))
-    }
-    setTimeout(() => {
-      this.message = 'APPROVED'
-      this.isApproved = true
+      let options: Ably.Types.ClientOptions = { key: 'm2BStQ.WYEoaw:WRC5iiG2PcIyhJW1fXTV-jGVlsINETMflLHfuOGexGk' };
+      let client = new Ably.Realtime(options);
+      let channel = client.channels.get(this.homeOwnerId); /* inferred type Ably.Types.RealtimeChannel */
+      client.connection.on('connected', () => {
+        channel.subscribe('LOG_ACTION', (message) => {
 
-      setTimeout(() => {
-        this._router.navigate(['/security-guard'])
-      }, 2000);
-    }, 5000);
+          const log: Log = message.data
+          if (log) {
+            debugger
+            if (log.status === 'APPROVED') {
+              this.message = 'APPROVED'
+              this.isApproved = true
+            } else {
+              this.message = 'REJECTED'
+              this.isRejected = true
+            }
+          }
+        })
+      });
+    }
   }
 
   ngOnInit(): void {
+  }
+
+  close() {
+    this._router.navigate(['/security-guard'])
   }
 
 }

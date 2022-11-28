@@ -1,6 +1,6 @@
 <div class="h-100 p-3 d-flex flex-column">
     <div class="text-end">
-        <mat-icon>close</mat-icon>
+        <mat-icon *ngIf="isApproved || isRejected" (click)="close()">close</mat-icon>
     </div>
     <div class="color-primary  label-24-700 flex-grow-1 d-flex align-items-center justify-content-center"
         [ngClass]="{'color-success': isApproved, 'color-warn': isRejected}">

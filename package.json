@@ -29,6 +29,7 @@
     "@ngrx/effects": "^14.3.2",
     "@ngrx/entity": "^14.3.2",
     "@ngrx/store": "^14.3.2",
+    "ably": "^1.2.33",
     "angular-font-awesome": "^3.1.2",
     "apollo-angular": "^4.1.0",
     "bootstrap": "^5.2.2",
