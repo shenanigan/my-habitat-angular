@@ -22,7 +22,7 @@ export class SecurityGuardService extends BaseService implements ISecurityGuardS
   }
 
   addHousehold(request: AddHouseholdRequest): Observable<string> {
-    return this._http.post<Household>(environment.homeOwnerURL + `SecurityGuard/AddHousehold`, request, super.headers())
+    return this._http.post<Household>(environment.homeOwnerURL + `SecurityGuard/AddVisitor`, request, super.headers())
       .pipe(map(response => response.entityId),
         catchError(this.handleError));
   }
@@ -53,6 +53,7 @@ export class SecurityGuardService extends BaseService implements ISecurityGuardS
           type
           role
           permission
+          imageUrl
         }
       }
     }`

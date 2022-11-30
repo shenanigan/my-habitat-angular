@@ -6,4 +6,5 @@ export interface AddHouseholdRequest {
     role: string
     permission?: string
     countryCode?: number
+    imageUrl?: string
 }

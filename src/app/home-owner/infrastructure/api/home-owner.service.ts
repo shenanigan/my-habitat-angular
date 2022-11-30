@@ -65,6 +65,7 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
             name
             role 
             type
+            imageUrl
           }
         }
         households {
@@ -75,6 +76,7 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
           permission
           countryCode
           entityId: householdId
+          imageUrl
         }
       }
     }`

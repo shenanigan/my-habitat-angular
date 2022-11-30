@@ -13,6 +13,7 @@ export class Household extends Entity {
     role?: string
     permission?: string
     countryCode?: number
+    imageUrl?: string
 
     get truncatedName(): string | undefined {
         const names = this.name?.split(' ')

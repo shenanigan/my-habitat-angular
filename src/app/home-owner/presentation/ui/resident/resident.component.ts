@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { getHomeOwner } from 'src/app/home-owner/+state/home-owner.actions';
 import { selectHomeOwner } from 'src/app/home-owner/+state/home-owner.selector';
+import { environment } from 'src/environments/environment';
 import { AddFamilyComponent } from '../add-family/add-family.component';
 
 @Component({
@@ -18,6 +19,7 @@ export class ResidentComponent implements OnInit, OnDestroy {
   helpers: any;
   visitors: any;
   subscription: Subscription;
+  readSASToken = environment.azureRWSASToken;
 
   constructor(private _store: Store,
     private _bottomSheet: MatBottomSheet

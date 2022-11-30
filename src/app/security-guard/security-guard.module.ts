@@ -28,6 +28,8 @@ import { MatCardModule } from '@angular/material/card';
 import { SelectVisitorComponent } from './presentation/ui/select-visitor/select-visitor.component';
 import { SecurityGuardService } from './infrastructure/api/security-guard.service';
 import { RequestStatusComponent } from './presentation/ui/request-status/request-status.component';
+import { AzureImageStorageService } from '../shared/infrastructure/storage/azure.service';
+import { AbstractImageStorageService } from '../shared/domain/services/iimage-storage.service';
 
 
 @NgModule({
@@ -59,6 +61,10 @@ import { RequestStatusComponent } from './presentation/ui/request-status/request
     {
       provide: AbstractSecurityGuardService,
       useClass: SecurityGuardService
+    },
+    {
+      provide: AbstractImageStorageService,
+      useClass: AzureImageStorageService
     }
   ]
 })

@@ -7,6 +7,7 @@ import { Observable, Subscription } from 'rxjs';
 import { selectHomeOwner } from 'src/app/security-guard/+state/security-guard.selector';
 import { HomeOwner } from 'src/app/security-guard/domain/entities/home-owner';
 import { Household } from 'src/app/security-guard/domain/entities/household';
+import { environment } from 'src/environments/environment';
 import { AddFamilyComponent } from '../add-family/add-family.component';
 
 @Component({
@@ -22,6 +23,7 @@ export class SelectVisitorComponent implements OnInit, OnDestroy {
   visitors: any;
   homeOwnerId?: string;
   subscription?: Subscription;
+  readSASToken = environment.azureRWSASToken
 
   constructor(private _store: Store,
     private _bottomSheet: MatBottomSheet,

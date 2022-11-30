@@ -7,6 +7,9 @@ import { addHousehold } from 'src/app/security-guard/+state/security-guard.actio
 import { AddHouseholdRequest } from 'src/app/security-guard/domain/contracts/requests/add-household';
 import { selectDailyHelpRoles, selectFamilyAdultRoles, selectFamilyKidRoles, selectFrequentVisitorRoles, selectVisitorRoles } from 'src/app/shared/+state/shared.selector';
 import { Role } from 'src/app/shared/domain/role';
+import { Camera, CameraResultType, Photo } from '@capacitor/camera';
+import { AbstractImageStorageService } from 'src/app/shared/domain/services/iimage-storage.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-add-family',
@@ -19,6 +22,21 @@ export class AddFamilyComponent implements OnInit {
   activeRole?: Role
   isAdultSelected = true
   homeOwnerId?: string;
+  image?: Photo
+
+  async selectImage() {
+    await this.takePicture();
+  }
+
+  async takePicture() {
+    const image = await Camera.getPhoto({
+      quality: 50,
+      allowEditing: true,
+      resultType: CameraResultType.Base64
+    });
+
+    this.image = image;
+  }
 
   get showPhoneNumber(): boolean {
     return this.type !== 'FAMILY_KID'
@@ -42,6 +60,7 @@ export class AddFamilyComponent implements OnInit {
   })
 
   constructor(private _store: Store,
+    private _imageService: AbstractImageStorageService,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
 
     this.type = data[0].type
@@ -89,6 +108,16 @@ export class AddFamilyComponent implements OnInit {
   }
 
   addHousehold() {
+    if (this.image?.base64String) {
+      this._imageService.saveImage(uuidv4(), this.image.base64String, this.image.format).pipe(take(1)).subscribe(imageUrl => {
+        this._addHousehold(imageUrl)
+      });
+    } else {
+      this._addHousehold()
+    }
+  }
+
+  private _addHousehold(imageUrl?: string) {
     if (this.homeOwnerId) {
       const householdRequest: AddHouseholdRequest = {
         homeOwnerId: this.homeOwnerId,
@@ -98,6 +127,7 @@ export class AddFamilyComponent implements OnInit {
         countryCode: 973,
         permission: this.currentPermission,
         phoneNumber: this.addHouseholeFormGroup.get('phoneNumber')?.value ?? '',
+        imageUrl: imageUrl
       }
       this._store.dispatch(addHousehold({ household: householdRequest }))
     }

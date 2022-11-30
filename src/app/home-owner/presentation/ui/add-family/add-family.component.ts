@@ -7,6 +7,9 @@ import { addHousehold } from 'src/app/home-owner/+state/home-owner.actions';
 import { AddHouseholdRequest } from 'src/app/home-owner/domain/contracts/requests/add-household';
 import { selectDailyHelpRoles, selectFamilyAdultRoles, selectFamilyKidRoles, selectFrequentVisitorRoles } from 'src/app/shared/+state/shared.selector';
 import { Role } from 'src/app/shared/domain/role';
+import { Camera, CameraResultType, Photo } from '@capacitor/camera';
+import { AbstractImageStorageService } from 'src/app/shared/domain/services/iimage-storage.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-add-family',
@@ -14,6 +17,21 @@ import { Role } from 'src/app/shared/domain/role';
   styleUrls: ['./add-family.component.scss']
 })
 export class AddFamilyComponent implements OnInit {
+  image?: Photo;
+  subscription?: Observable<any>;
+  async selectImage() {
+    await this.takePicture();
+  }
+
+  async takePicture() {
+    const image = await Camera.getPhoto({
+      quality: 50,
+      allowEditing: true,
+      resultType: CameraResultType.Base64
+    });
+
+    this.image = image;
+  }
 
   @Input() type: string = 'FAMILY_ADULT'
   activeRole?: Role
@@ -42,6 +60,7 @@ export class AddFamilyComponent implements OnInit {
   })
 
   constructor(private _store: Store,
+    private _imageService: AbstractImageStorageService,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
 
     this.type = data[0].type
@@ -84,6 +103,17 @@ export class AddFamilyComponent implements OnInit {
   }
 
   addHousehold() {
+    if (this.image?.base64String) {
+      this._imageService.saveImage(uuidv4(), this.image.base64String, this.image.format).pipe(take(1)).subscribe(imageUrl => {
+        this._addHousehold(imageUrl)
+      });
+    } else {
+      this._addHousehold()
+    }
+  }
+
+  private _addHousehold(imageUrl?: string) {
+
     var permission: string | undefined
     if (this.currentPermission) {
       const index = this.permissions.indexOf(this.currentPermission);
@@ -97,6 +127,7 @@ export class AddFamilyComponent implements OnInit {
       type: this.type,
       countryCode: 973,
       permission: permission,
+      imageUrl: imageUrl,
       phoneNumber: this.addHouseholeFormGroup.get('phoneNumber')?.value ?? '',
     }
     this._store.dispatch(addHousehold({ household: householdRequest }))

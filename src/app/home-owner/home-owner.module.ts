@@ -25,6 +25,8 @@ import { HomeComponent } from './presentation/ui/home/home.component';
 import { VisitorsComponent } from './presentation/ui/visitors/visitors.component';
 import { HomeOwnerService } from './infrastructure/api/home-owner.service';
 import { LogComponent } from './presentation/component/log/log.component';
+import { AzureImageStorageService } from '../shared/infrastructure/storage/azure.service';
+import { AbstractImageStorageService } from '../shared/domain/services/iimage-storage.service';
 
 
 @NgModule({
@@ -52,6 +54,10 @@ import { LogComponent } from './presentation/component/log/log.component';
     {
       provide: AbstractHomeOwnerService,
       useClass: HomeOwnerService
+    }, 
+    {
+      provide: AbstractImageStorageService,
+      useClass: AzureImageStorageService
     }
   ]
 })

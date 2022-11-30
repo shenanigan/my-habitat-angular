@@ -31,10 +31,9 @@ export class RequestStatusComponent implements OnInit {
       let channel = client.channels.get(this.homeOwnerId); /* inferred type Ably.Types.RealtimeChannel */
       client.connection.on('connected', () => {
         channel.subscribe('LOG_ACTION', (message) => {
-
+          channel.unsubscribe('LOG_ACTION');
           const log: Log = message.data
           if (log) {
-            debugger
             if (log.status === 'APPROVED') {
               this.message = 'APPROVED'
               this.isApproved = true

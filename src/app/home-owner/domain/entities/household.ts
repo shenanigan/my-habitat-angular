@@ -13,6 +13,7 @@ export class Household extends Entity {
     role?: string
     permission?: string
     countryCode?: number
+    imageUrl?: string
 
     get formattedType(): string | undefined {
         return this.type?.replace('_', ' ').toLocaleLowerCase()

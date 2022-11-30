@@ -6,8 +6,9 @@
    <hr class="hr pb-1">
    <div class="p-3">
       <form [formGroup]="addHouseholeFormGroup" (submit)="addHousehold()">
-         <div class="d-flex justify-content-center">
-            <img class="photo-container" src="http://bluegalaxy.info/images/sea_captain.jpg">
+         <div class="d-flex justify-content-center" (click)="selectImage()">
+            <img class="photo-container" [src]="'data:image/'+image?.format+ ';base64,' + image?.base64String"
+               style="object-fit: cover;">
          </div>
 
          <ng-container *ngIf="showAdultSelection">
