@@ -44,3 +44,12 @@ input.mat-input-element {
 .mat-form-field-appearance-outline .mat-form-field-suffix {
     top: 0.18em !important;
 }
+
+.add-message.mat-form-field-appearance-outline .mat-form-field-outline {
+    box-shadow: 0px -5px 10px #0000000D;
+    top: 0 !important;
+}
+
+.add-message.mat-form-field-appearance-outline .mat-form-field-flex {
+    padding: 0.5em 1.2em 0.5em 1.2em !important;
+}

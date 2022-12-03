@@ -2,6 +2,7 @@ import { Entity } from "src/app/shared/domain/entity";
 import { Home } from "./home";
 import { Household } from "./household";
 import { Log } from "./log";
+import { Message } from "./message";
 
 export class HomeOwner extends Entity {
 
@@ -19,6 +20,11 @@ export class HomeOwner extends Entity {
             if (logs) {
                 this.logs = logs
             }
+
+            const messages = obj.messages?.map(message => new Log(message.entityId, message))
+            if (messages) {
+                this.messages = messages
+            }
         }
     }
     societyId?: string
@@ -29,6 +35,7 @@ export class HomeOwner extends Entity {
     home?: Home
     households: Household[] = []
     logs: Log[] = []
+    messages: Message[] = []
 
     get truncatedName(): string | undefined {
         const names = this.name?.split(' ')

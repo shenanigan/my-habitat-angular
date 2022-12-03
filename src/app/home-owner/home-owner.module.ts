@@ -27,11 +27,16 @@ import { HomeOwnerService } from './infrastructure/api/home-owner.service';
 import { LogComponent } from './presentation/component/log/log.component';
 import { AzureImageStorageService } from '../shared/infrastructure/storage/azure.service';
 import { AbstractImageStorageService } from '../shared/domain/services/iimage-storage.service';
+import { MyTextMessageComponent } from './presentation/component/my-text-message/my-text-message.component';
+import { MyImageMessageComponent } from './presentation/component/my-image-message/my-image-message.component';
+import { OtherImageMessageComponent } from './presentation/component/other-image-message/other-image-message.component';
+import { OtherTextMessageComponent } from './presentation/component/other-text-message/other-text-message.component';
+import { ChatComponent } from './presentation/ui/chat/chat.component';
 
 
 @NgModule({
   declarations: [ResidentComponent, AddFamilyComponent, KidExitComponent,
-    HomeComponent, VisitorsComponent, LogComponent],
+    HomeComponent, VisitorsComponent, LogComponent, ChatComponent, MyTextMessageComponent, MyImageMessageComponent, OtherImageMessageComponent, OtherTextMessageComponent],
   imports: [
     CommonModule,
     HomeOwnerRoutingModule,
@@ -54,7 +59,7 @@ import { AbstractImageStorageService } from '../shared/domain/services/iimage-st
     {
       provide: AbstractHomeOwnerService,
       useClass: HomeOwnerService
-    }, 
+    },
     {
       provide: AbstractImageStorageService,
       useClass: AzureImageStorageService

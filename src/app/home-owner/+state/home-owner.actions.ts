@@ -1,10 +1,12 @@
 
 import { createAction, props } from "@ngrx/store";
 import { AddHouseholdRequest } from "../domain/contracts/requests/add-household";
+import { AddMessageRequest } from "../domain/contracts/requests/add-message";
 import { KidExitRequest } from "../domain/contracts/requests/kid-exit";
 import { UpdateLogRequest } from "../domain/contracts/requests/update-log";
 import { HomeOwner } from "../domain/entities/home-owner";
 import { Household } from "../domain/entities/household";
+import { Message } from "../domain/entities/message";
 
 export const getHomeOwner = createAction('[HomeOwner] Get Home Owner')
 export const getHomeOwnerSuccess = createAction('[HomeOwner] Get Home Owner Success', props<{ homeOwner: HomeOwner }>())
@@ -17,3 +19,6 @@ export const allowKidExitSuccess = createAction('[HomeOwner]  Allow Kid Exit Suc
 
 export const updateLog = createAction('[HomeOwner] Update Log', props<{ request: UpdateLogRequest }>())
 export const updateLogSuccess = createAction('[HomeOwner]  Update Log Success', props<{ logId: string, shouldApprove: boolean }>())
+
+export const addMessage = createAction('[HomeOwner] Add Message', props<{ homeOwnerId: string, request: AddMessageRequest }>())
+export const addMessageSuccess = createAction('[HomeOwner]  Add Message Success', props<{ message: Message }>())

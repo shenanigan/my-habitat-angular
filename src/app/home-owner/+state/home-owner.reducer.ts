@@ -1,7 +1,8 @@
 import { createReducer, on } from "@ngrx/store";
 import { failed } from "src/app/shared/+state/shared.actions";
 import { HomeOwner } from "../domain/entities/home-owner";
-import { addHouseholdSuccess, getHomeOwnerSuccess, updateLogSuccess } from "./home-owner.actions";
+import { Message } from "../domain/entities/message";
+import { addHouseholdSuccess, addMessage, addMessageSuccess, getHomeOwnerSuccess, updateLogSuccess } from "./home-owner.actions";
 
 export interface IState {
     homeOwner: HomeOwner
@@ -39,6 +40,18 @@ export const homeOwnerReducer = createReducer(
                 log.rejectedTime = new Date()
             }
         }
+        return {
+            ...state,
+            homeOwner: updatedHomeOwner
+        }
+    }),
+    on(addMessage, (state, { homeOwnerId, request }) => {
+
+        var updatedHomeOwner = new HomeOwner(state.homeOwner.entityId, state.homeOwner)
+        var message = new Message('_', request)
+        message.createdAt = new Date();
+        message.sentById = updatedHomeOwner.entityId;
+        updatedHomeOwner.messages.push(message);
         return {
             ...state,
             homeOwner: updatedHomeOwner

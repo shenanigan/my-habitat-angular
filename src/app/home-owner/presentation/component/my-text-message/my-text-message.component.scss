@@ -1,0 +1,8 @@
+@import "src/theme/_variables.scss";
+
+.text-container {
+    background-color: $primary;
+    border-radius: 20px 20px 0 20px;
+    color: white !important;
+    max-width: 75%;
+}

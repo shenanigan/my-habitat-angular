@@ -6,11 +6,11 @@ import { IHomeOwnerService } from "../../domain/services/ihome-owner.service";
 import { HomeOwner } from "../../domain/entities/home-owner";
 import { Home } from "../../domain/entities/home";
 import { Household } from "../../domain/entities/household";
-import { subscribe } from "graphql";
 import { AddHouseholdRequest } from "../../domain/contracts/requests/add-household";
 import { StorageService } from "src/app/shared/infrastructure/storage/storage.service";
 import { KidExitRequest } from "../../domain/contracts/requests/kid-exit";
 import { UpdateLogRequest } from "../../domain/contracts/requests/update-log";
+import { AddMessageRequest } from "../../domain/contracts/requests/add-message";
 
 @Injectable()
 export class MockHomeOwnerService extends BaseService implements IHomeOwnerService {
@@ -107,6 +107,13 @@ export class MockHomeOwnerService extends BaseService implements IHomeOwnerServi
     }
 
     updateLog(request: UpdateLogRequest): Observable<void> {
+        return new Observable(subscriber => {
+            subscriber.next()
+            subscriber.complete()
+        })
+    }
+
+    addMessage(request: AddMessageRequest): Observable<void> {
         return new Observable(subscriber => {
             subscriber.next()
             subscriber.complete()

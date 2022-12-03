@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Store } from '@ngrx/store';
+import { take } from 'rxjs';
 import { selectHomeOwner } from 'src/app/home-owner/+state/home-owner.selector';
+import { AddMessageRequest } from 'src/app/home-owner/domain/contracts/requests/add-message';
 import { UpdateLogRequest } from 'src/app/home-owner/domain/contracts/requests/update-log';
 import { Log } from 'src/app/home-owner/domain/entities/log';
-import { getHomeOwner, updateLog } from '../../../+state/home-owner.actions';
+import { addMessage, getHomeOwner, updateLog } from '../../../+state/home-owner.actions';
 import { KidExitComponent } from '../kid-exit/kid-exit.component';
 
 @Component({
@@ -24,7 +26,14 @@ export class HomeComponent implements OnInit {
   }
 
   openKidExit() {
-    this._bottomSheet.open(KidExitComponent)
+    this.homeOwner$.pipe(take(1)).subscribe(x => {
+      const request: AddMessageRequest = {
+        type: 'TEXT',
+        text: 'HELLO WORLD'
+      }
+      this._store.dispatch(addMessage({ homeOwnerId: x.entityId, request }))
+    })
+    // this._bottomSheet.open(KidExitComponent)
   }
 
   deny(log: Log) {

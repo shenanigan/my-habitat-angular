@@ -11,6 +11,8 @@ import { environment } from "src/environments/environment";
 import { StorageService } from "src/app/shared/infrastructure/storage/storage.service";
 import { KidExitRequest } from "../../domain/contracts/requests/kid-exit";
 import { UpdateLogRequest } from "../../domain/contracts/requests/update-log";
+import { AddMessageRequest } from "../../domain/contracts/requests/add-message";
+import { Message } from "../../domain/entities/message";
 
 @Injectable()
 export class HomeOwnerService extends BaseService implements IHomeOwnerService {
@@ -78,6 +80,14 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
           entityId: householdId
           imageUrl
         }
+        messages{
+          text
+          type
+          sentById
+          createdAt
+          imageUrl
+          messageId
+        }
       }
     }`
     return this._apollo
@@ -88,5 +98,11 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
         return homeOwner
       }))
       .pipe(catchError(this.handleError));
+  }
+
+  addMessage(request: AddMessageRequest): Observable<void> {
+    return this._http.post<void>(environment.homeOwnerURL + `HomeOwner/AddMessage`, request, super.headers())
+      .pipe(map(_ => _),
+        catchError(this.handleError));
   }
 }

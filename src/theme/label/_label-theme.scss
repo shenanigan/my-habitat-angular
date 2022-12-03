@@ -31,6 +31,14 @@
         color: mat.get-color-from-palette($primary-palette, 900) !important;
     }
 
+    .color-white {
+        color: white !important
+    }
+
+    .color-dark {
+        color: #001949 !important
+    }
+
     // $primary-palette: map.get($color-config, 'primary');
 
     // .smallest-yello-label
@@ -60,6 +68,11 @@
     .label-15-400 {
         font-weight: 400 !important;
         font-size: 15px !important;
+    }
+
+    .label-14-400 {
+        font-weight: 100 !important;
+        font-size: 14px !important;
     }
 
     .label-24-100 {
