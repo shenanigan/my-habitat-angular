@@ -1,0 +1,31 @@
+<div class="w-100" style="border-bottom: 1px solid #CCC; position: fixed; top: 0; z-index: 1;">
+    <div class="d-flex px-3 py-3 align-items-center" [ngClass]="bkgClass ? bkgClass : 'bkg-color'">
+        <div style="width: 60px;" class="d-flex" *ngIf="!showLogo">
+            <mat-icon svgIcon="back" class="ms-0" (click)="back()"></mat-icon>
+        </div>
+        <div class="d-flex" *ngIf="showLogo">
+            <mat-icon svgIcon="docx_logo" class="ms-0" (click)="back()" style="width: 83px; height: 42px"></mat-icon>
+        </div>
+        <span class="mx-auto navbartitle-label text-nowrap header2-label">{{title}}</span>
+
+
+
+        <a style="text-decoration: none; width: 30px;" (click)="rightClick2()"
+            class="disclaimer-label primary-dark-color d-flex justify-content-end align-items-center">
+            <mat-icon *ngIf="rightIcon2" [svgIcon]="rightIcon2"></mat-icon>
+        </a>
+
+        <a style="text-decoration: none; width: 30px;" (click)="rightClick()"
+            class="disclaimer-label primary-dark-color d-flex justify-content-end align-items-center">
+            <mat-icon *ngIf="rightIcon" [svgIcon]="rightIcon"></mat-icon>
+            {{rightText}}
+        </a>
+
+    </div>
+    <!-- <div *ngIf="loaderService.isLoading | async">
+        <mat-progress-bar mode="query"></mat-progress-bar>
+    </div> -->
+</div>
+<!-- <div *ngIf="canShowLoader">
+    <div *ngIf="loaderService.isLoading | async" class="loader-overlay"></div>
+</div> -->

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-ic_sendmessage">
+      <rect width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="ic_sendmessage" clip-path="url(#clip-ic_sendmessage)">
+    <path id="ic_send_24px" d="M2.009,18.429,20,10.714,2.009,3,2,9l2.857,1.714L2,12.429Z" transform="translate(-1.536 10.021) rotate(-45)" fill="#fff"/>
+  </g>
+</svg>

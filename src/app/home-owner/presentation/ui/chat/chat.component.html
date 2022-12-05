@@ -1,13 +1,9 @@
-<div class="main-container">
-    <div class="d-flex justify-content-between p-3">
-        <mat-icon routerLink="/home-owner">arrow_back</mat-icon>
-        <span class="header2-label">Society Manager</span>
-        <span></span>
-    </div>
-    <hr class="hr">
-    <div class="p-3 " style="padding-bottom: 120px !important; overflow: scroll;" #chatBox>
+<app-header title="Society Manager" [bkgClass]="'bkg-white'" rightIcon2="call_chat" rightIcon="video_chat"></app-header>
 
-        <ng-container *ngFor="let message of (homeOwner$ | async)?.messages">
+<div class="main-container h-100 header-padding" style="overflow: scroll;" #chatBox>
+    <div class="p-3 " style="padding-bottom: 80px !important;">
+
+        <ng-container *ngFor="let message of (homeOwner$ | async)?.messages;">
             <app-my-text-message [message]="message"
                 *ngIf="message.type === 'TEXT' && message.sentById === (homeOwner$ | async)?.entityId">
             </app-my-text-message>
@@ -16,11 +12,11 @@
                 *ngIf="message.type === 'TEXT' && message.sentById !== (homeOwner$ | async)?.entityId">
             </app-other-text-message>
 
-            <app-my-image-message [message]="message"
+            <app-my-image-message [message]="message" (onClick)="openLightbox($event)"
                 *ngIf="message.type === 'IMAGE' && message.sentById === (homeOwner$ | async)?.entityId">
             </app-my-image-message>
 
-            <app-other-image-message [message]="message"
+            <app-other-image-message [message]="message" (onClick)="openLightbox($event)"
                 *ngIf="message.type === 'IMAGE' && message.sentById !== (homeOwner$ | async)?.entityId">
             </app-other-image-message>
 
@@ -35,18 +31,24 @@
             cdkAutosizeMaxRows="3" maxlength="240" placeholder="Type your message here..." [(ngModel)]="text"
             class="w-100 no-scroll"></textarea>
 
-        <button matSuffix mat-button class="me-2" style="margin-top: 5px; min-width: 0px; padding: 5px 5px"
+        <button matSuffix mat-button class="me-3" style="margin-top: 5px; min-width: 0px; padding: 5px 5px"
             (click)="selectImage()">
-            <mat-icon>attach_file</mat-icon>
+            <mat-icon svgIcon="chat_attach" style="line-height: 0 !important;"></mat-icon>
         </button>
 
         <button matSuffix mat-button style="margin-top: 5px; min-width: 0px; padding: 9px;
         background: #DDCA5B;
         border-radius: 20px;
         box-shadow: 0 0 10px #dcc963;" (click)="sendMessage()">
-            <mat-icon style="transform: rotate(-45deg);">send</mat-icon>
+            <mat-icon svgIcon="chat_send"></mat-icon>
         </button>
 
 
     </mat-form-field>
 </form>
+
+<ng-image-fullscreen-view
+    [images]="media"
+    [imageIndex]="selectedImageIndex"
+    [show]="showMedia"
+    (close)="closeMedia()"></ng-image-fullscreen-view>

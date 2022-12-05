@@ -32,6 +32,7 @@ import { MyImageMessageComponent } from './presentation/component/my-image-messa
 import { OtherImageMessageComponent } from './presentation/component/other-image-message/other-image-message.component';
 import { OtherTextMessageComponent } from './presentation/component/other-text-message/other-text-message.component';
 import { ChatComponent } from './presentation/ui/chat/chat.component';
+import { NgImageFullscreenViewModule } from 'ng-image-fullscreen-view';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { ChatComponent } from './presentation/ui/chat/chat.component';
     MatIconModule,
     MatChipsModule,
     SharedModule,
+    NgImageFullscreenViewModule,
     StoreModule.forFeature(homeOwnerFeatureName, homeOwnerReducer),
     EffectsModule.forFeature([HomeOwnerEffects])
   ],

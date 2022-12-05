@@ -16,6 +16,9 @@ export class Household extends Entity {
     imageUrl?: string
 
     get formattedType(): string | undefined {
+        if ((this.type?.indexOf('FAMILY') ?? '') >= 0) {
+            return 'Family'
+        }
         return this.type?.replace('_', ' ').toLocaleLowerCase()
     }
 

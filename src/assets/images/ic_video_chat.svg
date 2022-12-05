@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-ic_video_chat">
+      <rect width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="ic_video_chat" clip-path="url(#clip-ic_video_chat)">
+    <path id="ic_videocam_24px" d="M13.889,9.5V6.778A.78.78,0,0,0,13.111,6H3.778A.78.78,0,0,0,3,6.778v7.778a.78.78,0,0,0,.778.778h9.333a.78.78,0,0,0,.778-.778V11.833L17,14.944V6.389Z" transform="translate(2 1)" fill="#5761b2"/>
+  </g>
+</svg>

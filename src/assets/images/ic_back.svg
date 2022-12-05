@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-ic_back">
+      <rect width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="ic_back" clip-path="url(#clip-ic_back)">
+    <path id="ic_keyboard_arrow_right_24px" d="M8.59,18.1l5.343-5.355L8.59,7.395,10.235,5.75l7,7-7,7Z" transform="translate(17.235 24.75) rotate(180)" fill="#000c64"/>
+  </g>
+</svg>

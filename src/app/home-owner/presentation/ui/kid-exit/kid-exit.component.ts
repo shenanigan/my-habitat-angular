@@ -6,6 +6,7 @@ import { allowKidExit } from 'src/app/home-owner/+state/home-owner.actions';
 import { selectKids } from 'src/app/home-owner/+state/home-owner.selector';
 import { KidExitRequest } from 'src/app/home-owner/domain/contracts/requests/kid-exit';
 import { Household } from 'src/app/home-owner/domain/entities/household';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-kid-exit',
@@ -14,6 +15,7 @@ import { Household } from 'src/app/home-owner/domain/entities/household';
 })
 export class KidExitComponent implements OnInit {
 
+  readSASToken = environment.azureRWSASToken;
   selectedKid?: Household
   hours = 4
   kids$: Observable<Household[]> = this._store.select(selectKids())

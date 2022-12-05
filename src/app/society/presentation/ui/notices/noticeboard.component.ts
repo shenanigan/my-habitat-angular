@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { StorageService } from 'src/app/shared/infrastructure/storage/storage.service';
@@ -6,6 +7,9 @@ import { getSociety } from 'src/app/society/+state/society.actions';
 import { selectSociety } from 'src/app/society/+state/society.selector';
 import { Society } from 'src/app/society/domain/entities/society';
 
+export interface Filter {
+  name: string
+}
 @Component({
   selector: 'app-noticeboard',
   templateUrl: './noticeboard.component.html',
@@ -14,7 +18,20 @@ import { Society } from 'src/app/society/domain/entities/society';
 export class NoticeboardComponent implements OnInit {
 
   society$?: Observable<Society>
+  filters: Filter[] = [
+    {
+      name: 'All'
+    },
+    {
+      name: 'Society'
+    },
+    {
+      name: 'Payment'
+    }
+  ]
+  activeFilter: Filter = this.filters[0];
   constructor(private _store: Store,
+    private _router: Router,
     private _storageService: StorageService) {
     this.society$ = this._store.select(selectSociety());
   }
@@ -25,6 +42,10 @@ export class NoticeboardComponent implements OnInit {
       this._store.dispatch(getSociety({ societyId: societyId }))
     }
 
+  }
+
+  openChat() {
+    this._router.navigate(['home-owner/chat']);
   }
 
 }

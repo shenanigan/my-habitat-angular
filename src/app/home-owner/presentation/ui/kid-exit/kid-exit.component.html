@@ -26,7 +26,7 @@
                 (click)="selectedKid = kid">
                 <div class="d-flex justify-content-center">
                     <img [ngClass]="{'active': selectedKid === kid}" class="mb-1 photo-container"
-                        src="http://bluegalaxy.info/images/sea_captain.jpg">
+                        [src]="kid.imageUrl ? (kid.imageUrl + readSASToken) : 'assets/images/ic_defaultuser.svg'">
                 </div>
                 <label class="small-label">{{kid.truncatedName}}</label>
             </div>

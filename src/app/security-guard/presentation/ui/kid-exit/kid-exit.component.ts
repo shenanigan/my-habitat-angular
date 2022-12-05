@@ -1,11 +1,13 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
 import { requestKidExit } from 'src/app/security-guard/+state/security-guard.actions';
 import { selectKids } from 'src/app/security-guard/+state/security-guard.selector';
 import { HomeOwner } from 'src/app/security-guard/domain/entities/home-owner';
 import { Household } from 'src/app/security-guard/domain/entities/household';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-kid-exit',
@@ -18,9 +20,11 @@ export class KidExitComponent implements OnInit {
   hours = 4
   kids$?: Observable<Household[]>
   homeOwnerId: string;
+  readSASToken = environment.azureRWSASToken;
 
   constructor(@Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
     private _store: Store,
+    private _router: Router,
     private _sheet: MatBottomSheetRef<KidExitComponent>) {
     const homeOwner: HomeOwner = data.homeOwner
     this.homeOwnerId = homeOwner.entityId
@@ -39,8 +43,13 @@ export class KidExitComponent implements OnInit {
 
   requestExit() {
     if (this.selectedKid) {
-      this._store.dispatch(requestKidExit({ homeOwnerId: this.homeOwnerId, householdId: this.selectedKid?.entityId }))
       this._sheet.dismiss()
+      this._router.navigate(['/security-guard/request-status'], {
+        state: {
+          homeOwnerId: this.homeOwnerId,
+          household: this.selectedKid
+        }
+      })
     }
   }
 }

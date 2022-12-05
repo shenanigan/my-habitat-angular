@@ -86,7 +86,7 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
           sentById
           createdAt
           imageUrl
-          messageId
+          entityId: messageId
         }
       }
     }`

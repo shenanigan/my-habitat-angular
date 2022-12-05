@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Message } from 'src/app/home-owner/domain/entities/message';
 
 @Component({
@@ -9,10 +9,15 @@ import { Message } from 'src/app/home-owner/domain/entities/message';
 export class OtherImageMessageComponent implements OnInit {
 
   @Input() message?: Message
+  @Output() onClick = new EventEmitter<Message>()
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  click() {
+    this.onClick.emit(this.message)
   }
 
 }

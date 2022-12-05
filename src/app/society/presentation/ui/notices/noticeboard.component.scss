@@ -1,6 +1,5 @@
-.notice-container {
+.main-container {
    background-color: #F8F8F8;
-   min-height: 100%;
 }
 
 .flex-container {
@@ -8,14 +7,11 @@
    border-radius: 10px;
 }
 
-.hr {
-   margin-top: 0em;
-   margin-bottom: 1em;
-   border-width: 2px;
-}
-
-
-.mat-stroke-button {
-   padding: 0 15px;
-   line-height: 10px;
+.filter-btn {
+   background-color: #66666633 !important;
+   color: #666666 !important;
+   font-size: 10px !important;
+   border-radius: 4px !important;
+   padding: 5px 8px !important;
+   height: auto !important;
 }

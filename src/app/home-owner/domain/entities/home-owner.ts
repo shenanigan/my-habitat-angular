@@ -21,7 +21,7 @@ export class HomeOwner extends Entity {
                 this.logs = logs
             }
 
-            const messages = obj.messages?.map(message => new Log(message.entityId, message))
+            const messages = obj.messages?.map(message => new Message(message.entityId, message))
             if (messages) {
                 this.messages = messages
             }

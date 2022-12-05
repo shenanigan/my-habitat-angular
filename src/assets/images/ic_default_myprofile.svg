@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36" height="36" viewBox="0 0 36 36">
+  <defs>
+    <filter id="Rectangle_1244" x="-15" y="-15" width="66" height="66" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feFlood flood-color="#ebebeb"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-ic_default_myprofile">
+      <rect width="36" height="36"/>
+    </clipPath>
+  </defs>
+  <g id="ic_default_myprofile" clip-path="url(#clip-ic_default_myprofile)">
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Rectangle_1244)">
+      <rect id="Rectangle_1244-2" data-name="Rectangle 1244" width="36" height="36" rx="18" fill="#c8cadb"/>
+    </g>
+    <path id="ic_person_24px" d="M12,12A4,4,0,1,0,8,8,4,4,0,0,0,12,12Zm0,2c-2.67,0-8,1.34-8,4v2H20V18C20,15.34,14.67,14,12,14Z" transform="translate(6 6)" fill="#5761b2"/>
+  </g>
+</svg>

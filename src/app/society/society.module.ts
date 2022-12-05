@@ -16,6 +16,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { societyFeatureName, societyReducer } from './+state/society.reducer';
 import { StoreModule } from '@ngrx/store';
 import { MockSocietyService } from './infrastructure/api/mock-society.service';
+import { MatChipsModule } from '@angular/material/chips';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -30,6 +32,8 @@ import { MockSocietyService } from './infrastructure/api/mock-society.service';
     MatInputModule,
     MatSnackBarModule,
     MatIconModule,
+    MatChipsModule,
+    SharedModule,
     StoreModule.forFeature(societyFeatureName, societyReducer),
     EffectsModule.forFeature([NoticeboardEffects])
   ],

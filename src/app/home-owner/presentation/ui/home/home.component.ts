@@ -26,14 +26,7 @@ export class HomeComponent implements OnInit {
   }
 
   openKidExit() {
-    this.homeOwner$.pipe(take(1)).subscribe(x => {
-      const request: AddMessageRequest = {
-        type: 'TEXT',
-        text: 'HELLO WORLD'
-      }
-      this._store.dispatch(addMessage({ homeOwnerId: x.entityId, request }))
-    })
-    // this._bottomSheet.open(KidExitComponent)
+    this._bottomSheet.open(KidExitComponent)
   }
 
   deny(log: Log) {

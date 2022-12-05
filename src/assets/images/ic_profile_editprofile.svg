@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36" height="36" viewBox="0 0 36 36">
+  <defs>
+    <clipPath id="clip-ic_profile_editprofile">
+      <rect width="36" height="36"/>
+    </clipPath>
+  </defs>
+  <g id="ic_profile_editprofile" clip-path="url(#clip-ic_profile_editprofile)">
+    <g id="Group_3279" data-name="Group 3279" transform="translate(-540 -613)">
+      <circle id="Ellipse_180" data-name="Ellipse 180" cx="18" cy="18" r="18" transform="translate(540 613)" fill="#5761b2" opacity="0.2"/>
+      <path id="ic_edit_24px" d="M3,15.665V19H6.333l9.83-9.83L12.83,5.835ZM18.74,6.59a.885.885,0,0,0,0-1.253l-2.08-2.08a.885.885,0,0,0-1.253,0L13.781,4.884l3.333,3.333L18.74,6.59Z" transform="translate(547 620.002)" fill="#5761b2"/>
+    </g>
+  </g>
+</svg>

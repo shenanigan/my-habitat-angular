@@ -1,12 +1,14 @@
-import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Camera, CameraResultType, Photo } from '@capacitor/camera';
 import { Store } from '@ngrx/store';
-import { Observable, take } from 'rxjs';
-import { addMessage } from 'src/app/home-owner/+state/home-owner.actions';
+import { Observable, Subscription, take } from 'rxjs';
+import { addMessage, getHomeOwner } from 'src/app/home-owner/+state/home-owner.actions';
 import { selectHomeOwner } from 'src/app/home-owner/+state/home-owner.selector';
 import { AddMessageRequest } from 'src/app/home-owner/domain/contracts/requests/add-message';
 import { HomeOwner } from 'src/app/home-owner/domain/entities/home-owner';
+import { Message } from 'src/app/home-owner/domain/entities/message';
 import { AbstractImageStorageService } from 'src/app/shared/domain/services/iimage-storage.service';
+import { environment } from 'src/environments/environment';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -14,28 +16,63 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, AfterViewChecked {
+export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
 
+
+  subscription?: Subscription
   image?: Photo;
-  @ViewChild('chatBox') private chatBox?: ElementRef;
+  @ViewChild('chatBox') private chatBox!: ElementRef;
   text: string = '';
+  isScrollUpdated = false;
   homeOwner$: Observable<HomeOwner> = this._store.select(selectHomeOwner());
+  selectedImageIndex: number = 0;
+  showMedia = false;
+  media: any[] = []
+  readSASToken = environment.azureRWSASToken;
 
   constructor(private _store: Store,
-    private _imageService: AbstractImageStorageService) { }
+    private _imageService: AbstractImageStorageService) {
+    this._store.dispatch(getHomeOwner());
+    this._reloadMedia();
+  }
 
-  ngOnInit(): void {
-    if (this.chatBox) {
+  ngOnInit(): void { }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe()
+  }
+
+  ngAfterViewChecked() {
+    this._scrollToBottom();
+  }
+  private _reloadMedia() {
+    this.homeOwner$.pipe(take(1)).subscribe(x => {
+      this.media = x.messages.filter(x => x.type === 'IMAGE').map(x => {
+        const val = {
+          id: x.entityId,
+          image: x.imageUrl + this.readSASToken
+        }
+        return val
+      })
+    })
+  }
+
+
+
+  private _scrollToBottom() {
+    if (this.chatBox && !this.isScrollUpdated) {
       this.chatBox.nativeElement.scrollTop = this.chatBox.nativeElement.scrollHeight;
+      if (this.chatBox.nativeElement.scrollTop > 0) {
+        this.isScrollUpdated = true
+      }
     }
   }
-  ngAfterViewChecked(): void {
-    if (this.chatBox) {
-      this.chatBox.nativeElement.scrollTop = this.chatBox.nativeElement.scrollHeight;
-    }
-  }
+
+
+
 
   sendMessage() {
+    this.isScrollUpdated = false;
     this.homeOwner$.pipe(take(1)).subscribe(x => {
       const request: AddMessageRequest = {
         type: 'TEXT',
@@ -67,9 +104,20 @@ export class ChatComponent implements OnInit, AfterViewChecked {
             imageUrl
           }
           this._store.dispatch(addMessage({ homeOwnerId: x.entityId, request }))
+          this.isScrollUpdated = false;
           this.text = ''
         });
       });
     }
+  }
+
+  openLightbox($event: Message) {
+    this.selectedImageIndex = this.media.map(x => x.id).indexOf($event.entityId);
+    console.log(this.selectedImageIndex);
+    this.showMedia = true;
+  }
+
+  closeMedia() {
+    this.showMedia = false;
   }
 }

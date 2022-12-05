@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-ic_attach">
+      <rect width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="ic_attach" clip-path="url(#clip-ic_attach)">
+    <path id="ic_attachment_24px" d="M2,13.6A6.6,6.6,0,0,1,8.6,7H21.2a4.8,4.8,0,1,1,0,9.6H11a3,3,0,1,1,0-6h9V13H10.892c-.66,0-.66,1.2,0,1.2H21.2a2.4,2.4,0,0,0,0-4.8H8.6a4.2,4.2,0,1,0,0,8.4H20v2.4H8.6A6.6,6.6,0,0,1,2,13.6Z" transform="translate(25 -2) rotate(90)" fill="#5761b2"/>
+  </g>
+</svg>

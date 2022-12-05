@@ -6,15 +6,21 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { sharedFeatureName, sharedReducer, initialState } from './+state/shared.reducer';
 import { StoreModule } from '@ngrx/store';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { HeaderComponent } from './presentation/component/header/header.component';
 
 @NgModule({
-  declarations: [],
+  exports: [HeaderComponent],
+  declarations: [HeaderComponent],
   imports: [
     CommonModule,
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
     MatInputModule,
+    MatIconModule,
+    MatProgressBarModule,
     StoreModule.forFeature(sharedFeatureName, sharedReducer, { initialState })
   ],
 })
