@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Message } from 'src/app/home-owner/domain/entities/message';
 
 @Component({
   selector: 'app-other-image-message',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./other-image-message.component.scss']
 })
 export class OtherImageMessageComponent implements OnInit {
+
+  @Input() message?: Message
 
   constructor() { }
 

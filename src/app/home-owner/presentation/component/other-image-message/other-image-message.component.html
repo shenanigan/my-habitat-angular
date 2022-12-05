@@ -1,1 +1,6 @@
-<p>other-image-message works!</p>
+<div class="parent-container d-flex my-4">
+    <div class="image-container px-3 py-2">
+        <div class="label-14-100 color-dark mt-1">{{message?.imageUrl}}</div>
+        <div class="label-10-100 color-dark">{{message?.createdAt | date: 'short'}}</div>
+    </div>
+</div>
