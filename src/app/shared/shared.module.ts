@@ -9,10 +9,11 @@ import { StoreModule } from '@ngrx/store';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { HeaderComponent } from './presentation/component/header/header.component';
+import { RowHomeOwnerComponent } from './presentation/component/row-home-owner/row-home-owner.component';
 
 @NgModule({
   exports: [HeaderComponent],
-  declarations: [HeaderComponent],
+  declarations: [HeaderComponent, RowHomeOwnerComponent],
   imports: [
     CommonModule,
     MatPaginatorModule,

@@ -13,6 +13,7 @@ import { KidExitRequest } from "../../domain/contracts/requests/kid-exit";
 import { UpdateLogRequest } from "../../domain/contracts/requests/update-log";
 import { AddMessageRequest } from "../../domain/contracts/requests/add-message";
 import { Message } from "../../domain/entities/message";
+import { IMarkPaymentPaidRequest } from "../../domain/contracts/requests/mark-payment-paid-request";
 
 @Injectable()
 export class HomeOwnerService extends BaseService implements IHomeOwnerService {
@@ -88,6 +89,17 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
           imageUrl
           entityId: messageId
         }
+        
+        payments {
+          entityId: paymentId
+          createdAt
+          paymentDate
+          type
+          amount
+          currency
+          orderId
+          status
+        }
       }
     }`
     return this._apollo
@@ -102,6 +114,12 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
 
   addMessage(request: AddMessageRequest): Observable<void> {
     return this._http.post<void>(environment.homeOwnerURL + `HomeOwner/AddMessage`, request, super.headers())
+      .pipe(map(_ => _),
+        catchError(this.handleError));
+  }
+
+  markPaymentPaid(request: IMarkPaymentPaidRequest): Observable<void> {
+    return this._http.post<void>(environment.homeOwnerURL + `HomeOwner/MarkPaymentPaid`, request, super.headers())
       .pipe(map(_ => _),
         catchError(this.handleError));
   }

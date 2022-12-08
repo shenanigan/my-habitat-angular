@@ -3,6 +3,7 @@ import { Home } from "./home";
 import { Household } from "./household";
 import { Log } from "./log";
 import { Message } from "./message";
+import { Payment } from "./payment";
 
 export class HomeOwner extends Entity {
 
@@ -25,6 +26,12 @@ export class HomeOwner extends Entity {
             if (messages) {
                 this.messages = messages
             }
+
+            this.payments = []
+            const payments = obj.payments?.map(payment => new Payment(payment.entityId, payment))
+            if (payments) {
+                this.payments = payments
+            }
         }
     }
     societyId?: string
@@ -36,6 +43,7 @@ export class HomeOwner extends Entity {
     households: Household[] = []
     logs: Log[] = []
     messages: Message[] = []
+    payments: Payment[] = []
 
     get truncatedName(): string | undefined {
         const names = this.name?.split(' ')

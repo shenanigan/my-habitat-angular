@@ -1,0 +1,16 @@
+<app-header title="Payments"></app-header>
+<div class="main-container h-100 header-padding bkg-color" style="overflow: scroll;">
+    <div class="p-3 " style="padding-bottom: 20px !important;">
+        <ng-container *ngFor="let payment of (homeOwner$ | async)?.payments;">
+            <app-row-pending-payment [payment]="payment" *ngIf="payment.status === 'PENDING'"
+                (onMarkPaid)="markPaid(payment)" (onPayNow)="payNow(payment)">
+            </app-row-pending-payment>
+        </ng-container>
+        <hr>
+        <div class="header2-label mb-3">Payment History</div>
+        <ng-container *ngFor="let payment of (homeOwner$ | async)?.payments;">
+            <app-row-payment-made [payment]="payment" *ngIf="payment.status !== 'PENDING'">
+            </app-row-payment-made>
+        </ng-container>
+    </div>
+</div>

@@ -32,7 +32,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   constructor(private _store: Store,
     private _imageService: AbstractImageStorageService) {
-    this._store.dispatch(getHomeOwner());
     this._reloadMedia();
   }
 

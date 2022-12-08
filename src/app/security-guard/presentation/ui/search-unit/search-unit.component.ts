@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -22,7 +22,7 @@ export enum SearchUnitContext {
   templateUrl: './search-unit.component.html',
   styleUrls: ['./search-unit.component.scss']
 })
-export class SearchUnitComponent implements OnInit {
+export class SearchUnitComponent implements OnInit, OnDestroy {
 
 
   // SearchUnitContext = SearchUnitContext
@@ -61,6 +61,9 @@ export class SearchUnitComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  ngOnDestroy(): void {
+    this.subscriptionSearchDelay?.unsubscribe()
+  }
 
   selectHomeOwner(homeOwner: HomeOwner) {
     if (this.searchUnitContext === SearchUnitContext.logVisit) {
@@ -80,5 +83,7 @@ export class SearchUnitComponent implements OnInit {
   back() {
     this._location.back()
   }
+
+
 
 }

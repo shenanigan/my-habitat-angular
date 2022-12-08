@@ -1,6 +1,5 @@
 <div class="parent-container d-flex my-4" (click)="click()">
-    <div class="image-container px-3 py-2">
-        <div class="label-14-100 color-dark mt-1">{{message?.imageUrl}}</div>
-        <div class="label-10-100 color-dark">{{message?.createdAt | date: 'short'}}</div>
+    <div class="image-container">
+        <img class="member-photo" [src]="message?.imageUrl + readSASToken">
     </div>
 </div>

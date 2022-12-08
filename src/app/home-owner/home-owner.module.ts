@@ -33,11 +33,26 @@ import { OtherImageMessageComponent } from './presentation/component/other-image
 import { OtherTextMessageComponent } from './presentation/component/other-text-message/other-text-message.component';
 import { ChatComponent } from './presentation/ui/chat/chat.component';
 import { NgImageFullscreenViewModule } from 'ng-image-fullscreen-view';
+import { PaymentsComponent } from './presentation/ui/payments/payments.component';
+import { RowPendingPaymentComponent } from './presentation/component/row-pending-payment/row-pending-payment.component';
+import { RowPaymentMadeComponent } from './presentation/component/row-payment-made/row-payment-made.component';
 
 
 @NgModule({
-  declarations: [ResidentComponent, AddFamilyComponent, KidExitComponent,
-    HomeComponent, VisitorsComponent, LogComponent, ChatComponent, MyTextMessageComponent, MyImageMessageComponent, OtherImageMessageComponent, OtherTextMessageComponent],
+  declarations: [ResidentComponent,
+    AddFamilyComponent,
+    KidExitComponent,
+    HomeComponent,
+    VisitorsComponent,
+    LogComponent,
+    ChatComponent,
+    MyTextMessageComponent,
+    MyImageMessageComponent,
+    OtherImageMessageComponent,
+    OtherTextMessageComponent,
+    PaymentsComponent,
+    RowPendingPaymentComponent,
+    RowPaymentMadeComponent],
   imports: [
     CommonModule,
     HomeOwnerRoutingModule,

@@ -11,6 +11,7 @@ import { StorageService } from "src/app/shared/infrastructure/storage/storage.se
 import { KidExitRequest } from "../../domain/contracts/requests/kid-exit";
 import { UpdateLogRequest } from "../../domain/contracts/requests/update-log";
 import { AddMessageRequest } from "../../domain/contracts/requests/add-message";
+import { IMarkPaymentPaidRequest } from "../../domain/contracts/requests/mark-payment-paid-request";
 
 @Injectable()
 export class MockHomeOwnerService extends BaseService implements IHomeOwnerService {
@@ -114,6 +115,13 @@ export class MockHomeOwnerService extends BaseService implements IHomeOwnerServi
     }
 
     addMessage(request: AddMessageRequest): Observable<void> {
+        return new Observable(subscriber => {
+            subscriber.next()
+            subscriber.complete()
+        })
+    }
+
+    markPaymentPaid(request: IMarkPaymentPaidRequest): Observable<void> {
         return new Observable(subscriber => {
             subscriber.next()
             subscriber.complete()
