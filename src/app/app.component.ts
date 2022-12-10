@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { IRealTimeService } from './shared/domain/abstractions/irealtime.service';
+import { AblyEvents } from './shared/infrastructure/real-time/ably-events';
 import { StorageService } from './shared/infrastructure/storage/storage.service';
 
 @Component({
@@ -14,8 +16,8 @@ export class AppComponent implements OnInit {
   constructor(private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
     private _storageService: StorageService,
+    @Inject(AblyEvents) private _realtimeService: IRealTimeService,
     private _router: Router) {
-
     this.matIconRegistry.addSvgIcon('chat_send', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/ic_sendmessage.svg'));
     this.matIconRegistry.addSvgIcon('chat_attach', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/ic_attach.svg'));
     this.matIconRegistry.addSvgIcon('default_camera', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/ic_defaultcamera.svg'));
@@ -36,5 +38,10 @@ export class AppComponent implements OnInit {
       this._router.navigate(['/auth/phone'])
     }
   }
+
+  @HostListener('window:beforeunload', [ '$event' ])
+   beforeUnloadHandler() {
+     this._realtimeService.close()
+   }
 
 }

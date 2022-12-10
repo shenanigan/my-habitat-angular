@@ -1,4 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
+import { noticeAdded } from "src/app/shared/+state/shared.actions";
+import { Notice } from "../domain/entities/notice";
 import { Society } from "../domain/entities/society";
 import { failed, getSocietySuccess } from "./society.actions";
 
@@ -7,7 +9,7 @@ export interface ISocietyState {
 }
 
 const initialState: ISocietyState = {
-    society: new Society()
+    society: new Society('_')
 }
 
 export const societyReducer = createReducer(
@@ -18,7 +20,15 @@ export const societyReducer = createReducer(
             society
         }
     }),
-
+    on(noticeAdded, (state, { notice }) => {
+        var updatedSociety = new Society(state.society.entityId, state.society)
+        var newNotice = new Notice(notice.entityId, notice);
+        updatedSociety.notices.push(newNotice);
+        return {
+            ...state,
+            society: updatedSociety
+        }
+    }),
     on(failed, (state, { error }) => ({
         ...state,
         errorMessage: error.message,

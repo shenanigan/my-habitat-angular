@@ -11,6 +11,13 @@ export class RowPendingPaymentComponent implements OnInit {
   @Input() payment?: Payment
   @Output() onMarkPaid = new EventEmitter<Payment>()
   @Output() onPayNow = new EventEmitter<Payment>()
+  get status(): string {
+    if (this.payment?.dueDate) {
+      const dueDate = new Date(this.payment.dueDate);
+      return (dueDate > new Date()) ? 'PENDING' : 'OVERDUE'
+    }
+    return 'PENDING';
+  };
 
   constructor() { }
 

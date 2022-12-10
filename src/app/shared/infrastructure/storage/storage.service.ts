@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import jwt_decode from 'jwt-decode';
-import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
   providedIn: 'root'
@@ -74,5 +73,10 @@ export class StorageService {
   getSocietyId(): string | undefined {
     var decodedToken = this.getDecodedAccessToken()
     return decodedToken?.['SocietyId'];
+  }
+
+  getUserId(): string | undefined {
+    var decodedToken = this.getDecodedAccessToken()
+    return decodedToken?.['userId'];
   }
 }

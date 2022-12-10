@@ -3,8 +3,8 @@ import { Notice } from "./notice";
 
 export class Society extends Entity {
 
-    constructor(obj?: any) {
-        super(obj?.societyId);
+    constructor(societyId: string, obj?: any) {
+        super(societyId);
         if (obj) {
             Object.assign(this, obj);
         }

@@ -1,12 +1,14 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Camera, CameraResultType, Photo } from '@capacitor/camera';
-import { Store } from '@ngrx/store';
+import { ofType } from '@ngrx/effects';
+import { ActionsSubject, Store } from '@ngrx/store';
 import { Observable, Subscription, take } from 'rxjs';
-import { addMessage, getHomeOwner } from 'src/app/home-owner/+state/home-owner.actions';
+import { addMessage, getHomeOwner, markMessageViewed } from 'src/app/home-owner/+state/home-owner.actions';
 import { selectHomeOwner } from 'src/app/home-owner/+state/home-owner.selector';
 import { AddMessageRequest } from 'src/app/home-owner/domain/contracts/requests/add-message';
 import { HomeOwner } from 'src/app/home-owner/domain/entities/home-owner';
 import { Message } from 'src/app/home-owner/domain/entities/message';
+import { messageRecieved } from 'src/app/shared/+state/shared.actions';
 import { AbstractImageStorageService } from 'src/app/shared/domain/services/iimage-storage.service';
 import { environment } from 'src/environments/environment';
 import { v4 as uuidv4 } from 'uuid';
@@ -29,23 +31,35 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   showMedia = false;
   media: any[] = []
   readSASToken = environment.azureRWSASToken;
+  _subscription?: Subscription;
+  _actionsSubscription: Subscription;
 
   constructor(private _store: Store,
+    private _actions$: ActionsSubject,
     private _imageService: AbstractImageStorageService) {
+    this._store.dispatch(markMessageViewed())
+    this._actionsSubscription = this._actions$.pipe(
+      ofType(messageRecieved)).subscribe(_ => {
+        this._store.dispatch(markMessageViewed())
+      })
     this._reloadMedia();
   }
 
   ngOnInit(): void { }
 
   ngOnDestroy(): void {
+
     this.subscription?.unsubscribe()
+    this._subscription?.unsubscribe()
+    this._actionsSubscription.unsubscribe()
   }
 
   ngAfterViewChecked() {
     this._scrollToBottom();
   }
+
   private _reloadMedia() {
-    this.homeOwner$.pipe(take(1)).subscribe(x => {
+    this._subscription = this.homeOwner$.subscribe(x => {
       this.media = x.messages.filter(x => x.type === 'IMAGE').map(x => {
         const val = {
           id: x.entityId,
@@ -53,6 +67,12 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         }
         return val
       })
+
+
+      setTimeout(() => {
+        this.isScrollUpdated = false;
+        this._scrollToBottom()
+      }, 300);
     })
   }
 
@@ -112,7 +132,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   openLightbox($event: Message) {
     this.selectedImageIndex = this.media.map(x => x.id).indexOf($event.entityId);
-    console.log(this.selectedImageIndex);
     this.showMedia = true;
   }
 

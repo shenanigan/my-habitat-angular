@@ -3,12 +3,12 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { createEffect, ofType } from "@ngrx/effects";
 import { ActionsSubject } from "@ngrx/store";
 import { catchError, map, of, switchMap } from "rxjs";
-import { failed } from "src/app/shared/+state/shared.actions";
+import { failed, success } from "src/app/shared/+state/shared.actions";
 import { Household } from "../domain/entities/household";
 import { Message } from "../domain/entities/message";
 import { Payment } from "../domain/entities/payment";
 import { AbstractHomeOwnerService } from "../domain/services/ihome-owner.service";
-import { addHousehold, addHouseholdSuccess, addMessage, addMessageSuccess, allowKidExit, allowKidExitSuccess, getHomeOwner, getHomeOwnerSuccess, markPaymentPaid, markPaymentPaidSuccess, updateLog, updateLogSuccess } from "./home-owner.actions";
+import { addHousehold, addHouseholdSuccess, addMessage, addMessageSuccess, allowKidExit, allowKidExitSuccess, getHomeOwner, getHomeOwnerSuccess, markMessageViewed, markNoticeboardViewed, markPaymentPaid, markPaymentPaidSuccess, markPaymentViewed, updateLog, updateLogSuccess } from "./home-owner.actions";
 
 @Injectable()
 export class HomeOwnerEffects {
@@ -121,6 +121,61 @@ export class HomeOwnerEffects {
                             payment.paymentDate = new Date()
                             payment.status = 'PAID'
                             return markPaymentPaidSuccess({ payment })
+                        }),
+                            catchError(err => {
+                                this._snackBarService.open(err.message, 'CANCEL');
+                                return of(failed(err))
+                            })
+                        )
+                })
+            )
+        )
+
+
+    markMessageViewed$ =
+        createEffect(() =>
+            this._actions$.pipe(
+                ofType(markMessageViewed),
+                switchMap(_ => {
+                    return this._homeOwnerService.markMessageViewed().
+                        pipe(map(_ => {
+                            return success()
+                        }),
+                            catchError(err => {
+                                this._snackBarService.open(err.message, 'CANCEL');
+                                return of(failed(err))
+                            })
+                        )
+                })
+            )
+        )
+
+    markPaymentViewed$ =
+        createEffect(() =>
+            this._actions$.pipe(
+                ofType(markPaymentViewed),
+                switchMap(_ => {
+                    return this._homeOwnerService.markPaymentViewed().
+                        pipe(map(_ => {
+                            return success()
+                        }),
+                            catchError(err => {
+                                this._snackBarService.open(err.message, 'CANCEL');
+                                return of(failed(err))
+                            })
+                        )
+                })
+            )
+        )
+
+    markNoticeboardViewed$ =
+        createEffect(() =>
+            this._actions$.pipe(
+                ofType(markNoticeboardViewed),
+                switchMap(_ => {
+                    return this._homeOwnerService.markNoticeboardViewed().
+                        pipe(map(_ => {
+                            return success()
                         }),
                             catchError(err => {
                                 this._snackBarService.open(err.message, 'CANCEL');

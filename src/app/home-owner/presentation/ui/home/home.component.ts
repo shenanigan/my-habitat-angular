@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { selectHomeOwner } from 'src/app/home-owner/+state/home-owner.selector';
-import { AddMessageRequest } from 'src/app/home-owner/domain/contracts/requests/add-message';
 import { UpdateLogRequest } from 'src/app/home-owner/domain/contracts/requests/update-log';
 import { Log } from 'src/app/home-owner/domain/entities/log';
-import { addMessage, getHomeOwner, updateLog } from '../../../+state/home-owner.actions';
+import { IRealTimeService } from 'src/app/shared/domain/abstractions/irealtime.service';
+import { AblyEvents } from 'src/app/shared/infrastructure/real-time/ably-events';
+import { getHomeOwner, updateLog } from '../../../+state/home-owner.actions';
 import { KidExitComponent } from '../kid-exit/kid-exit.component';
 
 @Component({
@@ -14,15 +15,33 @@ import { KidExitComponent } from '../kid-exit/kid-exit.component';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   homeOwner$ = this._store.select(selectHomeOwner());
+  hasUnreadMessages: boolean = false;
+  private _homeOwnerSubscription: Subscription;
+
   constructor(private _bottomSheet: MatBottomSheet,
+    @Inject(AblyEvents) private _realtimeService: IRealTimeService,
     private _store: Store) {
+
+    this._homeOwnerSubscription = this.homeOwner$.subscribe(homeOwner => {
+      if (homeOwner.messages.length > 0 && homeOwner.hasViewedMessages.filter(x => x.key === homeOwner.entityId).length === 0) {
+        this.hasUnreadMessages = true;
+      } else {
+        this.hasUnreadMessages = false;
+      }
+    })
+
     this._store.dispatch(getHomeOwner());
+    this._realtimeService.listen()
+    
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+  ngOnDestroy(): void {
+    debugger
+    this._homeOwnerSubscription.unsubscribe()
   }
 
   openKidExit() {

@@ -127,4 +127,23 @@ export class MockHomeOwnerService extends BaseService implements IHomeOwnerServi
             subscriber.complete()
         })
     }
+
+    markMessageViewed(): Observable<void> {
+        return new Observable(subscriber => {
+            subscriber.next()
+            subscriber.complete()
+        })
+    }
+    markPaymentViewed(): Observable<void> {
+        return new Observable(subscriber => {
+            subscriber.next()
+            subscriber.complete()
+        })
+    }
+    markNoticeboardViewed(): Observable<void> {
+        return new Observable(subscriber => {
+            subscriber.next()
+            subscriber.complete()
+        })
+    }
 }

@@ -1,8 +1,9 @@
 import { createReducer, on } from "@ngrx/store";
-import { failed } from "src/app/shared/+state/shared.actions";
+import { failed, messageRecieved, noticeAdded, paymentRequested } from "src/app/shared/+state/shared.actions";
 import { HomeOwner } from "../domain/entities/home-owner";
 import { Message } from "../domain/entities/message";
-import { addHouseholdSuccess, addMessage, addMessageSuccess, getHomeOwnerSuccess, markPaymentPaidSuccess, updateLogSuccess } from "./home-owner.actions";
+import { Payment } from "../domain/entities/payment";
+import { addHouseholdSuccess, addMessage, getHomeOwnerSuccess, markPaymentPaidSuccess, updateLogSuccess } from "./home-owner.actions";
 
 export interface IState {
     homeOwner: HomeOwner
@@ -52,6 +53,37 @@ export const homeOwnerReducer = createReducer(
         message.createdAt = new Date();
         message.sentById = updatedHomeOwner.entityId;
         updatedHomeOwner.messages.push(message);
+        return {
+            ...state,
+            homeOwner: updatedHomeOwner
+        }
+    }),
+    on(messageRecieved, (state, { message }) => {
+        var updatedHomeOwner = new HomeOwner(state.homeOwner.entityId, state.homeOwner)
+        var newMessage = new Message(message.entityId, message);
+        updatedHomeOwner.messages.push(newMessage);
+        updatedHomeOwner.hasViewedMessages = []
+
+        return {
+            ...state,
+            homeOwner: updatedHomeOwner
+        }
+    }),
+    on(paymentRequested, (state, { payment }) => {
+        var updatedHomeOwner = new HomeOwner(state.homeOwner.entityId, state.homeOwner)
+        var newPayment = new Payment(payment.entityId, payment);
+        updatedHomeOwner.payments.push(newPayment);
+        updatedHomeOwner.hasViewedPayments = false;
+
+        return {
+            ...state,
+            homeOwner: updatedHomeOwner
+        }
+    }),
+    on(noticeAdded, (state, { notice }) => {
+        var updatedHomeOwner = new HomeOwner(state.homeOwner.entityId, state.homeOwner)
+        updatedHomeOwner.hasViewedNoticeboard = false;
+
         return {
             ...state,
             homeOwner: updatedHomeOwner

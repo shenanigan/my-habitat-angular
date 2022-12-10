@@ -27,3 +27,7 @@ export const addMessageSuccess = createAction('[HomeOwner]  Add Message Success'
 
 export const markPaymentPaid = createAction('[HomeOwner] Mark Payment Paid', props<{ request: IMarkPaymentPaidRequest }>())
 export const markPaymentPaidSuccess = createAction('[HomeOwner]  Mark Payment Paid success', props<{ payment: Payment }>())
+
+export const markMessageViewed = createAction('[HomeOwner] Mark Message Viewed')
+export const markPaymentViewed = createAction('[HomeOwner] Mark Payment Viewed')
+export const markNoticeboardViewed = createAction('[HomeOwner] Mark Noticeboard Viewed')

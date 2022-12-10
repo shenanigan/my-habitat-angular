@@ -1,6 +1,7 @@
 import { Entity } from "src/app/shared/domain/entity";
 import { Home } from "./home";
 import { Household } from "./household";
+import { KeyValue } from "./KeyValue";
 import { Log } from "./log";
 import { Message } from "./message";
 import { Payment } from "./payment";
@@ -32,6 +33,12 @@ export class HomeOwner extends Entity {
             if (payments) {
                 this.payments = payments
             }
+
+            this.hasViewedMessages = []
+            const hasViewedMessages = obj.hasViewedMessages?.map(x => new KeyValue(x))
+            if (hasViewedMessages) {
+                this.hasViewedMessages = hasViewedMessages
+            }
         }
     }
     societyId?: string
@@ -44,6 +51,9 @@ export class HomeOwner extends Entity {
     logs: Log[] = []
     messages: Message[] = []
     payments: Payment[] = []
+    hasViewedMessages: KeyValue[] = []
+    hasViewedNoticeboard: boolean = true
+    hasViewedPayments: boolean = true
 
     get truncatedName(): string | undefined {
         const names = this.name?.split(' ')

@@ -13,6 +13,9 @@ export interface IHomeOwnerService {
     updateLog(request: UpdateLogRequest): Observable<void>
     addMessage(request: AddMessageRequest): Observable<void>
     markPaymentPaid(request: IMarkPaymentPaidRequest): Observable<void>
+    markMessageViewed(): Observable<void>
+    markPaymentViewed(): Observable<void>
+    markNoticeboardViewed(): Observable<void>
 }
 
 export abstract class AbstractHomeOwnerService implements IHomeOwnerService {
@@ -22,4 +25,7 @@ export abstract class AbstractHomeOwnerService implements IHomeOwnerService {
     abstract updateLog(request: UpdateLogRequest): Observable<void>
     abstract addMessage(request: AddMessageRequest): Observable<void>
     abstract markPaymentPaid(request: IMarkPaymentPaidRequest): Observable<void>
+    abstract markMessageViewed(): Observable<void>
+    abstract markNoticeboardViewed(): Observable<void>
+    abstract markPaymentViewed(): Observable<void>
 }

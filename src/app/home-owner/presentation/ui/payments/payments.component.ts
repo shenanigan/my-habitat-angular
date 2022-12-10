@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, take } from 'rxjs';
-import { getHomeOwner, markPaymentPaid } from 'src/app/home-owner/+state/home-owner.actions';
+import { markPaymentPaid, markPaymentViewed } from 'src/app/home-owner/+state/home-owner.actions';
 import { selectHomeOwner } from 'src/app/home-owner/+state/home-owner.selector';
 import { IMarkPaymentPaidRequest } from 'src/app/home-owner/domain/contracts/requests/mark-payment-paid-request';
 import { HomeOwner } from 'src/app/home-owner/domain/entities/home-owner';
@@ -20,8 +20,8 @@ export class PaymentsComponent implements OnInit, OnDestroy {
 
 
   constructor(private _store: Store) {
-    this._store.dispatch(getHomeOwner());
 
+    this._store.dispatch(markPaymentViewed())
     this._homeOwnerSubscription = this.homeOwner$.subscribe(x => {
       this.pendingPayments = x.payments.filter(x => x.status === 'PENDING');
     })

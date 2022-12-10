@@ -10,7 +10,8 @@
     </div>
     <p class="mt-2 paragraph-label">Welcome to Bahrain's Smart Community <br> Management System</p>
     <div class="d-flex justify-content-flex-start flex-wrap p-2">
-        <span class="span-background columncount" routerLink="/noticeboard">
+        <span class="span-background columncount" routerLink="/noticeboard" style="position: relative;">
+            <div class="notification" *ngIf="(homeOwner$ | async)?.hasViewedNoticeboard === false"></div>
             <img src="assets/images/card_ic_notice.svg">
             <div class="label-10-100 color-primary">Noticeboard</div>
         </span>
@@ -18,7 +19,8 @@
             <img src="assets/images/card_ic_reservation.svg">
             <div class="label-10-100 color-primary">Reservation</div>
         </span>
-        <span class="span-background columncount" routerLink="/home-owner/payments">
+        <span class="span-background columncount" routerLink="/home-owner/payments" style="position: relative;">
+            <div class="notification" *ngIf="(homeOwner$ | async)?.hasViewedPayments === false"></div>
             <img src="assets/images/card_ic_payments.svg">
             <div class="label-10-100 color-primary">Payments</div>
         </span>
@@ -27,7 +29,8 @@
             <div class="label-10-100 color-primary">Kid Exit</div>
         </span>
 
-        <span class="span-background columncount" routerLink="chat">
+        <span class="span-background columncount" routerLink="chat" style="position: relative;">
+            <div class="notification" *ngIf="hasUnreadMessages"></div>
             <img src="assets/images/card_ic_societymanager.svg">
             <div class="label-10-100 color-primary">Management</div>
         </span>

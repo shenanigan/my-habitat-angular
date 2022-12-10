@@ -34,7 +34,7 @@ export class SocietyService extends BaseService implements ISocietyService {
         query: GET_SOCIETY,
         variables: { societyId }
       }).pipe(map(res => {
-        var society = new Society(res.data.society);
+        var society = new Society(res.data.society.societyId, res.data.society);
         return society
       }))
       .pipe(catchError(this.handleError));

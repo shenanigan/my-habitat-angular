@@ -12,7 +12,6 @@ import { StorageService } from "src/app/shared/infrastructure/storage/storage.se
 import { KidExitRequest } from "../../domain/contracts/requests/kid-exit";
 import { UpdateLogRequest } from "../../domain/contracts/requests/update-log";
 import { AddMessageRequest } from "../../domain/contracts/requests/add-message";
-import { Message } from "../../domain/entities/message";
 import { IMarkPaymentPaidRequest } from "../../domain/contracts/requests/mark-payment-paid-request";
 
 @Injectable()
@@ -51,6 +50,12 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
         phoneNumber
         countryCode
         homeOwnerId
+        hasViewedNoticeboard
+        hasViewedPayments
+        hasViewedMessages {
+          key
+          value
+        }
         home {
           unit
           homeId
@@ -94,6 +99,7 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
           entityId: paymentId
           createdAt
           paymentDate
+          dueDate
           type
           amount
           currency
@@ -120,6 +126,23 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
 
   markPaymentPaid(request: IMarkPaymentPaidRequest): Observable<void> {
     return this._http.post<void>(environment.homeOwnerURL + `HomeOwner/MarkPaymentPaid`, request, super.headers())
+      .pipe(map(_ => _),
+        catchError(this.handleError));
+  }
+  markMessageViewed(): Observable<void> {
+    return this._http.post<void>(environment.homeOwnerURL + `HomeOwner/MarkMessageViewed`, {}, super.headers())
+      .pipe(map(_ => _),
+        catchError(this.handleError));
+  }
+
+  markNoticeboardViewed(): Observable<void> {
+    return this._http.post<void>(environment.homeOwnerURL + `HomeOwner/MarkNoticeboardViewed`, {}, super.headers())
+      .pipe(map(_ => _),
+        catchError(this.handleError));
+  }
+
+  markPaymentViewed(): Observable<void> {
+    return this._http.post<void>(environment.homeOwnerURL + `HomeOwner/MarkPaymentViewed`, {}, super.headers())
       .pipe(map(_ => _),
         catchError(this.handleError));
   }

@@ -77,3 +77,12 @@ body {
 .bkg-white {
   background: white !important;
 }
+
+.notification {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px;
+  border-radius: 4px;
+  background: red;
+}
