@@ -35,12 +35,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this._store.dispatch(getHomeOwner());
     this._realtimeService.listen()
-    
+
   }
 
   ngOnInit(): void { }
   ngOnDestroy(): void {
-    debugger
     this._homeOwnerSubscription.unsubscribe()
   }
 

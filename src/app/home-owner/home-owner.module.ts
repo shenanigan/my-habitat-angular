@@ -36,6 +36,10 @@ import { NgImageFullscreenViewModule } from 'ng-image-fullscreen-view';
 import { PaymentsComponent } from './presentation/ui/payments/payments.component';
 import { RowPendingPaymentComponent } from './presentation/component/row-pending-payment/row-pending-payment.component';
 import { RowPaymentMadeComponent } from './presentation/component/row-payment-made/row-payment-made.component';
+import { ReservationsComponent } from './presentation/ui/reservations/reservations.component';
+import { AddReservationComponent } from './presentation/ui/add-reservation/add-reservation.component';
+import { RowUpcomingReservationComponent } from './presentation/component/row-upcoming-reservation/row-upcoming-reservation.component';
+import { RowCompletedReservationComponent } from './presentation/component/row-completed-reservation/row-completed-reservation.component';
 
 
 @NgModule({
@@ -52,7 +56,11 @@ import { RowPaymentMadeComponent } from './presentation/component/row-payment-ma
     OtherTextMessageComponent,
     PaymentsComponent,
     RowPendingPaymentComponent,
-    RowPaymentMadeComponent],
+    RowPaymentMadeComponent,
+    ReservationsComponent,
+    AddReservationComponent,
+    RowUpcomingReservationComponent,
+    RowCompletedReservationComponent],
   imports: [
     CommonModule,
     HomeOwnerRoutingModule,

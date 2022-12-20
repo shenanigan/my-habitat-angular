@@ -39,9 +39,9 @@ export class AppComponent implements OnInit {
     }
   }
 
-  @HostListener('window:beforeunload', [ '$event' ])
-   beforeUnloadHandler() {
-     this._realtimeService.close()
-   }
+  @HostListener('window:beforeunload', ['$event'])
+  beforeUnloadHandler() {
+    this._realtimeService.close()
+  }
 
 }

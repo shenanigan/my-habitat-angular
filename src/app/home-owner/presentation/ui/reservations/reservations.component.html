@@ -1,0 +1,24 @@
+<app-header title="Reservations" rightIcon="start_chat" (onRightClick)="openAddReservation()"></app-header>
+<div class="main-container h-100 header-padding bkg-color" style="overflow: scroll;">
+    <div class="main-container p-3">
+        <mat-chip-list>
+            <mat-chip *ngFor="let filter of filters" class="selection-chip"
+                [ngClass]="{'active': activeFilter === filter}" (click)="activeFilter = filter">
+                {{filter.name}}
+            </mat-chip>
+        </mat-chip-list>
+        <div class="mt-3" *ngIf="activeFilter.name === 'Upcoming' || activeFilter.name === 'All'">
+            <ng-container *ngFor="let reservation of reservations;">
+                <app-row-upcoming-reservation [reservation]="reservation" *ngIf="isUpcoming(reservation)">
+                </app-row-upcoming-reservation>
+            </ng-container>
+        </div>
+
+        <div class="mt-3" *ngIf="activeFilter.name === 'Completed' || activeFilter.name === 'All'">
+            <ng-container *ngFor="let reservation of reservations;">
+                <app-row-completed-reservation [reservation]="reservation" *ngIf="isCompleted(reservation)">
+                </app-row-completed-reservation>
+            </ng-container>
+        </div>
+    </div>
+</div>
