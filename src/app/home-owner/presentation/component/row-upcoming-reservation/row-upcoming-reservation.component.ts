@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { getHomeOwner } from 'src/app/home-owner/+state/home-owner.actions';
 import { Reservation } from 'src/app/home-owner/domain/entities/reservation';
 
 @Component({
@@ -9,9 +11,18 @@ import { Reservation } from 'src/app/home-owner/domain/entities/reservation';
 export class RowUpcomingReservationComponent implements OnInit {
 
   @Input() reservation?: Reservation
-  constructor() { }
+  @Output() onEdit = new EventEmitter<Reservation>()
+  constructor(private _store: Store) { }
 
   ngOnInit(): void {
+  }
+
+  cancel() {
+    this._store.dispatch(getHomeOwner());
+  }
+
+  edit() {
+    this.onEdit.emit(this.reservation)
   }
 
 }

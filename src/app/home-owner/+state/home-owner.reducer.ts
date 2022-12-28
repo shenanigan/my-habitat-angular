@@ -3,7 +3,8 @@ import { failed, messageRecieved, noticeAdded, paymentRequested } from "src/app/
 import { HomeOwner } from "../domain/entities/home-owner";
 import { Message } from "../domain/entities/message";
 import { Payment } from "../domain/entities/payment";
-import { addHouseholdSuccess, addMessage, getHomeOwnerSuccess, markPaymentPaidSuccess, updateLogSuccess } from "./home-owner.actions";
+import { Reservation } from "../domain/entities/reservation";
+import { addHouseholdSuccess, addMessage, addReservationSuccess, getHomeOwnerSuccess, markPaymentPaidSuccess, updateLogSuccess } from "./home-owner.actions";
 
 export interface IState {
     homeOwner: HomeOwner
@@ -97,6 +98,16 @@ export const homeOwnerReducer = createReducer(
             var storedPayment = payments[0]
             Object.assign(storedPayment, payment)
         }
+        return {
+            ...state,
+            homeOwner: updatedHomeOwner
+        }
+    }),
+    on(addReservationSuccess, (state, { reservation }) => {
+
+        var updatedHomeOwner = new HomeOwner(state.homeOwner.entityId, state.homeOwner)
+        var reservation = new Reservation('_', reservation)
+        updatedHomeOwner.reservations.push(reservation);
         return {
             ...state,
             homeOwner: updatedHomeOwner

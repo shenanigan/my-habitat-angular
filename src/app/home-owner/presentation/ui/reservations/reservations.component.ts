@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectHomeOwner } from 'src/app/home-owner/+state/home-owner.selector';
+import { HomeOwner } from 'src/app/home-owner/domain/entities/home-owner';
 import { Reservation } from 'src/app/home-owner/domain/entities/reservation';
 
 export interface Filter {
@@ -14,22 +18,8 @@ export interface Filter {
 export class ReservationsComponent implements OnInit {
 
 
-  reservations: Reservation[] = [
-    {
-      entityId: '',
-      createdAt: new Date(),
-      eventEndDate: new Date(1672525565000),
-      eventStartDate: new Date(1672525523000),
-      type: 'Tennis'
-    },
-    {
-      entityId: '',
-      createdAt: new Date(),
-      eventEndDate: new Date(1670525523000),
-      eventStartDate: new Date(1670525223000),
-      type: 'Swimming'
-    }
-  ]
+  homeOwner$: Observable<HomeOwner> = this._store.select(selectHomeOwner());
+
   filters: Filter[] = [
     {
       name: 'All'
@@ -44,7 +34,8 @@ export class ReservationsComponent implements OnInit {
 
   activeFilter: Filter = this.filters[0];
 
-  constructor(private _router: Router) { }
+  constructor(private _router: Router,
+    private _store: Store) { }
 
   ngOnInit(): void { }
 
@@ -71,5 +62,13 @@ export class ReservationsComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  edit(reservation: Reservation) {
+    this._router.navigate(['/home-owner/add-reservation'], {
+      state: {
+        reservation
+      }
+    })
   }
 }

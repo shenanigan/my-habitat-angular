@@ -26,7 +26,8 @@
                 (click)="selectedKid = kid">
                 <div class="d-flex justify-content-center">
                     <img [ngClass]="{'active': selectedKid === kid}" class="mb-1 photo-container"
-                        [src]="kid.imageUrl ? (kid.imageUrl + readSASToken) : 'assets/images/ic_defaultuser.svg'">
+                        [src]="kid.imageUrl ? (kid.imageUrl + readSASToken) : 'assets/images/ic_defaultuser.svg'"
+                        [ngStyle]="kid.imageUrl ? {'object-fit': 'cover'} : {'background-color': 'white', 'object-fit': 'none'}">
                 </div>
                 <label class="small-label">{{kid.truncatedName}}</label>
             </div>

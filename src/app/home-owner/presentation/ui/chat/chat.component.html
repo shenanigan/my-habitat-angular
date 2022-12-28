@@ -1,4 +1,4 @@
-<app-header title="Society Manager" [bkgClass]="'bkg-white'" rightIcon2="call_chat" rightIcon="video_chat"></app-header>
+<app-header title="Society Manager" [bkgClass]="'bkg-white'" rightIcon="call_chat"></app-header>
 
 <div class="main-container h-100 header-padding" style="overflow: scroll;" #chatBox>
     <div class="p-3 " style="padding-bottom: 80px !important;">
@@ -47,8 +47,5 @@
     </mat-form-field>
 </form>
 
-<ng-image-fullscreen-view
-    [images]="media"
-    [imageIndex]="selectedImageIndex"
-    [show]="showMedia"
+<ng-image-fullscreen-view [images]="media" [imageIndex]="selectedImageIndex" [show]="showMedia"
     (close)="closeMedia()"></ng-image-fullscreen-view>

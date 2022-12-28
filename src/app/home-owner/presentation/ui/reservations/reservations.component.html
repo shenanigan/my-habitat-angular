@@ -8,14 +8,15 @@
             </mat-chip>
         </mat-chip-list>
         <div class="mt-3" *ngIf="activeFilter.name === 'Upcoming' || activeFilter.name === 'All'">
-            <ng-container *ngFor="let reservation of reservations;">
-                <app-row-upcoming-reservation [reservation]="reservation" *ngIf="isUpcoming(reservation)">
+            <ng-container *ngFor="let reservation of (homeOwner$| async)?.reservations;">
+                <app-row-upcoming-reservation [reservation]="reservation" *ngIf="isUpcoming(reservation)"
+                    (onEdit)="edit($event)">
                 </app-row-upcoming-reservation>
             </ng-container>
         </div>
 
         <div class="mt-3" *ngIf="activeFilter.name === 'Completed' || activeFilter.name === 'All'">
-            <ng-container *ngFor="let reservation of reservations;">
+            <ng-container *ngFor="let reservation of (homeOwner$| async)?.reservations;">
                 <app-row-completed-reservation [reservation]="reservation" *ngIf="isCompleted(reservation)">
                 </app-row-completed-reservation>
             </ng-container>

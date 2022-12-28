@@ -1,7 +1,8 @@
 import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 import { IRealTimeService } from './shared/domain/abstractions/irealtime.service';
 import { AblyEvents } from './shared/infrastructure/real-time/ably-events';
 import { StorageService } from './shared/infrastructure/storage/storage.service';
@@ -33,6 +34,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     // this._storageService.logout()
     if (!this._storageService.isAuthenticated()) {
       this._router.navigate(['/auth/phone'])

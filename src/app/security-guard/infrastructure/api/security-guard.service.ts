@@ -40,7 +40,10 @@ export class SecurityGuardService extends BaseService implements ISecurityGuardS
   }
   searchUnit(unit: string): Observable<HomeOwner[]> {
     const SEARCH_UNIT = gql`query SearchUnit($unit: String!) {
-      searchHomeOwners (where: { home: { unit: { contains: $unit } } }) {
+      searchHomeOwners (where: 
+        {
+          or: [{ name: { contains: $unit }}, {home: { unit: { contains: $unit } } }]
+      }) {
         societyId
         homeOwnerId
         name

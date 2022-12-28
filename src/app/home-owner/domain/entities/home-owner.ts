@@ -5,6 +5,7 @@ import { KeyValue } from "./KeyValue";
 import { Log } from "./log";
 import { Message } from "./message";
 import { Payment } from "./payment";
+import { Reservation } from "./reservation";
 
 export class HomeOwner extends Entity {
 
@@ -39,6 +40,29 @@ export class HomeOwner extends Entity {
             if (hasViewedMessages) {
                 this.hasViewedMessages = hasViewedMessages
             }
+
+            this.reservations = []
+
+            const jsonReservations: Reservation[] = [
+                {
+                    entityId: '',
+                    createdAt: new Date(),
+                    eventEndDate: new Date(1672525565000),
+                    eventStartDate: new Date(1672525523000),
+                    type: 'Tennis'
+                },
+                {
+                    entityId: '',
+                    createdAt: new Date(),
+                    eventEndDate: new Date(1670525523000),
+                    eventStartDate: new Date(1670525223000),
+                    type: 'Tennis'
+                }
+            ]
+            const reservations = jsonReservations.map(reservation => new Reservation(reservation.entityId, reservation))
+            if (reservations) {
+                this.reservations = reservations
+            }
         }
     }
     societyId?: string
@@ -51,6 +75,7 @@ export class HomeOwner extends Entity {
     logs: Log[] = []
     messages: Message[] = []
     payments: Payment[] = []
+    reservations: Reservation[] = []
     hasViewedMessages: KeyValue[] = []
     hasViewedNoticeboard: boolean = true
     hasViewedPayments: boolean = true

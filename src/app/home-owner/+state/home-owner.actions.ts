@@ -9,6 +9,7 @@ import { HomeOwner } from "../domain/entities/home-owner";
 import { Household } from "../domain/entities/household";
 import { Message } from "../domain/entities/message";
 import { Payment } from "../domain/entities/payment";
+import { Reservation } from "../domain/entities/reservation";
 
 export const getHomeOwner = createAction('[HomeOwner] Get Home Owner')
 export const getHomeOwnerSuccess = createAction('[HomeOwner] Get Home Owner Success', props<{ homeOwner: HomeOwner }>())
@@ -27,6 +28,9 @@ export const addMessageSuccess = createAction('[HomeOwner]  Add Message Success'
 
 export const markPaymentPaid = createAction('[HomeOwner] Mark Payment Paid', props<{ request: IMarkPaymentPaidRequest }>())
 export const markPaymentPaidSuccess = createAction('[HomeOwner]  Mark Payment Paid success', props<{ payment: Payment }>())
+
+export const addReservation = createAction('[HomeOwner] Add Reservation')
+export const addReservationSuccess = createAction('[HomeOwner]  Add Reservation Success', props<{ reservation: Reservation }>())
 
 export const markMessageViewed = createAction('[HomeOwner] Mark Message Viewed')
 export const markPaymentViewed = createAction('[HomeOwner] Mark Payment Viewed')

@@ -7,8 +7,9 @@ import { failed, success } from "src/app/shared/+state/shared.actions";
 import { Household } from "../domain/entities/household";
 import { Message } from "../domain/entities/message";
 import { Payment } from "../domain/entities/payment";
+import { Reservation } from "../domain/entities/reservation";
 import { AbstractHomeOwnerService } from "../domain/services/ihome-owner.service";
-import { addHousehold, addHouseholdSuccess, addMessage, addMessageSuccess, allowKidExit, allowKidExitSuccess, getHomeOwner, getHomeOwnerSuccess, markMessageViewed, markNoticeboardViewed, markPaymentPaid, markPaymentPaidSuccess, markPaymentViewed, updateLog, updateLogSuccess } from "./home-owner.actions";
+import { addHousehold, addHouseholdSuccess, addMessage, addMessageSuccess, addReservation, addReservationSuccess, allowKidExit, allowKidExitSuccess, getHomeOwner, getHomeOwnerSuccess, markMessageViewed, markNoticeboardViewed, markPaymentPaid, markPaymentPaidSuccess, markPaymentViewed, updateLog, updateLogSuccess } from "./home-owner.actions";
 
 @Injectable()
 export class HomeOwnerEffects {
@@ -186,4 +187,21 @@ export class HomeOwnerEffects {
             )
         )
 
+
+
+    addReservation$ =
+        createEffect(() =>
+            this._actions$.pipe(
+                ofType(addReservation),
+                switchMap(d => {
+                    const reservation = new Reservation('_id', {
+                        eventStartDate: new Date(1672718400000),
+                        eventEndDate: new Date(1672720200000),
+                        type: 'Tennis',
+                        createdAt: new Date()
+                    })
+                    return of(addReservationSuccess({ reservation }))
+                })
+            )
+        )
 }
