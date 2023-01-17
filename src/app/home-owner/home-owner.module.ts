@@ -11,7 +11,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { homeOwnerFeatureName, homeOwnerReducer } from './+state/home-owner.reducer';
+import {
+  homeOwnerFeatureName,
+  homeOwnerReducer,
+} from './+state/home-owner.reducer';
 import { AbstractHomeOwnerService } from './domain/services/ihome-owner.service';
 import { MockHomeOwnerService } from './infrastructure/api/mock-home-owner.service';
 import { HomeOwnerEffects } from './+state/home-owner.effects';
@@ -40,10 +43,14 @@ import { ReservationsComponent } from './presentation/ui/reservations/reservatio
 import { AddReservationComponent } from './presentation/ui/add-reservation/add-reservation.component';
 import { RowUpcomingReservationComponent } from './presentation/component/row-upcoming-reservation/row-upcoming-reservation.component';
 import { RowCompletedReservationComponent } from './presentation/component/row-completed-reservation/row-completed-reservation.component';
-
+import { ConfirmReservationComponent } from './presentation/ui/confirm-reservation/confirm-reservation.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { BookingSummaryComponent } from './presentation/ui/booking-summary/booking-summary.component';
 
 @NgModule({
-  declarations: [ResidentComponent,
+  declarations: [
+    ResidentComponent,
     AddFamilyComponent,
     KidExitComponent,
     HomeComponent,
@@ -60,7 +67,10 @@ import { RowCompletedReservationComponent } from './presentation/component/row-c
     ReservationsComponent,
     AddReservationComponent,
     RowUpcomingReservationComponent,
-    RowCompletedReservationComponent],
+    RowCompletedReservationComponent,
+    ConfirmReservationComponent,
+    BookingSummaryComponent,
+  ],
   imports: [
     CommonModule,
     HomeOwnerRoutingModule,
@@ -73,22 +83,24 @@ import { RowCompletedReservationComponent } from './presentation/component/row-c
     MatIconModule,
     MatBottomSheetModule,
     MatButtonToggleModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatIconModule,
     MatChipsModule,
     SharedModule,
     NgImageFullscreenViewModule,
     StoreModule.forFeature(homeOwnerFeatureName, homeOwnerReducer),
-    EffectsModule.forFeature([HomeOwnerEffects])
+    EffectsModule.forFeature([HomeOwnerEffects]),
   ],
   providers: [
     {
       provide: AbstractHomeOwnerService,
-      useClass: HomeOwnerService
+      useClass: HomeOwnerService,
     },
     {
       provide: AbstractImageStorageService,
-      useClass: AzureImageStorageService
-    }
-  ]
+      useClass: AzureImageStorageService,
+    },
+  ],
 })
-export class HomeOwnerModule { }
+export class HomeOwnerModule {}

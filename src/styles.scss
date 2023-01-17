@@ -1,16 +1,15 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
-@use './theme/label/label-theme' as label;
-@use './theme/form-field/form-field-theme' as form-field;
-@use './theme/button/button-theme' as button;
-@use './theme/mat-chip/mat-chip-theme' as mat-chip;
-
+@use "@angular/material" as mat;
+@use "./theme/label/label-theme" as label;
+@use "./theme/form-field/form-field-theme" as form-field;
+@use "./theme/button/button-theme" as button;
+@use "./theme/mat-chip/mat-chip-theme" as mat-chip;
 
 // Plus imports for other components in your app.
-@import './theme/my-habitat-palette.scss';
-@import './theme/label/label.scss';
-@import './theme/form-field/form-field.scss';
+@import "./theme/my-habitat-palette.scss";
+@import "./theme/label/label.scss";
+@import "./theme/form-field/form-field.scss";
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -21,19 +20,29 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $My-Habitat-primary: mat.define-palette($my-habitat-primary-palette);
-$My-Habitat-accent: mat.define-palette($my-habitat-primary-palette, A200, A100, A400);
+$My-Habitat-accent: mat.define-palette(
+  $my-habitat-primary-palette,
+  A200,
+  A100,
+  A400
+);
 
 // The warn palette is optional (defaults to red).
 $My-Habitat-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$My-Habitat-theme: mat.define-light-theme((color: (primary: $My-Habitat-primary,
-        accent: $My-Habitat-accent,
-        warn: $My-Habitat-warn,
-      ),
-      typography: (),
-      style: ()));
+$My-Habitat-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $My-Habitat-primary,
+      accent: $My-Habitat-accent,
+      warn: $My-Habitat-warn,
+    ),
+    typography: (),
+    style: (),
+  )
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -47,7 +56,6 @@ $My-Habitat-theme: mat.define-light-theme((color: (primary: $My-Habitat-primary,
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/bootstrap/scss/bootstrap";
 
-
 html,
 body {
   height: 100%;
@@ -55,9 +63,8 @@ body {
 
 body {
   margin: 0;
-  font-family: 'Source Sans Pro', "Helvetica Neue", sans-serif !important;
+  font-family: "Source Sans Pro", "Helvetica Neue", sans-serif !important;
 }
-
 
 .mat-bottom-sheet-container {
   padding: 0 !important;
@@ -69,9 +76,8 @@ body {
   padding-top: 57px;
 }
 
-
 .bkg-color {
-  background: #F8F8F8 !important;
+  background: #f8f8f8 !important;
 }
 
 .bkg-white {
@@ -85,4 +91,19 @@ body {
   padding: 4px;
   border-radius: 4px;
   background: red;
+}
+
+.img-48 {
+  width: 48px;
+  height: 48px;
+}
+.img-72 {
+  width: 72px;
+  height: 72px;
+}
+
+.reservation-block {
+  border: 0px solid #ffffff;
+  border-radius: 10px;
+  min-width: 30%;
 }
