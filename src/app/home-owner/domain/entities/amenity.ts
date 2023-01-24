@@ -1,9 +1,6 @@
-import { Entity } from "src/app/shared/domain/entity";
+export class Amenity {
 
-export class Reservation extends Entity {
-
-    constructor(reservationId: string, obj?: Partial<Reservation>) {
-        super(reservationId)
+    constructor(obj?: Partial<Amenity>) {
         if (obj) {
             Object.assign(this, obj)
             this.startDateTime = new Date('' + obj.startDateTime);
@@ -11,8 +8,9 @@ export class Reservation extends Entity {
         }
     }
 
+    slotDuration?: number
+    name?: string
+    icon?: string
     startDateTime?: Date
-    amenity?: string
-    createdAt?: Date
     endDateTime?: Date
 }

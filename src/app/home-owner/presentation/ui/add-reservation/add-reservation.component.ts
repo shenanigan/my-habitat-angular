@@ -1,9 +1,15 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { addReservation } from 'src/app/home-owner/+state/home-owner.actions';
+import { Observable } from 'rxjs';
+import { addReservation, getHomeOwner } from 'src/app/home-owner/+state/home-owner.actions';
+import { selectHomeOwner, selectSociety } from 'src/app/home-owner/+state/home-owner.selector';
+import { Amenity } from 'src/app/home-owner/domain/entities/amenity';
 import { Reservation } from 'src/app/home-owner/domain/entities/reservation';
-export {};
+import { Society } from 'src/app/home-owner/domain/entities/society';
+import { StorageService } from 'src/app/shared/infrastructure/storage/storage.service';
+import { getSociety } from 'src/app/society/+state/society.actions';
+export { };
 declare global {
   interface Window {
     Calendly: any;
@@ -17,8 +23,8 @@ declare global {
 })
 export class AddReservationComponent implements OnInit, AfterViewInit {
   isAdded = false;
-  reservation?: Reservation;
-  amenities: any[] = [
+  society$ = this._store.select(selectSociety())
+  amenities: Amenity[] = [
     { icon: 'assets/images/ic_defaultuser.svg', name: 'Swimming Pool' },
     {
       icon: 'assets/images/ic_defaultuser.svg',
@@ -61,37 +67,24 @@ export class AddReservationComponent implements OnInit, AfterViewInit {
     },
   ];
 
-  constructor(private _router: Router, private _store: Store) {
-    // this.reservation =
-    //   _router.getCurrentNavigation()?.extras?.state?.['reservation'];
+  constructor(private _router: Router,
+    private _store: Store,
+    private _storageService: StorageService) {
+    const societyId = this._storageService.getSocietyId()
+    if (societyId) {
+      this._store.dispatch(getSociety({ societyId: societyId }))
+    }
   }
 
   ngAfterViewInit(): void {
     if (this.isAdded === false) {
       this.isAdded = true;
-      this._store.dispatch(addReservation());
     }
   }
 
-  ngOnInit(): void {
-    // if (this.reservation) {
-    //   window.Calendly.initInlineWidget({
-    //     url: 'https://calendly.com/reschedulings/a58a3765-b159-4b8d-a56e-19649c8fa974',
-    //     parentElement: document.querySelector('.calendly-inline-widget'),
-    //   });
-    // } else {
-    //   window.Calendly.initInlineWidget({
-    //     url: 'https://calendly.com/arjav-dave?name=Arjav&email=arjav@royalecheese.com&hide_gdpr_banner=1',
-    //     parentElement: document.querySelector('.calendly-inline-widget'),
-    //   });
-    // }
-  }
+  ngOnInit(): void { }
 
   redirect(amenity: string) {
-    this._router.navigate(['/home-owner/confirm-reservation'], {
-      state: {
-        amenity,
-      },
-    });
+    this._router.navigate(['/home-owner/confirm-reservation'], { queryParams: { amenity } });
   }
 }

@@ -1,29 +1,13 @@
-<app-header
-  [title]="reservation ? 'Reschedule' : 'New Reservation'"
-  [hasCalendly]="true"
-></app-header>
-<div
-  class="main-container h-100 header-padding bkg-color"
-  style="overflow: scroll"
->
+<app-header [title]="'New Reservation'" [hasCalendly]="true"></app-header>
+<div class="main-container h-100 header-padding bkg-color" style="overflow: scroll">
   <div class="p-3">
     <div class="label-15-700 color-primary mb-2 pb-1">Select Amenity</div>
-    <div
-      class="d-flex flex-wrap justify-content-start mb-3"
-      style="column-gap: 17px; row-gap: 16px"
-    >
-      <div
-        *ngFor="let amenity of amenities"
-        (click)="redirect(amenity.name)"
+    <div class="d-flex flex-wrap justify-content-start mb-3" style="column-gap: 17px; row-gap: 16px">
+      <div *ngFor="let amenity of (society$ | async)?.amenities" (click)="redirect(amenity.name ?? '')"
         class="d-flex flex-column justify-content-center align-items-center reservation-block bkg-white"
-        style="aspect-ratio: 1/1"
-      >
+        style="aspect-ratio: 1/1">
         <img src="{{ amenity.icon }}" class="img-48" alt="" />
-        <span
-          class="label-12-400 color-primary mt-2"
-          style="line-height: 15px"
-          >{{ amenity.name }}</span
-        >
+        <span class="label-12-400 color-primary mt-2" style="line-height: 15px">{{ amenity.name }}</span>
       </div>
     </div>
   </div>

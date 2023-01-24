@@ -2,33 +2,18 @@
 <div class="main-container h-100 header-padding bkg-color px-3">
   <div class="d-flex flex-column justify-content-between h-100">
     <div class="mt-3">
-      <app-row-upcoming-reservation
-        [reservation]="reservation"
-        (onEdit)="edit($event)"
-      >
+      <app-row-upcoming-reservation [reservation]="reservation" (onEdit)="edit($event)">
       </app-row-upcoming-reservation>
-      <div
-        class="bkg-white d-flex flex-column align-items-center justify-content-center pt-4 pb-5"
-        style="border-radius: 10px"
-      >
-        <qrcode
-          [qrdata]="myAngularxQrCode"
-          [width]="200"
-          [errorCorrectionLevel]="'M'"
-        ></qrcode>
+      <div class="bkg-white d-flex flex-column align-items-center justify-content-center pt-4 pb-5"
+        style="border-radius: 10px">
+        <qrcode [qrdata]="reservation?.entityId ?? ''" [width]="200" [errorCorrectionLevel]="'M'"></qrcode>
         <div class="label-14-400 color-primary">Booking ID</div>
         <div class="color-primary" style="font-size: 23px; font-weight: bold">
-          MH2468
+          ...{{reservation?.entityId?.slice(10)}}
         </div>
       </div>
     </div>
-    <button
-      mat-flat-button
-      color="primary"
-      class="mat-flat-button w-100 mb-4"
-      style="color: #fff"
-      (click)="done()"
-    >
+    <button mat-flat-button color="primary" class="mat-flat-button w-100 mb-4" style="color: #fff" (click)="done()">
       Done
     </button>
   </div>

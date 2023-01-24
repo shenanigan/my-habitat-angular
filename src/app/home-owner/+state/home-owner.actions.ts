@@ -2,6 +2,9 @@
 import { createAction, props } from "@ngrx/store";
 import { AddHouseholdRequest } from "../domain/contracts/requests/add-household";
 import { AddMessageRequest } from "../domain/contracts/requests/add-message";
+import { IAddReservation } from "../domain/contracts/requests/add-reservation";
+import { ICancelReservation } from "../domain/contracts/requests/cancel-reservation";
+import { IEditReservation } from "../domain/contracts/requests/edit-reservation";
 import { KidExitRequest } from "../domain/contracts/requests/kid-exit";
 import { IMarkPaymentPaidRequest } from "../domain/contracts/requests/mark-payment-paid-request";
 import { UpdateLogRequest } from "../domain/contracts/requests/update-log";
@@ -29,8 +32,14 @@ export const addMessageSuccess = createAction('[HomeOwner]  Add Message Success'
 export const markPaymentPaid = createAction('[HomeOwner] Mark Payment Paid', props<{ request: IMarkPaymentPaidRequest }>())
 export const markPaymentPaidSuccess = createAction('[HomeOwner]  Mark Payment Paid success', props<{ payment: Payment }>())
 
-export const addReservation = createAction('[HomeOwner] Add Reservation')
+export const addReservation = createAction('[HomeOwner] Add Reservation', props<{ reservation: IAddReservation }>())
 export const addReservationSuccess = createAction('[HomeOwner]  Add Reservation Success', props<{ reservation: Reservation }>())
+
+export const editReservation = createAction('[HomeOwner] Edit Reservation', props<{ reservation: IEditReservation }>())
+export const editReservationSuccess = createAction('[HomeOwner]  Edit Reservation Success', props<{ reservation: Reservation }>())
+
+export const cancelReservation = createAction('[HomeOwner] Cancel Reservation', props<{ reservation: ICancelReservation }>())
+export const cancelReservationSuccess = createAction('[HomeOwner]  Cancel Reservation Success', props<{ reservation: Reservation }>())
 
 export const markMessageViewed = createAction('[HomeOwner] Mark Message Viewed')
 export const markPaymentViewed = createAction('[HomeOwner] Mark Payment Viewed')

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
+import { cancelReservation, getHomeOwner } from 'src/app/home-owner/+state/home-owner.actions';
 import { selectHomeOwner } from 'src/app/home-owner/+state/home-owner.selector';
+import { ICancelReservation } from 'src/app/home-owner/domain/contracts/requests/cancel-reservation';
 import { HomeOwner } from 'src/app/home-owner/domain/entities/home-owner';
 import { Reservation } from 'src/app/home-owner/domain/entities/reservation';
 
@@ -35,7 +37,8 @@ export class ReservationsComponent implements OnInit {
   activeFilter: Filter = this.filters[0];
 
   constructor(private _router: Router,
-    private _store: Store) { }
+    private _store: Store) {
+  }
 
   ngOnInit(): void { }
 
@@ -45,8 +48,8 @@ export class ReservationsComponent implements OnInit {
 
   isUpcoming(reservation: Reservation): boolean {
 
-    if (reservation.eventStartDate) {
-      const startDate = new Date(reservation.eventStartDate);
+    if (reservation.startDateTime) {
+      const startDate = new Date(reservation.startDateTime);
       if (startDate > new Date()) {
         return true
       }
@@ -55,8 +58,8 @@ export class ReservationsComponent implements OnInit {
   }
 
   isCompleted(reservation: Reservation): boolean {
-    if (reservation.eventEndDate) {
-      const endDate = new Date(reservation.eventEndDate);
+    if (reservation.endDateTime) {
+      const endDate = new Date(reservation.endDateTime);
       if (endDate < new Date()) {
         return true
       }
@@ -65,10 +68,23 @@ export class ReservationsComponent implements OnInit {
   }
 
   edit(reservation: Reservation) {
-    this._router.navigate(['/home-owner/add-reservation'], {
+    this._router.navigate(['/home-owner/confirm-reservation'], {
       state: {
         reservation
+      },
+      queryParams: {
+        amenity: reservation.amenity
       }
     })
+  }
+
+  cancel(selectedReservation: Reservation) {
+    const reservation: ICancelReservation = {
+      amenity: selectedReservation.amenity!,
+      oldStartDateTime: selectedReservation.startDateTime!,
+      reservationId: selectedReservation.entityId,
+    }
+
+    this._store.dispatch(cancelReservation({ reservation }));
   }
 }

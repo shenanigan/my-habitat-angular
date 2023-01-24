@@ -9,7 +9,7 @@ import { Message } from "../domain/entities/message";
 import { Payment } from "../domain/entities/payment";
 import { Reservation } from "../domain/entities/reservation";
 import { AbstractHomeOwnerService } from "../domain/services/ihome-owner.service";
-import { addHousehold, addHouseholdSuccess, addMessage, addMessageSuccess, addReservation, addReservationSuccess, allowKidExit, allowKidExitSuccess, getHomeOwner, getHomeOwnerSuccess, markMessageViewed, markNoticeboardViewed, markPaymentPaid, markPaymentPaidSuccess, markPaymentViewed, updateLog, updateLogSuccess } from "./home-owner.actions";
+import { addHousehold, addHouseholdSuccess, addMessage, addMessageSuccess, addReservation, addReservationSuccess, allowKidExit, allowKidExitSuccess, cancelReservation, cancelReservationSuccess, editReservation, editReservationSuccess, getHomeOwner, getHomeOwnerSuccess, markMessageViewed, markNoticeboardViewed, markPaymentPaid, markPaymentPaidSuccess, markPaymentViewed, updateLog, updateLogSuccess } from "./home-owner.actions";
 
 @Injectable()
 export class HomeOwnerEffects {
@@ -194,13 +194,55 @@ export class HomeOwnerEffects {
             this._actions$.pipe(
                 ofType(addReservation),
                 switchMap(d => {
-                    const reservation = new Reservation('_id', {
-                        eventStartDate: new Date(1672718400000),
-                        eventEndDate: new Date(1672720200000),
-                        type: 'Tennis',
-                        createdAt: new Date()
-                    })
-                    return of(addReservationSuccess({ reservation }))
+                    return this._homeOwnerService.addReservation(d.reservation).
+                        pipe(map(_ => {
+                            var reservation = new Reservation('', d.reservation);
+                            return addReservationSuccess({ reservation })
+                        }),
+                            catchError(err => {
+                                this._snackBarService.open(err.message, 'CANCEL');
+                                return of(failed(err))
+                            })
+                        )
+                })
+            )
+        )
+
+
+    editReservation$ =
+        createEffect(() =>
+            this._actions$.pipe(
+                ofType(editReservation),
+                switchMap(d => {
+                    return this._homeOwnerService.editReservation(d.reservation).
+                        pipe(map(_ => {
+                            var reservation = new Reservation(d.reservation.reservationId, d.reservation);
+                            return editReservationSuccess({ reservation })
+                        }),
+                            catchError(err => {
+                                this._snackBarService.open(err.message, 'CANCEL');
+                                return of(failed(err))
+                            })
+                        )
+                })
+            )
+        )
+
+    cancelReservation$ =
+        createEffect(() =>
+            this._actions$.pipe(
+                ofType(cancelReservation),
+                switchMap(d => {
+                    return this._homeOwnerService.cancelReservation(d.reservation).
+                        pipe(map(_ => {
+                            var reservation = new Reservation(d.reservation.reservationId, d.reservation);
+                            return cancelReservationSuccess({ reservation })
+                        }),
+                            catchError(err => {
+                                this._snackBarService.open(err.message, 'CANCEL');
+                                return of(failed(err))
+                            })
+                        )
                 })
             )
         )

@@ -13,6 +13,10 @@ import { KidExitRequest } from "../../domain/contracts/requests/kid-exit";
 import { UpdateLogRequest } from "../../domain/contracts/requests/update-log";
 import { AddMessageRequest } from "../../domain/contracts/requests/add-message";
 import { IMarkPaymentPaidRequest } from "../../domain/contracts/requests/mark-payment-paid-request";
+import { Society } from "../../domain/entities/society";
+import { IAddReservation } from "../../domain/contracts/requests/add-reservation";
+import { IEditReservation } from "../../domain/contracts/requests/edit-reservation";
+import { ICancelReservation } from "../../domain/contracts/requests/cancel-reservation";
 
 @Injectable()
 export class HomeOwnerService extends BaseService implements IHomeOwnerService {
@@ -106,13 +110,54 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
           orderId
           status
         }
+
+        reservations{
+          startDateTime
+          endDateTime
+          amenity
+          createdAt
+          entityId: reservationId
+        }
       }
+
+
+        society {
+          entityId: societyId
+          name
+          address
+          city
+          state
+          country
+          amenities {
+            name
+            slotDuration
+            startDateTime
+            endDateTime
+            icon
+          }
+          reservations {
+            key
+            value {
+              key
+              value {
+                entityId: reservationId
+                startDateTime
+                endDateTime
+                createdAt
+                amenity
+              }
+            }
+          }
+        }
+      
     }`
     return this._apollo
       .query<any>({
         query: GET_HOME_OWNER
       }).pipe(map(res => {
         var homeOwner = new HomeOwner(res.data.homeOwner.homeOwnerId, res.data.homeOwner);
+        var society = new Society(res.data.society.entityId, res.data.society);
+        homeOwner.society = society;
         return homeOwner
       }))
       .pipe(catchError(this.handleError));
@@ -124,11 +169,30 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
         catchError(this.handleError));
   }
 
+  addReservation(request: IAddReservation): Observable<void> {
+    return this._http.post<void>(environment.homeOwnerURL + `Societies/AddReservation`, request, super.headers())
+      .pipe(map(_ => _),
+        catchError(this.handleError));
+  }
+
+  editReservation(request: IEditReservation): Observable<void> {
+    return this._http.post<void>(environment.homeOwnerURL + `Societies/EditReservation`, request, super.headers())
+      .pipe(map(_ => _),
+        catchError(this.handleError));
+  }
+
+  cancelReservation(request: ICancelReservation): Observable<void> {
+    return this._http.post<void>(environment.homeOwnerURL + `Societies/CancelReservation`, request, super.headers())
+      .pipe(map(_ => _),
+        catchError(this.handleError));
+  }
+
   markPaymentPaid(request: IMarkPaymentPaidRequest): Observable<void> {
     return this._http.post<void>(environment.homeOwnerURL + `HomeOwner/MarkPaymentPaid`, request, super.headers())
       .pipe(map(_ => _),
         catchError(this.handleError));
   }
+
   markMessageViewed(): Observable<void> {
     return this._http.post<void>(environment.homeOwnerURL + `HomeOwner/MarkMessageViewed`, {}, super.headers())
       .pipe(map(_ => _),

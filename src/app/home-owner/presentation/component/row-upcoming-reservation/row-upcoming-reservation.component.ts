@@ -12,13 +12,14 @@ export class RowUpcomingReservationComponent implements OnInit {
 
   @Input() reservation?: Reservation
   @Output() onEdit = new EventEmitter<Reservation>()
+  @Output() onCancel = new EventEmitter<Reservation>()
   constructor(private _store: Store) { }
 
   ngOnInit(): void {
   }
 
   cancel() {
-    this._store.dispatch(getHomeOwner());
+    this.onCancel.emit(this.reservation)
   }
 
   edit() {

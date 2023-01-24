@@ -12,6 +12,9 @@ import { KidExitRequest } from "../../domain/contracts/requests/kid-exit";
 import { UpdateLogRequest } from "../../domain/contracts/requests/update-log";
 import { AddMessageRequest } from "../../domain/contracts/requests/add-message";
 import { IMarkPaymentPaidRequest } from "../../domain/contracts/requests/mark-payment-paid-request";
+import { IAddReservation } from "../../domain/contracts/requests/add-reservation";
+import { IEditReservation } from "../../domain/contracts/requests/edit-reservation";
+import { ICancelReservation } from "../../domain/contracts/requests/cancel-reservation";
 
 @Injectable()
 export class MockHomeOwnerService extends BaseService implements IHomeOwnerService {
@@ -115,6 +118,27 @@ export class MockHomeOwnerService extends BaseService implements IHomeOwnerServi
     }
 
     addMessage(request: AddMessageRequest): Observable<void> {
+        return new Observable(subscriber => {
+            subscriber.next()
+            subscriber.complete()
+        })
+    }
+
+    addReservation(request: IAddReservation): Observable<void> {
+        return new Observable(subscriber => {
+            subscriber.next()
+            subscriber.complete()
+        })
+    }
+
+    editReservation(request: IEditReservation): Observable<void> {
+        return new Observable(subscriber => {
+            subscriber.next()
+            subscriber.complete()
+        })
+    }
+
+    cancelReservation(request: ICancelReservation): Observable<void> {
         return new Observable(subscriber => {
             subscriber.next()
             subscriber.complete()
