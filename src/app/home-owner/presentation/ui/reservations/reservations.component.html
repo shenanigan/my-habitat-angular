@@ -10,7 +10,7 @@
         <div class="mt-3" *ngIf="activeFilter.name === 'Upcoming' || activeFilter.name === 'All'">
             <ng-container *ngFor="let reservation of (homeOwner$| async)?.reservations;">
                 <app-row-upcoming-reservation [reservation]="reservation" *ngIf="isUpcoming(reservation)"
-                    (onEdit)="edit($event)">
+                    (onEdit)="edit($event)" (onCancel)="cancel($event)">
                 </app-row-upcoming-reservation>
             </ng-container>
         </div>

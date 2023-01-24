@@ -5,8 +5,8 @@ import { HttpLink } from 'apollo-angular/http';
 import { setContext } from '@apollo/client/link/context';
 import { StorageService } from './shared/infrastructure/storage/storage.service';
 
-// const uri = 'https://localhost:7022/graphql'; // <-- add the URL of the GraphQL server here
-const uri = 'https://my-habitat-dotnet-read.azurewebsites.net/graphql'; // <-- add the URL of the GraphQL server here
+const uri = 'https://localhost:7022/graphql'; // <-- add the URL of the GraphQL server here
+// const uri = 'https://my-habitat-dotnet-read.azurewebsites.net/graphql'; // <-- add the URL of the GraphQL server here
 export function createApollo(httpLink: HttpLink, storageService: StorageService): ApolloClientOptions<any> {
   const auth = setContext((operation, context) => {
     const token = storageService.getToken()

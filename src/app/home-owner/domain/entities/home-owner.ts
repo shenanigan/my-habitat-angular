@@ -1,4 +1,5 @@
 import { Entity } from "src/app/shared/domain/entity";
+import { Society } from "./society";
 import { Home } from "./home";
 import { Household } from "./household";
 import { KeyValue } from "./KeyValue";
@@ -43,23 +44,23 @@ export class HomeOwner extends Entity {
 
             this.reservations = []
 
-            const jsonReservations: Reservation[] = [
-                {
-                    entityId: '',
-                    createdAt: new Date(),
-                    eventEndDate: new Date(1672525565000),
-                    eventStartDate: new Date(1672525523000),
-                    type: 'Tennis'
-                },
-                {
-                    entityId: '',
-                    createdAt: new Date(),
-                    eventEndDate: new Date(1670525523000),
-                    eventStartDate: new Date(1670525223000),
-                    type: 'Tennis'
-                }
-            ]
-            const reservations = jsonReservations.map(reservation => new Reservation(reservation.entityId, reservation))
+            // const jsonReservations: Reservation[] = [
+            //     {
+            //         entityId: '',
+            //         createdAt: new Date(),
+            //         eventEndDate: new Date(1672525565000),
+            //         eventStartDate: new Date(1672525523000),
+            //         type: 'Tennis'
+            //     },
+            //     {
+            //         entityId: '',
+            //         createdAt: new Date(),
+            //         eventEndDate: new Date(1670525523000),
+            //         eventStartDate: new Date(1670525223000),
+            //         type: 'Tennis'
+            //     }
+            // ]
+            const reservations = obj.reservations?.map(reservation => new Reservation(reservation.entityId, reservation))
             if (reservations) {
                 this.reservations = reservations
             }
@@ -79,6 +80,7 @@ export class HomeOwner extends Entity {
     hasViewedMessages: KeyValue[] = []
     hasViewedNoticeboard: boolean = true
     hasViewedPayments: boolean = true
+    society?: Society
 
     get truncatedName(): string | undefined {
         const names = this.name?.split(' ')

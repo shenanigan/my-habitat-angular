@@ -32,6 +32,7 @@
     "@ngrx/store": "^14.3.2",
     "ably": "^1.2.33",
     "angular-font-awesome": "^3.1.2",
+    "angularx-qrcode": "^13.0.15",
     "apollo-angular": "^4.1.0",
     "base64-arraybuffer": "^1.0.2",
     "bootstrap": "^5.2.2",

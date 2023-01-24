@@ -10,6 +10,13 @@ export const selectHomeOwner = () => createSelector(
     }
 );
 
+export const selectSociety = () => createSelector(
+    getHomeOwnerModule,
+    state => {
+        return state.homeOwner.society
+    }
+);
+
 
 export const selectKids = () => createSelector(
     getHomeOwnerModule,
