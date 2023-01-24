@@ -19,44 +19,36 @@ export class AddReservationComponent implements OnInit, AfterViewInit {
   isAdded = false;
   reservation?: Reservation;
   amenities: any[] = [
-    { icon: 'assets/images/ic_defaultuser.svg', name: 'Swimming Pool' },
+    { icon: 'assets/images/ic_swimming.svg', name: 'Swimming Pool' },
+    { icon: 'assets/images/ic_gym.svg', name: 'Gym' },
+    { icon: 'assets/images/ic_parking.svg', name: 'Parking Spot' },
+    { icon: 'assets/images/ic_yoga.svg', name: 'Yoga Room' },
     {
-      icon: 'assets/images/ic_defaultuser.svg',
-      name: 'Specialisation',
-    },
-    { icon: 'assets/images/ic_defaultuser.svg', name: 'Gym' },
-    {
-      icon: 'assets/images/ic_defaultuser.svg',
-      name: 'Practice Places',
-    },
-    { icon: 'assets/images/ic_defaultuser.svg', name: 'Parking Spot' },
-    { icon: 'assets/images/ic_defaultuser.svg', name: 'Yoga Room' },
-    {
-      icon: 'assets/images/ic_defaultuser.svg',
+      icon: 'assets/images/ic_music.svg',
       name: 'Music Room',
     },
     {
-      icon: 'assets/images/ic_defaultuser.svg',
+      icon: 'assets/images/ic_golf.svg',
       name: 'Golf',
     },
     {
-      icon: 'assets/images/ic_defaultuser.svg',
+      icon: 'assets/images/ic_tabletennis.svg',
       name: 'Table Tennis',
     },
     {
-      icon: 'assets/images/ic_defaultuser.svg',
+      icon: 'assets/images/ic_tennis.svg',
       name: 'Tennis',
     },
     {
-      icon: 'assets/images/ic_defaultuser.svg',
+      icon: 'assets/images/ic_basket.svg',
       name: 'Basket Ball',
     },
     {
-      icon: 'assets/images/ic_defaultuser.svg',
+      icon: 'assets/images/ic_jacuzzi.svg',
       name: 'Jacuzzi',
     },
     {
-      icon: 'assets/images/ic_defaultuser.svg',
+      icon: 'assets/images/ic_kidsroom.svg',
       name: 'Kids Room',
     },
   ];
