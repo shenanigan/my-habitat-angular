@@ -195,8 +195,8 @@ export class HomeOwnerEffects {
                 ofType(addReservation),
                 switchMap(d => {
                     return this._homeOwnerService.addReservation(d.reservation).
-                        pipe(map(_ => {
-                            var reservation = new Reservation('', d.reservation);
+                        pipe(map(response => {
+                            var reservation = new Reservation(response.entityId, d.reservation);
                             return addReservationSuccess({ reservation })
                         }),
                             catchError(err => {

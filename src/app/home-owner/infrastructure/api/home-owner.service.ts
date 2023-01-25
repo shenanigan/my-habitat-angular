@@ -17,6 +17,7 @@ import { Society } from "../../domain/entities/society";
 import { IAddReservation } from "../../domain/contracts/requests/add-reservation";
 import { IEditReservation } from "../../domain/contracts/requests/edit-reservation";
 import { ICancelReservation } from "../../domain/contracts/requests/cancel-reservation";
+import { IAddEntity } from "../../domain/contracts/responses/add";
 
 @Injectable()
 export class HomeOwnerService extends BaseService implements IHomeOwnerService {
@@ -169,9 +170,9 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
         catchError(this.handleError));
   }
 
-  addReservation(request: IAddReservation): Observable<void> {
-    return this._http.post<void>(environment.homeOwnerURL + `Societies/AddReservation`, request, super.headers())
-      .pipe(map(_ => _),
+  addReservation(request: IAddReservation): Observable<IAddEntity> {
+    return this._http.post<IAddEntity>(environment.homeOwnerURL + `Societies/AddReservation`, request, super.headers())
+      .pipe(map(res => res),
         catchError(this.handleError));
   }
 

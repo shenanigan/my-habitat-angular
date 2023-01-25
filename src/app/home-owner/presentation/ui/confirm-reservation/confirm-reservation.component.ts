@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { ofType } from '@ngrx/effects';
+import { ActionsSubject, Store } from '@ngrx/store';
 import { Subscription, take } from 'rxjs';
-import { addReservation, editReservation, getHomeOwner } from 'src/app/home-owner/+state/home-owner.actions';
+import { addReservation, addReservationSuccess, editReservation, editReservationSuccess, getHomeOwner } from 'src/app/home-owner/+state/home-owner.actions';
 import { selectHomeOwner } from 'src/app/home-owner/+state/home-owner.selector';
 import { IAddReservation } from 'src/app/home-owner/domain/contracts/requests/add-reservation';
 import { IEditReservation } from 'src/app/home-owner/domain/contracts/requests/edit-reservation';
@@ -20,7 +21,7 @@ export interface TimeSlot {
   templateUrl: './confirm-reservation.component.html',
   styleUrls: ['./confirm-reservation.component.scss'],
 })
-export class ConfirmReservationComponent implements OnInit {
+export class ConfirmReservationComponent implements OnInit, OnDestroy {
   amenity?: string;
   showPopup: boolean = true;
   timeSlots: TimeSlot[] = [];
@@ -31,13 +32,24 @@ export class ConfirmReservationComponent implements OnInit {
   homeOwner$ = this._store.select(selectHomeOwner());
   homeOwner?: HomeOwner
   reservation?: Reservation
+  _actionsSubscription: Subscription
 
   constructor(private _router: Router,
     private _activatedRoute: ActivatedRoute,
+    private _actions$: ActionsSubject,
     private _store: Store) {
     this._activatedRoute.queryParams.subscribe(params => {
       this.amenity = params['amenity'];
     })
+
+    this._actionsSubscription = this._actions$.pipe(
+      ofType(...[addReservationSuccess, editReservationSuccess])).subscribe(action => {
+        this._router.navigate(['/home-owner/booking-summary'], {
+          state: {
+            reservation: action.reservation
+          },
+        });
+      })
 
     this.reservation = this._router.getCurrentNavigation()?.extras?.state?.['reservation'];
 
@@ -67,6 +79,9 @@ export class ConfirmReservationComponent implements OnInit {
       }
     })
     this._store.dispatch(getHomeOwner());
+  }
+  ngOnDestroy(): void {
+    this._actionsSubscription.unsubscribe()
   }
 
   ngOnInit(): void { }
@@ -164,15 +179,6 @@ export class ConfirmReservationComponent implements OnInit {
         }
 
         this._store.dispatch(editReservation({ reservation }));
-
-        this.homeOwner$.pipe(take(1)).subscribe(homeOwner => {
-          const r = new Reservation("New Booking", reservation)
-          this._router.navigate(['/home-owner/booking-summary'], {
-            state: {
-              reservation: r,
-            },
-          });
-        })
       }
       else {
         const reservation: IAddReservation = {
@@ -182,15 +188,6 @@ export class ConfirmReservationComponent implements OnInit {
         }
 
         this._store.dispatch(addReservation({ reservation }));
-
-        this.homeOwner$.pipe(take(1)).subscribe(homeOwner => {
-          const r = new Reservation("New Booking", reservation)
-          this._router.navigate(['/home-owner/booking-summary'], {
-            state: {
-              reservation: r,
-            },
-          });
-        })
       }
     }
 

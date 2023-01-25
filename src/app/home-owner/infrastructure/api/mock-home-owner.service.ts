@@ -15,6 +15,7 @@ import { IMarkPaymentPaidRequest } from "../../domain/contracts/requests/mark-pa
 import { IAddReservation } from "../../domain/contracts/requests/add-reservation";
 import { IEditReservation } from "../../domain/contracts/requests/edit-reservation";
 import { ICancelReservation } from "../../domain/contracts/requests/cancel-reservation";
+import { IAddEntity } from "../../domain/contracts/responses/add";
 
 @Injectable()
 export class MockHomeOwnerService extends BaseService implements IHomeOwnerService {
@@ -124,7 +125,7 @@ export class MockHomeOwnerService extends BaseService implements IHomeOwnerServi
         })
     }
 
-    addReservation(request: IAddReservation): Observable<void> {
+    addReservation(request: IAddReservation): Observable<IAddEntity> {
         return new Observable(subscriber => {
             subscriber.next()
             subscriber.complete()
