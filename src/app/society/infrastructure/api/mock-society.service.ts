@@ -35,4 +35,27 @@ export class MockSocietyService extends BaseService implements ISocietyService {
             subscriber.complete()
         })
     }
+
+    getSocietyForHO(): Observable<Society> {
+        return new Observable(subscriber => {
+            const notice1 = new Notice('1234-5678')
+            notice1.createdAt = new Date()
+            notice1.text = "<h1>Lorem Ipsum</h1><br><h4>Ipsum Lorem</h4>"
+            notice1.tag = "Society"
+
+            const notice2 = new Notice('1234-5678-90')
+            notice2.createdAt = new Date()
+            notice2.text = "<h1>Lorem Ipsum</h1><br><h4>Ipsum Lorem</h4>"
+            notice2.tag = "Payment"
+            var society = new Society('1234-5678-90')
+            society.address = "Test Address"
+            society.name = "Test Society Name"
+            society.city = "Test City"
+            society.state = "Test State"
+            society.country = "Test Country"
+            society.notices = [notice1, notice2]
+            subscriber.next(society)
+            subscriber.complete()
+        })
+    }
 }

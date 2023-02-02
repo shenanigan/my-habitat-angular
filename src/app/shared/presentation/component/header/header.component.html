@@ -1,7 +1,7 @@
 <div class="w-100" style="border-bottom: 1px solid #CCC; position: fixed; top: 0; z-index: 1000;">
     <div class="d-flex px-3 py-3 align-items-center" [ngClass]="bkgClass ? bkgClass : 'bkg-color'">
         <div style="width: 60px;" class="d-flex" *ngIf="!showLogo">
-            <mat-icon svgIcon="back" class="ms-0" (click)="back()"></mat-icon>
+            <mat-icon svgIcon="back" class="ms-0" (click)="back()" *ngIf="!hideBack"></mat-icon>
         </div>
         <div class="d-flex" *ngIf="showLogo">
             <mat-icon svgIcon="docx_logo" class="ms-0" (click)="back()" style="width: 83px; height: 42px"></mat-icon>

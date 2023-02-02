@@ -13,6 +13,35 @@ export class SocietyService extends BaseService implements ISocietyService {
     private _apollo: Apollo) {
     super(_storageService);
   }
+
+
+  getSocietyForHO(): Observable<Society> {
+    const GET_SOCIETY = gql`query GetSociety {
+      society {
+        societyId
+        name
+        address
+        city
+        state
+        country
+        notices {
+          noticeId
+          text
+          createdAt
+        }
+      }
+    }`
+    return this._apollo
+      .query<any>({
+        query: GET_SOCIETY
+      }).pipe(map(res => {
+        var society = new Society(res.data.society.societyId, res.data.society);
+        return society
+      }))
+      .pipe(catchError(this.handleError));
+  }
+
+
   getSociety(societyId: string): Observable<Society> {
     const GET_SOCIETY = gql`query GetSociety($societyId: String!) {
       society(societyId: $societyId) {

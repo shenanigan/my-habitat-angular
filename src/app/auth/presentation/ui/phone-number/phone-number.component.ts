@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ofType } from '@ngrx/effects';
-import { ActionsSubject, Store } from '@ngrx/store';
-import { map, mergeMap, Subscription } from 'rxjs';
+import { ScannedActionsSubject, Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { sendOtp, sendOtpSuccess } from 'src/app/auth/+state/auth.actions';
 @Component({
   selector: 'app-phone-number',
@@ -17,7 +17,7 @@ export class PhoneNumberComponent implements OnInit, OnDestroy {
     phoneNumber: new FormControl('', [Validators.required, Validators.pattern("^\\d{7,12}$")]),
   })
   constructor(private _router: Router,
-    private _actions$: ActionsSubject,
+    private _actions$: ScannedActionsSubject,
     private _store: Store) {
 
     this._actionsSubscription = this._actions$.pipe(

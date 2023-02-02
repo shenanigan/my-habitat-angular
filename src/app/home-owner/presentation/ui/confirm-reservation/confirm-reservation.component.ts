@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ofType } from '@ngrx/effects';
-import { ActionsSubject, Store } from '@ngrx/store';
-import { Subscription, take } from 'rxjs';
+import { ActionsSubject, ScannedActionsSubject, Store } from '@ngrx/store';
+import { Subscription, take, takeUntil } from 'rxjs';
 import { addReservation, addReservationSuccess, editReservation, editReservationSuccess, getHomeOwner } from 'src/app/home-owner/+state/home-owner.actions';
 import { selectHomeOwner } from 'src/app/home-owner/+state/home-owner.selector';
 import { IAddReservation } from 'src/app/home-owner/domain/contracts/requests/add-reservation';
@@ -36,7 +36,7 @@ export class ConfirmReservationComponent implements OnInit, OnDestroy {
 
   constructor(private _router: Router,
     private _activatedRoute: ActivatedRoute,
-    private _actions$: ActionsSubject,
+    private _actions$: ScannedActionsSubject,
     private _store: Store) {
     this._activatedRoute.queryParams.subscribe(params => {
       this.amenity = params['amenity'];
@@ -44,10 +44,12 @@ export class ConfirmReservationComponent implements OnInit, OnDestroy {
 
     this._actionsSubscription = this._actions$.pipe(
       ofType(...[addReservationSuccess, editReservationSuccess])).subscribe(action => {
+        debugger
         this._router.navigate(['/home-owner/booking-summary'], {
           state: {
             reservation: action.reservation
           },
+          replaceUrl: true
         });
       })
 
@@ -81,6 +83,7 @@ export class ConfirmReservationComponent implements OnInit, OnDestroy {
     this._store.dispatch(getHomeOwner());
   }
   ngOnDestroy(): void {
+    debugger
     this._actionsSubscription.unsubscribe()
   }
 

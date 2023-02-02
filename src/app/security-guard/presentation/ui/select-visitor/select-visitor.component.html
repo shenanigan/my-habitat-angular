@@ -16,6 +16,7 @@
                 <div class="p-1 d-flex flex-column align-items-center" style="width: 80px;"
                     *ngIf="member.type === 'VISITOR'" (click)="requestVisit(member)">
                     <img class="member-photo"
+                        [ngStyle]="member.imageUrl ? {'object-fit': 'cover'} : {'background-color': 'white', 'object-fit': 'none'}"
                         [src]="member.imageUrl ? (member.imageUrl + readSASToken) : 'assets/images/ic_defaultuser.svg'">
                     <div class="small-label mt-1">{{member.truncatedName}}</div>
                     <div class="smallest-opacity-label">{{member.role}}</div>
@@ -33,6 +34,7 @@
                     *ngIf="member.type === 'FAMILY_ADULT' ||  member.type === 'FAMILY_KID'"
                     (click)="requestVisit(member)">
                     <img class="member-photo"
+                        [ngStyle]="member.imageUrl ? {'object-fit': 'cover'} : {'background-color': 'white', 'object-fit': 'none'}"
                         [src]="member.imageUrl ? (member.imageUrl + readSASToken) : 'assets/images/ic_defaultuser.svg'">
                     <div class="small-label mt-1">{{member.truncatedName}}</div>
                     <div class="smallest-opacity-label">{{member.role}}</div>
@@ -46,6 +48,7 @@
         <ng-container *ngFor="let helper of (homeOwner$ | async)?.households" class="daily-helper d-flex p-2">
             <div class="daily-helper d-flex p-2" *ngIf="helper.type === 'DAILY_HELP'" (click)="requestVisit(helper)">
                 <img class="member-photo me-3"
+                    [ngStyle]="helper.imageUrl ? {'object-fit': 'cover'} : {'background-color': 'white', 'object-fit': 'none'}"
                     [src]="helper.imageUrl ? (helper.imageUrl + readSASToken) : 'assets/images/ic_defaultuser.svg'">
                 <span class="flex-grow-1 justify-content-center d-flex flex-column">
                     <div class="sub-heading-label">{{helper.name}}</div>
@@ -65,6 +68,7 @@
                     <div class="p-1 d-flex flex-column align-items-center" *ngIf="member.type === 'FREQUENT_VISITOR'"
                         (click)="requestVisit(member)">
                         <img class="member-photo"
+                            [ngStyle]="member.imageUrl ? {'object-fit': 'cover'} : {'background-color': 'white', 'object-fit': 'none'}"
                             [src]="member.imageUrl ? (member.imageUrl + readSASToken) : 'assets/images/ic_defaultuser.svg'">
                         <div class="small-label mt-1">{{member.truncatedName}}</div>
                         <div class="smallest-opacity-label">{{member.role}}</div>

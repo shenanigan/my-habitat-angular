@@ -4,7 +4,7 @@ import { createEffect, ofType } from "@ngrx/effects";
 import { ActionsSubject } from "@ngrx/store";
 import { catchError, map, of, switchMap } from "rxjs";
 import { AbstractSocietyService } from "../domain/services/isociety.service";
-import { failed, getSociety, getSocietySuccess } from "./society.actions";
+import { failed, getSociety, getSocietyForHO, getSocietySuccess } from "./society.actions";
 
 @Injectable()
 export class NoticeboardEffects {
@@ -15,12 +15,28 @@ export class NoticeboardEffects {
         private _snackBarService: MatSnackBar) { }
 
 
-    sendOtp$ =
+    getSociety$ =
         createEffect(() =>
             this._actions$.pipe(
                 ofType(getSociety),
                 switchMap(d => {
                     return this._societyService.getSociety(d.societyId).
+                        pipe(map(society => getSocietySuccess({ society })),
+                            catchError(err => {
+                                this._snackBarService.open(err.message, 'CANCEL');
+                                return of(failed(err))
+                            })
+                        )
+                })
+            )
+        )
+
+    getSocietyForHO$ =
+        createEffect(() =>
+            this._actions$.pipe(
+                ofType(getSocietyForHO),
+                switchMap(d => {
+                    return this._societyService.getSocietyForHO().
                         pipe(map(society => getSocietySuccess({ society })),
                             catchError(err => {
                                 this._snackBarService.open(err.message, 'CANCEL');

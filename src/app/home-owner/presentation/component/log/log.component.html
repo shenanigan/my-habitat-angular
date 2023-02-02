@@ -19,6 +19,7 @@
     <div class="p-1  d-flex flex-column align-items-center"></div>
     <div class="daily-helper d-flex p-2">
         <img class="member-photo me-3"
+            [ngStyle]="log?.household?.imageUrl ? {'object-fit': 'cover'} : {'background-color': 'white', 'object-fit': 'none'}"
             [src]="log?.household?.imageUrl ? (log?.household?.imageUrl + readSASToken) : 'assets/images/ic_defaultuser.svg'">
         <span class="flex-grow-1 justify-content-center d-flex flex-column">
             <div class="sub-heading-label">{{log?.household?.name}}</div>

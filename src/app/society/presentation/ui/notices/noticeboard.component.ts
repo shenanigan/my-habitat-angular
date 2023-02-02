@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { markNoticeboardViewed } from 'src/app/home-owner/+state/home-owner.actions';
 import { StorageService } from 'src/app/shared/infrastructure/storage/storage.service';
-import { getSociety } from 'src/app/society/+state/society.actions';
+import { getSociety, getSocietyForHO } from 'src/app/society/+state/society.actions';
 import { selectSociety } from 'src/app/society/+state/society.selector';
 import { Society } from 'src/app/society/domain/entities/society';
 
@@ -40,10 +40,9 @@ export class NoticeboardComponent implements OnInit {
   ngOnInit(): void {
     const societyId = this._storageService.getSocietyId()
     if (societyId) {
-      this._store.dispatch(getSociety({ societyId: societyId }))
+      this._store.dispatch(getSocietyForHO())
       this._store.dispatch(markNoticeboardViewed())
     }
-
   }
 
   openChat() {

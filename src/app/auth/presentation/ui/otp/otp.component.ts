@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { ofType } from '@ngrx/effects';
-import { ActionsSubject, Store } from '@ngrx/store';
+import { ScannedActionsSubject, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { sendOtpSuccess, verifyOtp, verifyOtpSuccess } from 'src/app/auth/+state/auth.actions';
+import { verifyOtp, verifyOtpSuccess } from 'src/app/auth/+state/auth.actions';
 import { StorageService } from 'src/app/shared/infrastructure/storage/storage.service';
 @Component({
   selector: 'app-otp',
@@ -21,7 +20,7 @@ export class OtpComponent {
   })
   constructor(private _router: Router,
     private _storageService: StorageService,
-    private _actions$: ActionsSubject,
+    private _actions$: ScannedActionsSubject,
     private _store: Store) {
     this.phoneNumber = this._router.getCurrentNavigation()?.extras?.state?.['phoneNumber'];
     this._actionsSubscription = this._actions$.pipe(

@@ -41,6 +41,15 @@ export class AddFamilyComponent implements OnInit {
     return this.type !== 'FAMILY_KID'
   }
 
+  get title(): string {
+    if (this.type === 'DAILY_HELP') {
+      return 'Add Daily Help'
+    } else if (this.type === 'VISITOR' || this.type === 'FREQUENT_VISITOR') {
+      return 'Add Visitor'
+    }
+    return 'Add Family'
+  }
+
   get showPermissions(): boolean {
     return this.type === 'FAMILY_KID'
   }

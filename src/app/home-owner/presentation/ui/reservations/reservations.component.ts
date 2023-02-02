@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Dialog } from '@capacitor/dialog';
 import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
 import { cancelReservation, getHomeOwner } from 'src/app/home-owner/+state/home-owner.actions';
@@ -78,13 +79,23 @@ export class ReservationsComponent implements OnInit {
     })
   }
 
-  cancel(selectedReservation: Reservation) {
-    const reservation: ICancelReservation = {
-      amenity: selectedReservation.amenity!,
-      oldStartDateTime: selectedReservation.startDateTime!,
-      reservationId: selectedReservation.entityId,
-    }
+  async cancel(selectedReservation: Reservation) {
+    const { value } = await Dialog.confirm({
+      title: 'Confirm',
+      okButtonTitle: 'Cancel Reservation',
+      cancelButtonTitle: 'Close',
+      message: `Are you sure you'd like to cancel the reservation?`,
+    });
 
-    this._store.dispatch(cancelReservation({ reservation }));
+    if (value) {
+      const reservation: ICancelReservation = {
+        amenity: selectedReservation.amenity!,
+        oldStartDateTime: selectedReservation.startDateTime!,
+        reservationId: selectedReservation.entityId,
+      }
+
+      this._store.dispatch(cancelReservation({ reservation }));
+
+    }
   }
 }

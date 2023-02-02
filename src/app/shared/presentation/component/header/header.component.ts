@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
   @Input() showFavourite: boolean = false
   @Input() isFavourite?: boolean | null
   @Input() showLogo: boolean = false
+  @Input() hideBack: boolean = false
   @Input() hasCalendly: boolean = false
   @Input() calendlySuccessRoutingLength: number = 7
 
