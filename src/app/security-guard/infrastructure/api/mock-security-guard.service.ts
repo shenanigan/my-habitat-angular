@@ -39,16 +39,16 @@ export class MockSecurityGuardService extends BaseService implements ISecurityGu
         })
     }
 
-    requestVisit(request: RequestVisitRequest): Observable<void> {
+    requestVisit(request: RequestVisitRequest): Observable<string> {
         return new Observable(subscriber => {
-            subscriber.next()
+            subscriber.next('APPROVED')
             subscriber.complete()
         })
     }
 
-    requestKidExit(request: RequestKidExitRequest): Observable<void> {
+    requestKidExit(request: RequestKidExitRequest): Observable<string> {
         return new Observable(subscriber => {
-            subscriber.next()
+            subscriber.next('APPROVED')
             subscriber.complete()
         })
     }

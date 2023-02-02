@@ -10,8 +10,8 @@ export interface ISecurityGuardService {
     getSecurityGuard(): Observable<SecurityGuard>
     addHousehold(household: AddHouseholdRequest): Observable<string>
     searchUnit(unit: string): Observable<HomeOwner[]>
-    requestVisit(request: RequestVisitRequest): Observable<void>
-    requestKidExit(request: RequestKidExitRequest): Observable<void>
+    requestVisit(request: RequestVisitRequest): Observable<string>
+    requestKidExit(request: RequestKidExitRequest): Observable<string>
 
 }
 
@@ -19,6 +19,6 @@ export abstract class AbstractSecurityGuardService implements ISecurityGuardServ
     abstract getSecurityGuard(): Observable<SecurityGuard>
     abstract addHousehold(household: AddHouseholdRequest): Observable<string>
     abstract searchUnit(unit: string): Observable<HomeOwner[]>
-    abstract requestVisit(request: RequestVisitRequest): Observable<void>
-    abstract requestKidExit(request: RequestKidExitRequest): Observable<void>
+    abstract requestVisit(request: RequestVisitRequest): Observable<string>
+    abstract requestKidExit(request: RequestKidExitRequest): Observable<string>
 }

@@ -27,15 +27,15 @@ export class SecurityGuardService extends BaseService implements ISecurityGuardS
         catchError(this.handleError));
   }
 
-  requestVisit(request: RequestVisitRequest): Observable<void> {
-    return this._http.post<void>(environment.homeOwnerURL + `SecurityGuard/RequestVisit`, request, super.headers())
-      .pipe(map(_ => _),
+  requestVisit(request: RequestVisitRequest): Observable<string> {
+    return this._http.post<any>(environment.homeOwnerURL + `SecurityGuard/RequestVisit`, request, super.headers())
+      .pipe(map(res => res.status),
         catchError(this.handleError));
   }
 
-  requestKidExit(request: RequestKidExitRequest): Observable<void> {
-    return this._http.post<void>(environment.homeOwnerURL + `SecurityGuard/RequestKidExit`, request, super.headers())
-      .pipe(map(_ => _),
+  requestKidExit(request: RequestKidExitRequest): Observable<string> {
+    return this._http.post<any>(environment.homeOwnerURL + `SecurityGuard/RequestKidExit`, request, super.headers())
+      .pipe(map(res => res.status),
         catchError(this.handleError));
   }
   searchUnit(unit: string): Observable<HomeOwner[]> {

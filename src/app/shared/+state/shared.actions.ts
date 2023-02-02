@@ -14,6 +14,5 @@ export const getMetadataSuccess = createAction('[Shared] Get Metadata Success', 
 export const messageRecieved = createAction('[Shared] Message Received', props<{ message: IMessage }>())
 export const paymentRequested = createAction('[Shared] Payment Requested', props<{ payment: IPayment }>())
 export const noticeAdded = createAction('[Shared] NoticeAdded', props<{ notice: INotice }>())
-
-// This should be dispatched when a new reservation is added by calendly.
-export const reservationAdded = createAction('[Shared] Reservation Added')
+export const logApproved = createAction('[Shared] Log Approved')
+export const logRejected = createAction('[Shared] Log Rejected')

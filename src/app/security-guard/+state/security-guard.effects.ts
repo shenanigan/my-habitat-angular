@@ -3,7 +3,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { createEffect, ofType } from "@ngrx/effects";
 import { ActionsSubject } from "@ngrx/store";
 import { catchError, map, of, switchMap } from "rxjs";
-import { failed } from "src/app/shared/+state/shared.actions";
+import { failed, logApproved } from "src/app/shared/+state/shared.actions";
 import { RequestKidExitRequest } from "../domain/contracts/requests/request-kid-exit";
 import { RequestVisitRequest } from "../domain/contracts/requests/request-visit";
 import { Household } from "../domain/entities/household";
@@ -82,7 +82,13 @@ export class SecurityGuardEffects {
                         householdId: d.householdId
                     }
                     return this._securityGuardService.requestVisit(request).
-                        pipe(map(_ => requestVisitSuccess()),
+                        pipe(map(status => {
+                            if (status.toLocaleLowerCase() === 'approved') {
+                                return logApproved()
+                            } else {
+                                return requestVisitSuccess()
+                            }
+                        }),
                             catchError(err => {
                                 this._snackBarService.open(err.message, 'CANCEL');
                                 return of(failed(err))
@@ -102,11 +108,16 @@ export class SecurityGuardEffects {
                         householdId: d.householdId
                     }
                     return this._securityGuardService.requestKidExit(request).
-                        pipe(map(_ => requestKidExitSuccess()),
-                            catchError(err => {
-                                this._snackBarService.open(err.message, 'CANCEL');
-                                return of(failed(err))
-                            })
+                        pipe(map(status => {
+                            if (status.toLocaleLowerCase() === 'approved') {
+                                return logApproved()
+                            } else {
+                                return requestVisitSuccess()
+                            }
+                        }), catchError(err => {
+                            this._snackBarService.open(err.message, 'CANCEL');
+                            return of(failed(err))
+                        })
                         )
                 })
             )

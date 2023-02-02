@@ -1,7 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { reservationAdded } from 'src/app/shared/+state/shared.actions';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -38,15 +37,7 @@ export class HeaderComponent implements OnInit {
   }
 
   back() {
-    if (this.hasCalendly) {
-      // An event in scheduled is
-      if (window.history.length === this.calendlySuccessRoutingLength) {
-        this._store.dispatch(reservationAdded())
-      }
-      window.history.go(3 - window.history.length)
-    } else {
-      this._location.back()
-    }
+    this._location.back()
   }
 
   rightClick() {
