@@ -4,7 +4,7 @@ import { HomeOwner } from "../domain/entities/home-owner";
 import { Message } from "../domain/entities/message";
 import { Payment } from "../domain/entities/payment";
 import { Reservation } from "../domain/entities/reservation";
-import { addHouseholdSuccess, addMessage, addReservationSuccess, cancelReservationSuccess, editReservationSuccess, getHomeOwnerSuccess, markPaymentPaidSuccess, updateLogSuccess } from "./home-owner.actions";
+import { addHouseholdSuccess, addMessage, addReservationSuccess, allowKidExitSuccess, cancelKidExitSuccess, cancelReservationSuccess, editReservationSuccess, getHomeOwnerSuccess, markPaymentPaidSuccess, updateLogSuccess } from "./home-owner.actions";
 
 export interface IState {
     homeOwner: HomeOwner
@@ -97,6 +97,36 @@ export const homeOwnerReducer = createReducer(
         if (payments.length > 0) {
             var storedPayment = payments[0]
             Object.assign(storedPayment, payment)
+        }
+        return {
+            ...state,
+            homeOwner: updatedHomeOwner
+        }
+    }),
+
+    on(allowKidExitSuccess, (state, { kidExitRequest }) => {
+
+        var updatedHomeOwner = new HomeOwner(state.homeOwner.entityId, state.homeOwner)
+        var households = updatedHomeOwner.households.filter(x => x.entityId === kidExitRequest.householdId)
+        if (households.length > 0) {
+            var storedHousehold = households[0]
+            storedHousehold.allowedStartTime = new Date();
+            storedHousehold.allowedEndTime = new Date(storedHousehold.allowedStartTime.getTime() + 1000 * 60 * 60 * kidExitRequest.hours);
+        }
+        return {
+            ...state,
+            homeOwner: updatedHomeOwner
+        }
+    }),
+
+    on(cancelKidExitSuccess, (state, { request }) => {
+
+        var updatedHomeOwner = new HomeOwner(state.homeOwner.entityId, state.homeOwner)
+        var households = updatedHomeOwner.households.filter(x => x.entityId === request.householdId)
+        if (households.length > 0) {
+            var storedHousehold = households[0]
+            storedHousehold.allowedStartTime = undefined;
+            storedHousehold.allowedEndTime = undefined;
         }
         return {
             ...state,

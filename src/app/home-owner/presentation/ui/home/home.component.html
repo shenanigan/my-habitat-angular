@@ -45,5 +45,8 @@
         <div *ngFor="let log of (homeOwner$ | async)?.logs" class="mt-3">
             <app-log [log]="log" (onApprove)="approve(log)" (onDeny)="deny(log)"></app-log>
         </div>
+        <div *ngFor="let household of (homeOwner$ | async)?.pendingKidExits" class="mt-3">
+            <app-row-pending-kid-exit [household]="household" (onCancel)="cancel($event)"></app-row-pending-kid-exit>
+        </div>
     </div>
 </div>

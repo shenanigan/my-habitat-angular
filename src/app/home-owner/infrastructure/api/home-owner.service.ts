@@ -18,6 +18,7 @@ import { IAddReservation } from "../../domain/contracts/requests/add-reservation
 import { IEditReservation } from "../../domain/contracts/requests/edit-reservation";
 import { ICancelReservation } from "../../domain/contracts/requests/cancel-reservation";
 import { IAddEntity } from "../../domain/contracts/responses/add";
+import { CancelKidExitRequest } from "../../domain/contracts/requests/cancel-kid-exit";
 
 @Injectable()
 export class HomeOwnerService extends BaseService implements IHomeOwnerService {
@@ -37,6 +38,12 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
 
   allowKidExit(request: KidExitRequest): Observable<void> {
     return this._http.post<void>(environment.homeOwnerURL + `HomeOwner/AllowKidExit`, request, super.headers())
+      .pipe(map(_ => _),
+        catchError(this.handleError));
+  }
+
+  cancelKidExit(request: CancelKidExitRequest): Observable<void> {
+    return this._http.post<void>(environment.homeOwnerURL + `HomeOwner/CancelKidExit`, request, super.headers())
       .pipe(map(_ => _),
         catchError(this.handleError));
   }
@@ -90,6 +97,8 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
           countryCode
           entityId: householdId
           imageUrl
+          allowedStartTime
+          allowedEndTime
         }
         messages{
           text

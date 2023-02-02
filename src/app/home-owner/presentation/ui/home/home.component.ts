@@ -3,11 +3,13 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { selectHomeOwner } from 'src/app/home-owner/+state/home-owner.selector';
+import { CancelKidExitRequest } from 'src/app/home-owner/domain/contracts/requests/cancel-kid-exit';
 import { UpdateLogRequest } from 'src/app/home-owner/domain/contracts/requests/update-log';
+import { Household } from 'src/app/home-owner/domain/entities/household';
 import { Log } from 'src/app/home-owner/domain/entities/log';
 import { IRealTimeService } from 'src/app/shared/domain/abstractions/irealtime.service';
 import { AblyEvents } from 'src/app/shared/infrastructure/real-time/ably-events';
-import { getHomeOwner, updateLog } from '../../../+state/home-owner.actions';
+import { cancelKidExit, getHomeOwner, updateLog } from '../../../+state/home-owner.actions';
 import { KidExitComponent } from '../kid-exit/kid-exit.component';
 
 @Component({
@@ -61,5 +63,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       shouldApprove: true
     }
     this._store.dispatch(updateLog({ request }))
+  }
+
+  cancel(household: Household) {
+    const request: CancelKidExitRequest = {
+      householdId: household.entityId
+    }
+    this._store.dispatch(cancelKidExit({ request }))
   }
 }

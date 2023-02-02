@@ -9,7 +9,7 @@ import { Message } from "../domain/entities/message";
 import { Payment } from "../domain/entities/payment";
 import { Reservation } from "../domain/entities/reservation";
 import { AbstractHomeOwnerService } from "../domain/services/ihome-owner.service";
-import { addHousehold, addHouseholdSuccess, addMessage, addMessageSuccess, addReservation, addReservationSuccess, allowKidExit, allowKidExitSuccess, cancelReservation, cancelReservationSuccess, editReservation, editReservationSuccess, getHomeOwner, getHomeOwnerSuccess, markMessageViewed, markNoticeboardViewed, markPaymentPaid, markPaymentPaidSuccess, markPaymentViewed, updateLog, updateLogSuccess } from "./home-owner.actions";
+import { addHousehold, addHouseholdSuccess, addMessage, addMessageSuccess, addReservation, addReservationSuccess, allowKidExit, allowKidExitSuccess, cancelKidExit, cancelKidExitSuccess, cancelReservation, cancelReservationSuccess, editReservation, editReservationSuccess, getHomeOwner, getHomeOwnerSuccess, markMessageViewed, markNoticeboardViewed, markPaymentPaid, markPaymentPaidSuccess, markPaymentViewed, updateLog, updateLogSuccess } from "./home-owner.actions";
 
 @Injectable()
 export class HomeOwnerEffects {
@@ -61,7 +61,23 @@ export class HomeOwnerEffects {
                 ofType(allowKidExit),
                 switchMap(d => {
                     return this._homeOwnerService.allowKidExit(d.kidExitRequest).
-                        pipe(map(_ => allowKidExitSuccess),
+                        pipe(map(_ => allowKidExitSuccess({ kidExitRequest: d.kidExitRequest })),
+                            catchError(err => {
+                                this._snackBarService.open(err.message, 'CANCEL');
+                                return of(failed(err))
+                            })
+                        )
+                })
+            )
+        )
+
+    cancelKidExit$ =
+        createEffect(() =>
+            this._actions$.pipe(
+                ofType(cancelKidExit),
+                switchMap(d => {
+                    return this._homeOwnerService.cancelKidExit(d.request).
+                        pipe(map(_ => cancelKidExitSuccess({ request: d.request })),
                             catchError(err => {
                                 this._snackBarService.open(err.message, 'CANCEL');
                                 return of(failed(err))

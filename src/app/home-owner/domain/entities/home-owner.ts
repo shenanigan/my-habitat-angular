@@ -82,6 +82,10 @@ export class HomeOwner extends Entity {
     hasViewedPayments: boolean = true
     society?: Society
 
+    get pendingKidExits(): Household[] {
+        return this.households.filter(x => x.allowedStartTime)
+    }
+
     get truncatedName(): string | undefined {
         const names = this.name?.split(' ')
         var name = this.name

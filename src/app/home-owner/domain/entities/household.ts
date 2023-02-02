@@ -14,6 +14,8 @@ export class Household extends Entity {
     permission?: string
     countryCode?: number
     imageUrl?: string
+    allowedStartTime?: Date
+    allowedEndTime?: Date
 
     get formattedType(): string | undefined {
         if ((this.type?.indexOf('FAMILY') ?? '') >= 0) {

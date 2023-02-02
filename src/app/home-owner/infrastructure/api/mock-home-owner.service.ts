@@ -16,6 +16,7 @@ import { IAddReservation } from "../../domain/contracts/requests/add-reservation
 import { IEditReservation } from "../../domain/contracts/requests/edit-reservation";
 import { ICancelReservation } from "../../domain/contracts/requests/cancel-reservation";
 import { IAddEntity } from "../../domain/contracts/responses/add";
+import { CancelKidExitRequest } from "../../domain/contracts/requests/cancel-kid-exit";
 
 @Injectable()
 export class MockHomeOwnerService extends BaseService implements IHomeOwnerService {
@@ -105,6 +106,13 @@ export class MockHomeOwnerService extends BaseService implements IHomeOwnerServi
     }
 
     allowKidExit(request: KidExitRequest): Observable<void> {
+        return new Observable(subscriber => {
+            subscriber.next()
+            subscriber.complete()
+        })
+    }
+
+    cancelKidExit(request: CancelKidExitRequest): Observable<void> {
         return new Observable(subscriber => {
             subscriber.next()
             subscriber.complete()

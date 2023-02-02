@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ScannedActionsSubject, Store } from '@ngrx/store';
 import { Household } from 'src/app/home-owner/domain/entities/household';
@@ -8,6 +8,8 @@ import { Log } from 'src/app/home-owner/domain/entities/log';
 import { Subscription } from 'rxjs';
 import { ofType } from '@ngrx/effects';
 import { logApproved, logRejected } from 'src/app/shared/+state/shared.actions';
+import { IRealTimeService } from 'src/app/shared/domain/abstractions/irealtime.service';
+import { AblyEvents } from 'src/app/shared/infrastructure/real-time/ably-events';
 
 
 @Component({
@@ -27,6 +29,7 @@ export class RequestStatusComponent implements OnInit, OnDestroy {
 
   constructor(private _store: Store,
     private _actions$: ScannedActionsSubject,
+    @Inject(AblyEvents) private _realtimeService: IRealTimeService,
     private _router: Router) {
     this.homeOwnerId = this._router.getCurrentNavigation()?.extras?.state?.['homeOwnerId'];
     this.household = this._router.getCurrentNavigation()?.extras?.state?.['household'];
@@ -51,6 +54,8 @@ export class RequestStatusComponent implements OnInit, OnDestroy {
       } else {
         this._store.dispatch(requestVisit({ homeOwnerId: this.homeOwnerId, householdId: this.household?.entityId }))
       }
+
+      this._realtimeService.listenToHO(this.homeOwnerId)
     }
   }
 

@@ -47,6 +47,7 @@ import { ConfirmReservationComponent } from './presentation/ui/confirm-reservati
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BookingSummaryComponent } from './presentation/ui/booking-summary/booking-summary.component';
+import { RowPendingKidExitComponent } from './presentation/component/row-pending-kid-exit/row-pending-kid-exit.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { BookingSummaryComponent } from './presentation/ui/booking-summary/booki
     RowCompletedReservationComponent,
     ConfirmReservationComponent,
     BookingSummaryComponent,
+    RowPendingKidExitComponent,
   ],
   imports: [
     CommonModule,

@@ -3,6 +3,7 @@ import { createAction, props } from "@ngrx/store";
 import { AddHouseholdRequest } from "../domain/contracts/requests/add-household";
 import { AddMessageRequest } from "../domain/contracts/requests/add-message";
 import { IAddReservation } from "../domain/contracts/requests/add-reservation";
+import { CancelKidExitRequest } from "../domain/contracts/requests/cancel-kid-exit";
 import { ICancelReservation } from "../domain/contracts/requests/cancel-reservation";
 import { IEditReservation } from "../domain/contracts/requests/edit-reservation";
 import { KidExitRequest } from "../domain/contracts/requests/kid-exit";
@@ -21,7 +22,10 @@ export const addHousehold = createAction('[HomeOwner] Add Household', props<{ ho
 export const addHouseholdSuccess = createAction('[HomeOwner] Add Household Success', props<{ household: Household }>())
 
 export const allowKidExit = createAction('[HomeOwner] Allow Kid Exit', props<{ kidExitRequest: KidExitRequest }>())
-export const allowKidExitSuccess = createAction('[HomeOwner]  Allow Kid Exit Success')
+export const allowKidExitSuccess = createAction('[HomeOwner]  Allow Kid Exit Success', props<{ kidExitRequest: KidExitRequest }>())
+
+export const cancelKidExit = createAction('[HomeOwner] Cancel Kid Exit', props<{ request: CancelKidExitRequest }>())
+export const cancelKidExitSuccess = createAction('[HomeOwner]  Cancel Kid Exit Success', props<{ request: CancelKidExitRequest }>())
 
 export const updateLog = createAction('[HomeOwner] Update Log', props<{ request: UpdateLogRequest }>())
 export const updateLogSuccess = createAction('[HomeOwner]  Update Log Success', props<{ logId: string, shouldApprove: boolean }>())
