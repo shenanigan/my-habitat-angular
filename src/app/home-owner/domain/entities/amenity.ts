@@ -8,6 +8,7 @@ export class Amenity {
         }
     }
 
+    isActive?: boolean
     slotDuration?: number
     name?: string
     icon?: string

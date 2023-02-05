@@ -139,6 +139,7 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
           state
           country
           amenities {
+            isActive
             name
             slotDuration
             startDateTime

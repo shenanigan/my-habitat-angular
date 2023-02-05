@@ -14,6 +14,7 @@ export class Society extends Entity {
             const amenities = obj.amenities?.map((amenity: Partial<Amenity>) => new Amenity(amenity))
             if (amenities) {
                 this.amenities = amenities
+                this.amenities = this.amenities.filter(x => x.isActive);
             }
 
             if (obj.reservations) {

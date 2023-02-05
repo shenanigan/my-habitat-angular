@@ -14,6 +14,7 @@ import { IPayment } from '../../domain/abstractions/ipayment';
 import { StorageService } from '../storage/storage.service';
 import { INotice } from '../../domain/abstractions/inotice';
 import { ILog } from '../../domain/abstractions/ilog';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +30,7 @@ export class AblyEvents implements IRealTimeService {
   listen() {
     const homeOwnerId = this._storageService.getUserId();
     const societyId = this._storageService.getSocietyId();
-    if (this.client === undefined && homeOwnerId && societyId) {
+    if (this.client === undefined && homeOwnerId && societyId && environment.production) {
       this.client = new Ably.Realtime(this.options);
       let homeOwnerChannel = this.client.channels.get(homeOwnerId);
       let societyChannel = this.client.channels.get(societyId);
@@ -76,7 +77,7 @@ export class AblyEvents implements IRealTimeService {
   }
 
   listenToHO(homeOwnerId: string) {
-    if (this.client === undefined && homeOwnerId) {
+    if (this.client === undefined && homeOwnerId && environment.production) {
       this.client = new Ably.Realtime(this.options);
       let homeOwnerChannel = this.client.channels.get(homeOwnerId);
       this.client.connection.on('disconnected', () => {
