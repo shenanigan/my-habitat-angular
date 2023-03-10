@@ -14,6 +14,7 @@
   .header-label,
   .paragraph-label,
   .sub-label,
+  .smallest-label,
   .sub-heading-label,
   .header2-label,
   .label-24-100,
@@ -139,6 +140,13 @@
 
   .sub-label {
     font-size: 15px !important;
+    font-family: Source Sans Pro;
+    font-weight: 600;
+  }
+  .smallest-label{
+    font-size: 12px !important;
+    font-family: Source Sans Pro;
+    font-weight: 400;
   }
 
   .smallest-opacity-label {

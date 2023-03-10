@@ -1,8 +1,9 @@
 .top-conatainer{
-  height: 160px;
+  height: 200px;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url('https://img.freepik.com/free-vector/colorful-palm-silhouettes-background_23-2148541792.jpg?w=2000');
+  background-image:url('/assets/images/art_cardtop.svg');
+  background-position-y: 40px;
 }
 
 .bottom-container{ 
@@ -28,7 +29,8 @@
 }
 
 
-.middle-container{padding: 17px;
+.middle-container{
+  padding: 8px;
   background-color: white; 
   border-radius: 10px;
 } 
@@ -59,4 +61,11 @@
   height: 100%;
   overflow-y: scroll;
   background: #b1c3db;
+}
+
+.edit-icon{
+  height: 35px;
+  width: 35px;
+  font-size: 18px;
+  border-radius: 25px;
 }
