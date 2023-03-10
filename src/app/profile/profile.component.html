@@ -8,17 +8,19 @@
   </div>
   <div class="bottom-container">
     <div class="img-center">
-      <img class="circular-img" src="assets/images/ic_default_myprofile.svg" />
+      <img class="circular-img" src="{{userImage}}" />
     </div>
     <div class="user-info">
-      <div class="header-label">Ali Mubarak</div>
-      <div class="faded-mail">ali@mailinator.com</div>
+      <!-- <div class="header-label">{{userName}}</div> -->
+      <div class="title-label">{{(homeOwner$ | async)?.truncatedName}}
+      </div>
+      <div class="faded-mail">{{userEmail}} </div>
     </div>
     <div class="middle-container">
-      <div class="d-flex justify-content-between p-2 items">
+      <div class="d-flex align-items-center justify-content-between p-3 items">
         <mat-icon
           class="d-flex align-items-center justify-content-center editImage edit-icon"
-          style="background: #a09c9c; color: black"
+          style="background: #cfcece; color: black"
           >edit</mat-icon
         >
         <span class="subcontainer">
@@ -27,13 +29,13 @@
             Lorem ipsum dolor sit amet, consetetur
           </div>
         </span>
-        <mat-icon>chevron_right</mat-icon>
+        <mat-icon class="mt-1">chevron_right</mat-icon>
       </div>
       
-      <div class="d-flex justify-content-between p-2 items">
+      <div class="d-flex align-items-center justify-content-between p-3 items">
         <mat-icon
           class="d-flex align-items-center justify-content-center editImage edit-icon"
-          style="background: #a09c9c; color: black"
+          style="background: #cfcece; color: black"
           >help</mat-icon
         >
         <span class="subcontainer">
@@ -42,13 +44,13 @@
             Lorem ipsum dolor sit amet, consetetur
           </div>
         </span>
-        <mat-icon>chevron_right</mat-icon>
+        <mat-icon class="mt-1">chevron_right</mat-icon>
       </div>
 
-      <div class="d-flex justify-content-between p-2 items">
+      <div class="d-flex align-items-center justify-content-between p-3 items">
         <mat-icon
           class="d-flex align-items-center justify-content-center editImage edit-icon"
-          style="background: #a09c9c; color: black"
+          style="background: #cfcece; color: black"
           >settings</mat-icon
         >
         <span class="subcontainer">
@@ -57,16 +59,16 @@
             Lorem ipsum dolor sit amet, consetetur
           </div>
         </span>
-        <mat-icon>chevron_right</mat-icon>
+        <mat-icon class="mt-1">chevron_right</mat-icon>
       </div>
     </div>
     <br />
 
     <div class="middle-container">
-      <div class="d-flex justify-content-between p-2 items">
+      <div class="d-flex align-items-center justify-content-between p-3 items">
         <mat-icon
           class="d-flex align-items-center justify-content-center editImage edit-icon"
-          style="background: #a09c9c; color: black"
+          style="background: #cfcece; color: black"
           >info</mat-icon
         >
         <span class="subcontainer">
@@ -75,14 +77,14 @@
             Lorem ipsum dolor sit amet, consetetur
           </div>
         </span>
-        <mat-icon>chevron_right</mat-icon>
+        <mat-icon class="mt-1">chevron_right</mat-icon>
       </div>
 
-      <div class="d-flex justify-content-between p-2 items">
+      <div class="d-flex align-items-center justify-content-between p-3 items">
         <mat-icon
           class="d-flex align-items-center justify-content-center editImage edit-icon"
-          style="background: #a09c9c; color: black"
-          >edit</mat-icon
+          style="background: #cfcece; color: black"
+          >security</mat-icon
         >
         <span class="subcontainer">
           <div class="sub-label">Terms of Service</div>
@@ -90,19 +92,27 @@
             Lorem ipsum dolor sit amet, consetetur
           </div>
         </span>
-        <mat-icon>chevron_right</mat-icon>
+        <mat-icon class="mt-1">chevron_right</mat-icon>
       </div>
 
-      <div class="d-flex justify-content-between p-3 items">
-        <span class="logout-btn"
-          ><button
+      <div class="d-flex justify-content-center p-3 items">
+        <!-- <mat-icon
+          class="d-flex align-items-center justify-content-center editImage edit-icon"
+          style="background: #fcc2c8; color:  #dc3545"
+          >exit_to_app</mat-icon
+        > -->
+        <span class="logout-btn flex-item">
+          <button
             (click)="logout()"
             mat-stroked-button
-            class="filter-btn warn ms-1"
-          >
-            LogOut
+            class="filter-btn warn"
+          >Log Out
           </button>
         </span>
+        <!-- <span class="sub-container">
+          <div class="sub-label p-1" style="color:#dc3545" (click)="logout()">Log Out</div>
+        </span>
+        <mat-icon style="color:#dc3545">chevron_right</mat-icon> -->
       </div>
     </div>
   </div>
