@@ -1,0 +1,44 @@
+<div class="main-container">
+
+    <div class="d-flex justify-content-between align-items-center p-3">
+        <mat-icon (click)="back()">chevron_left</mat-icon>
+       <span class="header-label">Edit Profile</span>
+       <span></span>
+    </div>
+    <hr class="hr">
+    <div class="p-3">
+       <form [formGroup]="editProfileFormGroup" (submit)="editProfile()">
+          <div class="d-flex justify-content-center" (click)="selectImage()">
+             <img class="photo-container" style="object-fit: none;"
+                [src]="image?.base64String ? 'data:image/'+image?.format+ ';base64,' + image?.base64String : 'assets/images/ic_defaultcamera.svg'"
+                [ngStyle]="image?.base64String ? {'object-fit': 'cover'} : {'object-fit': 'none'}">
+          </div>
+ 
+          <ng-container >
+             <div class="sub-mini-label mt-4">Phone Number</div>
+             <div class="d-flex">
+                <mat-form-field appearance="outline" class="w-100 flex-grow-1">
+                   <input formControlName="phoneNumber" matInput placeholder="Phone Number" maxlength="12" value="{{(homeOwner$ | async)?.phoneNumber}}">
+                </mat-form-field>
+             </div>
+          </ng-container>
+ 
+          <div class="sub-mini-label mt-4">Name</div>
+          <mat-form-field class="w-100" appearance="outline" hideRequiredMarker>
+             <input matInput placeholder="Name" formControlName="name" value="{{(homeOwner$ | async)?.name}}">
+             <mat-icon class="mat-icon " matSuffix>perm_contact_calendar</mat-icon>
+          </mat-form-field>
+ 
+          <div class="sub-mini-label mt-4">Email</div>
+          <mat-form-field class="w-100" appearance="outline" hideRequiredMarker>
+             <input matInput placeholder="Email" formControlName="email">
+          </mat-form-field>
+ 
+          <button mat-flat-button color="primary"
+             class="mat-flat-button w-100 my-3">Save</button>
+ 
+          <!-- <button  mat-flat-button color="warn" type="reset"
+             class="mat-flat-button w-100">Remove</button> -->
+       </form>
+    </div>
+ </div>

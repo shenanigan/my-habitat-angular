@@ -1,5 +1,5 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
@@ -10,13 +10,16 @@ import { Role } from 'src/app/shared/domain/role';
 import { Camera, CameraResultType, Photo } from '@capacitor/camera';
 import { AbstractImageStorageService } from 'src/app/shared/domain/services/iimage-storage.service';
 import { v4 as uuidv4 } from 'uuid';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Household } from 'src/app/home-owner/domain/entities/household';
 
 @Component({
-  selector: 'app-add-family',
-  templateUrl: './add-family.component.html',
-  styleUrls: ['./add-family.component.scss']
+  selector: 'app-edit-hsouse-hold',
+  templateUrl: './edit-house-hold.component.html',
+  styleUrls: ['./edit-house-hold.component.scss']
 })
-export class AddFamilyComponent implements OnInit {
+export class EditHouseHoldComponent implements OnInit,OnChanges {
+
   image?: Photo;
   subscription?: Observable<any>;
   async selectImage() {
@@ -34,6 +37,9 @@ export class AddFamilyComponent implements OnInit {
   }
 
   @Input() type: string = 'FAMILY_ADULT'
+  @Input() member?: Household 
+  
+
   activeRole?: Role
   isAdultSelected = true
 
@@ -43,11 +49,11 @@ export class AddFamilyComponent implements OnInit {
 
   get title(): string {
     if (this.type === 'DAILY_HELP') {
-      return 'Add Daily Help'
+      return 'Edit Daily Help'
     } else if (this.type === 'VISITOR' || this.type === 'FREQUENT_VISITOR') {
-      return 'Add Visitor'
+      return 'Edit Visitor'
     }
-    return 'Add Family'
+    return 'Edit Family'
   }
 
   get showPermissions(): boolean {
@@ -63,7 +69,7 @@ export class AddFamilyComponent implements OnInit {
   permissionValues: string[] = ['REQUIRE_PERMISSION', 'NO_PERMISSION_REQUIRED']
   currentPermission?: string
 
-  addHouseholeFormGroup = new FormGroup({
+  editHouseholdFormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
     phoneNumber: new FormControl(''),
     email: new FormControl('')
@@ -74,6 +80,7 @@ export class AddFamilyComponent implements OnInit {
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
 
     this.type = data[0].type
+    this.member = data[0].member
 
     if (this.type === 'DAILY_HELP') {
       this.roles$ = this._store.select(selectDailyHelpRoles())
@@ -90,7 +97,16 @@ export class AddFamilyComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    if(this.member?.name!==undefined)
+      this.editHouseholdFormGroup.get('name')?.patchValue(this.member.name);
+    if(this.member?.phoneNumber!==undefined) 
+      this.editHouseholdFormGroup.get('phoneNumber')?.patchValue(this.member.phoneNumber);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+   
+  }
   toggleAdult() {
 
     this.isAdultSelected = !this.isAdultSelected
@@ -112,34 +128,39 @@ export class AddFamilyComponent implements OnInit {
     })
   }
 
-  addHousehold() {
-    if (this.image?.base64String) {
-      this._imageService.saveImage(uuidv4(), this.image.base64String, this.image.format).pipe(take(1)).subscribe(imageUrl => {
-        this._addHousehold(imageUrl)
-      });
-    } else {
-      this._addHousehold()
-    }
+  // addHousehold() {
+  //   if (this.image?.base64String) {
+  //     this._imageService.saveImage(uuidv4(), this.image.base64String, this.image.format).pipe(take(1)).subscribe(imageUrl => {
+  //       this._addHousehold(imageUrl)
+  //     });
+  //   } else {
+  //     this._addHousehold()
+  //   }
+  // }
+  // private _addHousehold(imageUrl?: string) {
+
+  //   var permission: string | undefined
+  //   if (this.currentPermission) {
+  //     const index = this.permissions.indexOf(this.currentPermission);
+  //     if (index >= 0) {
+  //       permission = this.permissionValues[index]
+  //     }
+  //   }
+  //   const householdRequest: AddHouseholdRequest = {
+  //     name: this.addHouseholeFormGroup.get('name')?.value ?? '',
+  //     role: this.activeRole?.name ?? '',
+  //     type: this.type,
+  //     countryCode: 973,
+  //     permission: permission,
+  //     imageUrl: imageUrl,
+  //     phoneNumber: this.addHouseholeFormGroup.get('phoneNumber')?.value ?? '',
+  //   }
+  //   this._store.dispatch(addHousehold({ household: householdRequest }))
+  // }
+
+
+  editHousehold(){
+
   }
 
-  private _addHousehold(imageUrl?: string) {
-
-    var permission: string | undefined
-    if (this.currentPermission) {
-      const index = this.permissions.indexOf(this.currentPermission);
-      if (index >= 0) {
-        permission = this.permissionValues[index]
-      }
-    }
-    const householdRequest: AddHouseholdRequest = {
-      name: this.addHouseholeFormGroup.get('name')?.value ?? '',
-      role: this.activeRole?.name ?? '',
-      type: this.type,
-      countryCode: 973,
-      permission: permission,
-      imageUrl: imageUrl,
-      phoneNumber: this.addHouseholeFormGroup.get('phoneNumber')?.value ?? '',
-    }
-    this._store.dispatch(addHousehold({ household: householdRequest }))
-  }
 }

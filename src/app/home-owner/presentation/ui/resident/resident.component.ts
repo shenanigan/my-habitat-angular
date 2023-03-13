@@ -4,8 +4,10 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { getHomeOwner } from 'src/app/home-owner/+state/home-owner.actions';
 import { selectHomeOwner } from 'src/app/home-owner/+state/home-owner.selector';
+import { Household } from 'src/app/home-owner/domain/entities/household';
 import { environment } from 'src/environments/environment';
 import { AddFamilyComponent } from '../add-family/add-family.component';
+import { EditHouseHoldComponent } from '../edit-house-hold/edit-house-hold.component';
 
 @Component({
   selector: 'app-resident',
@@ -22,8 +24,8 @@ export class ResidentComponent implements OnInit, OnDestroy {
   readSASToken = environment.azureRWSASToken;
 
   constructor(private _store: Store,
-    private _bottomSheet: MatBottomSheet
-  ) {
+    private _bottomSheet: MatBottomSheet) 
+  {
 
     this.subscription = this.homeOwner$.subscribe(x => {
       this._bottomSheet.dismiss();
@@ -42,7 +44,13 @@ export class ResidentComponent implements OnInit, OnDestroy {
 
   openAddHousehold(type: string) {
     this._bottomSheet.open(AddFamilyComponent, {
-      data: [{ type: type }]
+      data: [{ type: type }],
+    });
+  }
+
+  editHouseHold(type: string,member:Household){
+    this._bottomSheet.open(EditHouseHoldComponent, {
+      data: [{ type: type ,member:member}]
     });
   }
 }

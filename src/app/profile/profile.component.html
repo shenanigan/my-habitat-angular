@@ -12,12 +12,12 @@
     </div>
     <div class="user-info">
       <!-- <div class="header-label">{{userName}}</div> -->
-      <div class="title-label">{{(homeOwner$ | async)?.truncatedName}}
+      <div class="title-label">{{(homeOwner$ | async)?.name}}
       </div>
-      <div class="faded-mail">{{userEmail}} </div>
+      <div class="faded-mail">{{(homeOwner$ | async)?.email}} </div>
     </div>
     <div class="middle-container">
-      <div class="d-flex align-items-center justify-content-between p-3 items">
+      <div class="d-flex align-items-center justify-content-between p-3 items" routerLink="/EditProfile">
         <mat-icon
           class="d-flex align-items-center justify-content-center editImage edit-icon"
           style="background: #cfcece; color: black"

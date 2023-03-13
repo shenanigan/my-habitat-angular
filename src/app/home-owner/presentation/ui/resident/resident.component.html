@@ -10,7 +10,7 @@
             <ng-container *ngFor="let member of (homeOwner$ | async)?.households">
                 <div class="p-1 d-flex flex-column align-items-center" style="width: 80px;"
                     *ngIf="member.type === 'FAMILY_ADULT' ||  member.type === 'FAMILY_KID'">
-                    <img class="member-photo"
+                    <img class="member-photo" (click)="editHouseHold('FAMILY_ADULT',member)"
                         [src]="member.imageUrl ? (member.imageUrl + readSASToken) : 'assets/images/ic_defaultuser.svg'"
                         [ngStyle]="member.imageUrl ? {'object-fit': 'cover'} : {'background-color': 'white', 'object-fit': 'none'}">
                     <div class="small-label mt-1">{{member.truncatedName}}</div>
@@ -26,7 +26,7 @@
         </div>
         <ng-container *ngFor="let helper of (homeOwner$ | async)?.households" class="daily-helper d-flex p-2">
             <div class="daily-helper d-flex p-2" *ngIf="helper.type === 'DAILY_HELP'">
-                <img class="member-photo me-3"
+                <img class="member-photo me-3" (click)="editHouseHold('DAILY_HELP',helper)"
                     [ngStyle]="helper.imageUrl ? {'object-fit': 'cover'} : {'object-fit': 'none'}"
                     [src]="helper.imageUrl ? (helper.imageUrl + readSASToken) : 'assets/images/ic_defaultuser.svg'">
                 <span class="flex-grow-1 justify-content-center d-flex flex-column">
@@ -47,7 +47,8 @@
             <div class="d-flex flex-wrap justify-content-start  gap-3">
                 <ng-container *ngFor="let member of (homeOwner$ | async)?.households">
                     <div class="p-1 d-flex flex-column align-items-center" *ngIf="member.type === 'FREQUENT_VISITOR'">
-                        <img class="member-photo"
+                        <img class="member-photo" 
+                        (click)="editHouseHold('FREQUENT_VISITOR',member)"
                             [ngStyle]="member.imageUrl ? {'object-fit': 'cover'} : {'object-fit': 'none'}"
                             [src]="member.imageUrl ? (member.imageUrl + readSASToken) : 'assets/images/ic_defaultuser.svg'">
                         <div class="small-label mt-1">{{member.truncatedName}}</div>
