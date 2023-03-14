@@ -31,7 +31,7 @@
  
           <div class="sub-mini-label mt-4">Email</div>
           <mat-form-field class="w-100" appearance="outline" hideRequiredMarker>
-             <input matInput placeholder="Email" formControlName="email">
+             <input matInput placeholder="Email" formControlName="email" value="{{(homeOwner$ | async)?.email}}">
           </mat-form-field>
  
           <button mat-flat-button color="primary"

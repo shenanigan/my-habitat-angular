@@ -19,6 +19,8 @@ import { IEditReservation } from "../../domain/contracts/requests/edit-reservati
 import { ICancelReservation } from "../../domain/contracts/requests/cancel-reservation";
 import { IAddEntity } from "../../domain/contracts/responses/add";
 import { CancelKidExitRequest } from "../../domain/contracts/requests/cancel-kid-exit";
+import { IUpdateHouseholdRequest } from "../../domain/contracts/requests/update-household";
+import { IRemoveHousehold } from "../../domain/contracts/requests/remove-household";
 
 @Injectable()
 export class HomeOwnerService extends BaseService implements IHomeOwnerService {
@@ -32,6 +34,18 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
 
   addHousehold(request: AddHouseholdRequest): Observable<string> {
     return this._http.post<Household>(environment.homeOwnerURL + `HomeOwner/AddHousehold`, request, super.headers())
+      .pipe(map(response => response.entityId),
+        catchError(this.handleError));
+  }
+
+  updateHousehold(request: IUpdateHouseholdRequest): Observable<string> {
+    return this._http.post<Household>(environment.homeOwnerURL + `HomeOwner/UpdateHousehold`, request, super.headers())
+      .pipe(map(response => response.entityId),
+        catchError(this.handleError));
+  }
+
+  removeHousehold(request: IRemoveHousehold): Observable<string> {
+    return this._http.post<Household>(environment.homeOwnerURL + `HomeOwner/RemoveHousehold`, request, super.headers())
       .pipe(map(response => response.entityId),
         catchError(this.handleError));
   }

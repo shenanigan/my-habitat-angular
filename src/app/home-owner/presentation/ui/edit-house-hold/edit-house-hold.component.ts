@@ -3,7 +3,7 @@ import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges } from '@ang
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
-import { addHousehold } from 'src/app/home-owner/+state/home-owner.actions';
+import { addHousehold, removeHousehold } from 'src/app/home-owner/+state/home-owner.actions';
 import { AddHouseholdRequest } from 'src/app/home-owner/domain/contracts/requests/add-household';
 import { selectDailyHelpRoles, selectFamilyAdultRoles, selectFamilyKidRoles, selectFrequentVisitorRoles } from 'src/app/shared/+state/shared.selector';
 import { Role } from 'src/app/shared/domain/role';
@@ -12,6 +12,9 @@ import { AbstractImageStorageService } from 'src/app/shared/domain/services/iima
 import { v4 as uuidv4 } from 'uuid';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Household } from 'src/app/home-owner/domain/entities/household';
+import { environment } from 'src/environments/environment';
+import { Dialog } from '@capacitor/dialog';
+import { IRemoveHousehold } from 'src/app/home-owner/domain/contracts/requests/remove-household';
 
 @Component({
   selector: 'app-edit-hsouse-hold',
@@ -20,7 +23,9 @@ import { Household } from 'src/app/home-owner/domain/entities/household';
 })
 export class EditHouseHoldComponent implements OnInit,OnChanges {
 
+  imageUrl?:string;
   image?: Photo;
+  readSASToken = environment.azureRWSASToken;
   subscription?: Observable<any>;
   async selectImage() {
     await this.takePicture();
@@ -34,6 +39,7 @@ export class EditHouseHoldComponent implements OnInit,OnChanges {
     });
 
     this.image = image;
+    this.imageUrl= 'data:image/'+this.image?.format+ ';base64,' + this.image?.base64String
   }
 
   @Input() type: string = 'FAMILY_ADULT'
@@ -81,7 +87,8 @@ export class EditHouseHoldComponent implements OnInit,OnChanges {
 
     this.type = data[0].type
     this.member = data[0].member
-
+    
+    
     if (this.type === 'DAILY_HELP') {
       this.roles$ = this._store.select(selectDailyHelpRoles())
     }
@@ -98,10 +105,14 @@ export class EditHouseHoldComponent implements OnInit,OnChanges {
   }
 
   ngOnInit(): void {
+    this.imageUrl=this.member?.imageUrl+this.readSASToken
+    
     if(this.member?.name!==undefined)
       this.editHouseholdFormGroup.get('name')?.patchValue(this.member.name);
     if(this.member?.phoneNumber!==undefined) 
       this.editHouseholdFormGroup.get('phoneNumber')?.patchValue(this.member.phoneNumber);
+    if(this.member?.email!==undefined) 
+      this.editHouseholdFormGroup.get('email')?.patchValue(this.member.email); 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -160,7 +171,24 @@ export class EditHouseHoldComponent implements OnInit,OnChanges {
 
 
   editHousehold(){
-
+    
   }
 
+  async remove() {
+    const { value } = await Dialog.confirm({
+      title: 'Confirm',
+      okButtonTitle: 'Remove',
+      cancelButtonTitle: 'Close',
+      message: `Are you sure you'd like to remove member?`,
+    });
+
+    if (value) {
+      const household: IRemoveHousehold = {
+        id: this.member!.entityId
+      }
+
+      this._store.dispatch(removeHousehold({ household }));
+
+    }
+  }  
 }

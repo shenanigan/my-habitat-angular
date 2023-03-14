@@ -1,4 +1,5 @@
-export interface AddHouseholdRequest {
+export interface IUpdateHouseholdRequest {
+    id:string
     name: string
     type: string
     email?:string

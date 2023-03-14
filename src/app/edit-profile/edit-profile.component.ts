@@ -40,7 +40,7 @@ export class EditProfileComponent implements OnInit {
     email: new FormControl('')
   })
   ngOnInit(): void {
-    
+    this.editProfileFormGroup.get('name')?.patchValue
   }
 
   editProfile(){

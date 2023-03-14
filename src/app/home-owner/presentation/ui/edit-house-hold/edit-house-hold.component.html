@@ -8,8 +8,8 @@
        <form [formGroup]="editHouseholdFormGroup" (submit)="editHousehold()">
           <div class="d-flex justify-content-center" (click)="selectImage()">
              <img class="photo-container" style="object-fit: none;"
-                [src]="image?.base64String ? 'data:image/'+image?.format+ ';base64,' + image?.base64String : 'assets/images/ic_defaultcamera.svg'"
-                [ngStyle]="image?.base64String ? {'object-fit': 'cover'} : {'object-fit': 'none'}">
+                [src]=" imageUrl" onerror="this.src= 'assets/images/ic_defaultcamera.svg'"
+                [ngStyle]="imageUrl ? {'object-fit': 'cover'} : {'object-fit': 'none'}">
           </div>
  
           <ng-container *ngIf="showAdultSelection">
@@ -65,7 +65,7 @@
              class="mat-flat-button w-100 my-3">Save</button>
  
           <button  mat-flat-button color="warn" 
-             class="mat-flat-button w-100">Remove</button>
+             class="mat-flat-button w-100" (click)="remove()">Remove</button>
        </form>
     </div>
  </div>
