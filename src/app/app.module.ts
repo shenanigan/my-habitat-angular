@@ -21,6 +21,7 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { StoreModule } from '@ngrx/store';
     ProfileComponent,
     TermsComponent,
     EditFamilyComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

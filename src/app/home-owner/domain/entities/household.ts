@@ -9,6 +9,7 @@ export class Household extends Entity {
     }
     name?: string
     type?: string
+    email?:string
     phoneNumber?: string
     role?: string
     permission?: string

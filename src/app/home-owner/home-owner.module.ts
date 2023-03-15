@@ -48,11 +48,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BookingSummaryComponent } from './presentation/ui/booking-summary/booking-summary.component';
 import { RowPendingKidExitComponent } from './presentation/component/row-pending-kid-exit/row-pending-kid-exit.component';
+import { EditHouseHoldComponent } from './presentation/ui/edit-house-hold/edit-house-hold.component';
 
 @NgModule({
   declarations: [
     ResidentComponent,
     AddFamilyComponent,
+    EditHouseHoldComponent,
     KidExitComponent,
     HomeComponent,
     VisitorsComponent,

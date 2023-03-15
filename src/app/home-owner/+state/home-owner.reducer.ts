@@ -4,7 +4,7 @@ import { HomeOwner } from "../domain/entities/home-owner";
 import { Message } from "../domain/entities/message";
 import { Payment } from "../domain/entities/payment";
 import { Reservation } from "../domain/entities/reservation";
-import { addHouseholdSuccess, addMessage, addReservationSuccess, allowKidExitSuccess, cancelKidExitSuccess, cancelReservationSuccess, editReservationSuccess, getHomeOwnerSuccess, markPaymentPaidSuccess, updateLogSuccess } from "./home-owner.actions";
+import { addHouseholdSuccess, addMessage, addReservationSuccess, allowKidExitSuccess, cancelKidExitSuccess, cancelReservationSuccess, editReservationSuccess, getHomeOwnerSuccess,  markPaymentPaidSuccess,  RemoveHouseholdSuccess,  UpdateHouseholdSuccess,  updateLogSuccess } from "./home-owner.actions";
 
 export interface IState {
     homeOwner: HomeOwner
@@ -25,6 +25,25 @@ export const homeOwnerReducer = createReducer(
     on(addHouseholdSuccess, (state, { household }) => {
         var updatedHomeOwner = new HomeOwner(state.homeOwner.entityId, state.homeOwner)
         updatedHomeOwner.households.push(household);
+        return {
+            ...state,
+            homeOwner: updatedHomeOwner
+        }
+    }),
+    on(UpdateHouseholdSuccess, (state, { household }) => {
+        var updatedHomeOwner = new HomeOwner(state.homeOwner.entityId, state.homeOwner)
+        updatedHomeOwner.households=updatedHomeOwner.households.filter(x=>x.
+            entityId!==household.entityId);
+        updatedHomeOwner.households.push(household);
+        return {
+            ...state,
+            homeOwner: updatedHomeOwner
+        }
+    }),
+    on(RemoveHouseholdSuccess, (state, { household }) => {
+        var updatedHomeOwner = new HomeOwner(state.homeOwner.entityId, state.homeOwner)
+        updatedHomeOwner.households=updatedHomeOwner.households.filter(x=>x.
+            entityId!==household.entityId);
         return {
             ...state,
             homeOwner: updatedHomeOwner

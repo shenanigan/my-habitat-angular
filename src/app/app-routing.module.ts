@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule, Routes } from '@angular/router';
 import { EditFamilyComponent } from './edit-family/edit-family.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SocietyIssueComponent } from './society-issue/society-issue.component';
@@ -30,6 +31,7 @@ const routes: Routes = [
       ),
   },
   { path: 'Profile', component: ProfileComponent },
+  { path:'EditProfile', component:EditProfileComponent},
   { path: 'SocietyIssue', component: SocietyIssueComponent },
   { path: 'Terms', component: TermsComponent },
   { path: 'EditFamily', component: EditFamilyComponent },

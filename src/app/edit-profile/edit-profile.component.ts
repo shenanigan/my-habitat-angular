@@ -1,0 +1,58 @@
+import { Component,  OnInit } from '@angular/core';
+import { Camera, CameraResultType, Photo } from '@capacitor/camera';
+import { Store } from '@ngrx/store';
+import { async, Observable } from 'rxjs';
+import { selectHomeOwner } from '../home-owner/+state/home-owner.selector';
+import { Location } from '@angular/common';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-edit-profile',
+  templateUrl: './edit-profile.component.html',
+  styleUrls: ['./edit-profile.component.scss']
+})
+export class EditProfileComponent implements OnInit {
+ 
+  homeOwner$ = this._store.select(selectHomeOwner());
+  userImage='assets/images/ic_default_myprofile.svg';
+  image?: Photo;
+  subscription?: Observable<any>;
+  async selectImage() {
+    await this.takePicture();
+  }
+
+  async takePicture() {
+    const image = await Camera.getPhoto({
+      quality: 50,
+      allowEditing: true,
+      resultType: CameraResultType.Base64
+    });
+
+    this.image = image;
+  }
+  constructor(private _store:Store,
+              private _location: Location,){}
+  
+
+  editProfileFormGroup = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    phoneNumber: new FormControl(''),
+    email: new FormControl('')
+  })
+  ngOnInit(): void {
+    this.homeOwner$.subscribe((homeOwner)=>{
+      this.editProfileFormGroup.get('name')?.patchValue(homeOwner.name!)
+      this.editProfileFormGroup.get('phoneNumber')?.patchValue(homeOwner.phoneNumber!)
+      this.editProfileFormGroup.get('email')?.patchValue(homeOwner.email!)
+    })
+    this.editProfileFormGroup.get('phoneNumber')?.disable()
+  }
+
+  onSave(){
+
+  }
+  
+  back() {
+    this._location.back()
+  }
+}
