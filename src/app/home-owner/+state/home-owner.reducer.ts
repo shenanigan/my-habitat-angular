@@ -4,7 +4,7 @@ import { HomeOwner } from "../domain/entities/home-owner";
 import { Message } from "../domain/entities/message";
 import { Payment } from "../domain/entities/payment";
 import { Reservation } from "../domain/entities/reservation";
-import { addHouseholdSuccess, addMessage, addReservationSuccess, allowKidExitSuccess, cancelKidExitSuccess, cancelReservationSuccess, editReservationSuccess, getHomeOwnerSuccess, IRemoveHouseholdSuccess, IUpdateHouseholdSuccess, markPaymentPaidSuccess,  updateLogSuccess } from "./home-owner.actions";
+import { addHouseholdSuccess, addMessage, addReservationSuccess, allowKidExitSuccess, cancelKidExitSuccess, cancelReservationSuccess, editReservationSuccess, getHomeOwnerSuccess,  markPaymentPaidSuccess,  RemoveHouseholdSuccess,  UpdateHouseholdSuccess,  updateLogSuccess } from "./home-owner.actions";
 
 export interface IState {
     homeOwner: HomeOwner
@@ -30,7 +30,7 @@ export const homeOwnerReducer = createReducer(
             homeOwner: updatedHomeOwner
         }
     }),
-    on(IUpdateHouseholdSuccess, (state, { household }) => {
+    on(UpdateHouseholdSuccess, (state, { household }) => {
         var updatedHomeOwner = new HomeOwner(state.homeOwner.entityId, state.homeOwner)
         updatedHomeOwner.households=updatedHomeOwner.households.filter(x=>x.
             entityId!==household.entityId);
@@ -40,7 +40,7 @@ export const homeOwnerReducer = createReducer(
             homeOwner: updatedHomeOwner
         }
     }),
-    on(IRemoveHouseholdSuccess, (state, { household }) => {
+    on(RemoveHouseholdSuccess, (state, { household }) => {
         var updatedHomeOwner = new HomeOwner(state.homeOwner.entityId, state.homeOwner)
         updatedHomeOwner.households=updatedHomeOwner.households.filter(x=>x.
             entityId!==household.entityId);

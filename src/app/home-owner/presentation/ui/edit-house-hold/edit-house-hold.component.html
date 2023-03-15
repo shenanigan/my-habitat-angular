@@ -5,7 +5,7 @@
     </div>
     <hr class="hr pb-1">
     <div class="p-3">
-       <form [formGroup]="editHouseholdFormGroup" (submit)="editHousehold()">
+       <form [formGroup]="editHouseholdFormGroup" >
           <div class="d-flex justify-content-center" (click)="selectImage()">
              <img class="photo-container" style="object-fit: none;"
                 [src]=" imageUrl" onerror="this.src= 'assets/images/ic_defaultcamera.svg'"
@@ -36,11 +36,13 @@
              <input matInput placeholder="Name" formControlName="name" name="name">
              <mat-icon class="mat-icon " matSuffix>perm_contact_calendar</mat-icon>
           </mat-form-field>
- 
-          <div class="sub-mini-label mt-4">Email</div>
-          <mat-form-field class="w-100" appearance="outline" hideRequiredMarker>
-             <input matInput placeholder="Email" formControlName="email"name="email" >
-          </mat-form-field>
+          
+          <ng-container >
+            <div class="sub-mini-label mt-4">Email</div>
+            <mat-form-field class="w-100" appearance="outline" >
+               <input matInput placeholder="Email" formControlName="email"name="email" >
+            </mat-form-field>
+         </ng-container>
  
           <ng-container *ngIf="showPermissions">
              <div class="sub-mini-label mt-4 mb-1">When they exit society</div>
@@ -61,11 +63,18 @@
              </mat-chip-list>
           </div>
  
-          <button  mat-flat-button color="primary"
-             class="mat-flat-button w-100 my-3">Save</button>
+          <button  mat-flat-button color="primary" 
+             class="mat-flat-button w-100 my-3" (click)="save()">Save</button>
  
-          <button  mat-flat-button color="warn" 
-             class="mat-flat-button w-100" (click)="remove()">Remove</button>
+          <!-- <button  mat-flat-button color="warn" 
+             class="mat-flat-button w-100" (click)="remove()">Remove</button> -->
+         <div 
+            class="d-flex justify-content-center align-items-center sub-mini-label mt-2"
+            [ngStyle]="{'color':'red'}"
+            (click)="remove()">
+            Remove
+         </div> 
+
        </form>
     </div>
  </div>

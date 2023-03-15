@@ -17,8 +17,9 @@ import { IEditReservation } from "../../domain/contracts/requests/edit-reservati
 import { ICancelReservation } from "../../domain/contracts/requests/cancel-reservation";
 import { IAddEntity } from "../../domain/contracts/responses/add";
 import { CancelKidExitRequest } from "../../domain/contracts/requests/cancel-kid-exit";
-import { IUpdateHouseholdRequest } from "../../domain/contracts/requests/update-household";
-import { IRemoveHousehold } from "../../domain/contracts/requests/remove-household";
+import { UpdateHouseholdRequest } from "../../domain/contracts/requests/update-household";
+import { RemoveHouseholdRequest } from "../../domain/contracts/requests/remove-household";
+
 
 @Injectable()
 export class MockHomeOwnerService extends BaseService implements IHomeOwnerService {
@@ -107,14 +108,14 @@ export class MockHomeOwnerService extends BaseService implements IHomeOwnerServi
         })
     }
 
-    updateHousehold(householdRequest: IUpdateHouseholdRequest): Observable<string> {
+    updateHousehold(householdRequest: UpdateHouseholdRequest): Observable<string> {
         return new Observable(subscriber => {
             subscriber.next('123-456-789')
             subscriber.complete()
         })
     }
 
-    removeHousehold(householdRequest: IRemoveHousehold): Observable<string> {
+    removeHousehold(householdRequest: RemoveHouseholdRequest): Observable<string> {
         return new Observable(subscriber => {
             subscriber.next('123-456-789')
             subscriber.complete()

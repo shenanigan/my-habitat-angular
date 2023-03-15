@@ -8,8 +8,8 @@ import { ICancelReservation } from "../domain/contracts/requests/cancel-reservat
 import { IEditReservation } from "../domain/contracts/requests/edit-reservation";
 import { KidExitRequest } from "../domain/contracts/requests/kid-exit";
 import { IMarkPaymentPaidRequest } from "../domain/contracts/requests/mark-payment-paid-request";
-import { IRemoveHousehold } from "../domain/contracts/requests/remove-household";
-import { IUpdateHouseholdRequest } from "../domain/contracts/requests/update-household";
+import {  RemoveHouseholdRequest } from "../domain/contracts/requests/remove-household";
+import { UpdateHouseholdRequest } from "../domain/contracts/requests/update-household";
 import { UpdateLogRequest } from "../domain/contracts/requests/update-log";
 import { HomeOwner } from "../domain/entities/home-owner";
 import { Household } from "../domain/entities/household";
@@ -23,11 +23,11 @@ export const getHomeOwnerSuccess = createAction('[HomeOwner] Get Home Owner Succ
 export const addHousehold = createAction('[HomeOwner] Add Household', props<{ household: AddHouseholdRequest }>())
 export const addHouseholdSuccess = createAction('[HomeOwner] Add Household Success', props<{ household: Household }>())
 
-export const updateHousehold = createAction('[HomeOwner] update Household', props<{ household: IUpdateHouseholdRequest }>())
-export const IUpdateHouseholdSuccess = createAction('[HomeOwner] update Household Success', props<{ household: Household }>())
+export const updateHousehold = createAction('[HomeOwner] Update Household', props<{ household: UpdateHouseholdRequest }>())
+export const UpdateHouseholdSuccess = createAction('[HomeOwner] Update Household Success', props<{ household: Household }>())
 
-export const removeHousehold = createAction('[HomeOwner] remove Household', props<{ household: IRemoveHousehold }>())
-export const IRemoveHouseholdSuccess = createAction('[HomeOwner] remove Household Success', props<{ household: Household }>())
+export const removeHousehold = createAction('[HomeOwner] Remove Household', props<{ household: RemoveHouseholdRequest }>())
+export const RemoveHouseholdSuccess = createAction('[HomeOwner] Remove Household Success', props<{ household: Household }>())
 
 export const allowKidExit = createAction('[HomeOwner] Allow Kid Exit', props<{ kidExitRequest: KidExitRequest }>())
 export const allowKidExitSuccess = createAction('[HomeOwner]  Allow Kid Exit Success', props<{ kidExitRequest: KidExitRequest }>())

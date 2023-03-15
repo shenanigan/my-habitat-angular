@@ -1,7 +1,7 @@
 import { Component,  OnInit } from '@angular/core';
 import { Camera, CameraResultType, Photo } from '@capacitor/camera';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { async, Observable } from 'rxjs';
 import { selectHomeOwner } from '../home-owner/+state/home-owner.selector';
 import { Location } from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -14,7 +14,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class EditProfileComponent implements OnInit {
  
   homeOwner$ = this._store.select(selectHomeOwner());
-
+  userImage='assets/images/ic_default_myprofile.svg';
   image?: Photo;
   subscription?: Observable<any>;
   async selectImage() {
@@ -40,10 +40,15 @@ export class EditProfileComponent implements OnInit {
     email: new FormControl('')
   })
   ngOnInit(): void {
-    this.editProfileFormGroup.get('name')?.patchValue
+    this.homeOwner$.subscribe((homeOwner)=>{
+      this.editProfileFormGroup.get('name')?.patchValue(homeOwner.name!)
+      this.editProfileFormGroup.get('phoneNumber')?.patchValue(homeOwner.phoneNumber!)
+      this.editProfileFormGroup.get('email')?.patchValue(homeOwner.email!)
+    })
+    this.editProfileFormGroup.get('phoneNumber')?.disable()
   }
 
-  editProfile(){
+  onSave(){
 
   }
   

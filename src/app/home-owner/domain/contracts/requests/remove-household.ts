@@ -1,3 +1,3 @@
-export interface IRemoveHousehold{
-    id:string
+export interface RemoveHouseholdRequest{
+    householdId: string
 }

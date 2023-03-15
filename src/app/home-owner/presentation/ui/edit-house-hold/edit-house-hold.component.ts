@@ -3,7 +3,7 @@ import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges } from '@ang
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
-import { addHousehold, removeHousehold } from 'src/app/home-owner/+state/home-owner.actions';
+import { addHousehold, removeHousehold, updateHousehold } from 'src/app/home-owner/+state/home-owner.actions';
 import { AddHouseholdRequest } from 'src/app/home-owner/domain/contracts/requests/add-household';
 import { selectDailyHelpRoles, selectFamilyAdultRoles, selectFamilyKidRoles, selectFrequentVisitorRoles } from 'src/app/shared/+state/shared.selector';
 import { Role } from 'src/app/shared/domain/role';
@@ -14,7 +14,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Household } from 'src/app/home-owner/domain/entities/household';
 import { environment } from 'src/environments/environment';
 import { Dialog } from '@capacitor/dialog';
-import { IRemoveHousehold } from 'src/app/home-owner/domain/contracts/requests/remove-household';
+import { RemoveHouseholdRequest } from 'src/app/home-owner/domain/contracts/requests/remove-household';
+import { UpdateHouseholdRequest } from 'src/app/home-owner/domain/contracts/requests/update-household';
 
 @Component({
   selector: 'app-edit-hsouse-hold',
@@ -99,9 +100,16 @@ export class EditHouseHoldComponent implements OnInit,OnChanges {
 
     this.roles$.pipe(take(1)).subscribe(roles => {
       if (roles.length > 0) {
-        this.activeRole = roles[0]
+        const role =roles.find(x=>x.name===this.member?.role)
+        this.activeRole =role?? roles[0]
       }
     })
+
+    if(this.member?.type==='FAMILY_KID'){
+      this.isAdultSelected=false;
+    }
+      
+    
   }
 
   ngOnInit(): void {
@@ -139,40 +147,38 @@ export class EditHouseHoldComponent implements OnInit,OnChanges {
     })
   }
 
-  // addHousehold() {
-  //   if (this.image?.base64String) {
-  //     this._imageService.saveImage(uuidv4(), this.image.base64String, this.image.format).pipe(take(1)).subscribe(imageUrl => {
-  //       this._addHousehold(imageUrl)
-  //     });
-  //   } else {
-  //     this._addHousehold()
-  //   }
-  // }
-  // private _addHousehold(imageUrl?: string) {
+  save(){
 
-  //   var permission: string | undefined
-  //   if (this.currentPermission) {
-  //     const index = this.permissions.indexOf(this.currentPermission);
-  //     if (index >= 0) {
-  //       permission = this.permissionValues[index]
-  //     }
-  //   }
-  //   const householdRequest: AddHouseholdRequest = {
-  //     name: this.addHouseholeFormGroup.get('name')?.value ?? '',
-  //     role: this.activeRole?.name ?? '',
-  //     type: this.type,
-  //     countryCode: 973,
-  //     permission: permission,
-  //     imageUrl: imageUrl,
-  //     phoneNumber: this.addHouseholeFormGroup.get('phoneNumber')?.value ?? '',
-  //   }
-  //   this._store.dispatch(addHousehold({ household: householdRequest }))
-  // }
-
-
-  editHousehold(){
-    
+    if (this.image?.base64String) {
+      this._imageService.saveImage(uuidv4(), this.image.base64String, this.image.format).pipe(take(1)).subscribe(imageUrl => {
+        this._updateHousehold(imageUrl)
+      });
+    } else {
+       this._updateHousehold()
+      }
   }
+
+    private _updateHousehold(imageUrl?: string){
+      var permission: string | undefined
+      if (this.currentPermission) {
+        const index = this.permissions.indexOf(this.currentPermission);
+        if (index >= 0) {
+          permission = this.permissionValues[index]
+        }
+      }
+      const household:UpdateHouseholdRequest={
+        householdId:this.member?.entityId,
+        email:this.member?.email,
+        name: this.editHouseholdFormGroup.get('name')?.value ?? '',
+        phoneNumber: this.editHouseholdFormGroup.get('phoneNumber')?.value ?? '',
+        role: this.activeRole?.name ?? '',
+        permission: permission,
+        countryCode: 973,
+        imageUrl: this.imageUrl
+      }
+      this._store.dispatch(updateHousehold({ household }));
+    }
+  
 
   async remove() {
     const { value } = await Dialog.confirm({
@@ -183,8 +189,8 @@ export class EditHouseHoldComponent implements OnInit,OnChanges {
     });
 
     if (value) {
-      const household: IRemoveHousehold = {
-        id: this.member!.entityId
+      const household: RemoveHouseholdRequest = {
+        householdId: this.member!.entityId
       }
 
       this._store.dispatch(removeHousehold({ household }));

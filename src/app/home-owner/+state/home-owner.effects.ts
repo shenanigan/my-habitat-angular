@@ -9,7 +9,7 @@ import { Message } from "../domain/entities/message";
 import { Payment } from "../domain/entities/payment";
 import { Reservation } from "../domain/entities/reservation";
 import { AbstractHomeOwnerService } from "../domain/services/ihome-owner.service";
-import { addHousehold, addHouseholdSuccess, addMessage, addMessageSuccess, addReservation, addReservationSuccess, allowKidExit, allowKidExitSuccess, cancelKidExit, cancelKidExitSuccess, cancelReservation, cancelReservationSuccess, editReservation, editReservationSuccess, getHomeOwner, getHomeOwnerSuccess, markMessageViewed, markNoticeboardViewed, markPaymentPaid, markPaymentPaidSuccess, markPaymentViewed, removeHousehold, IRemoveHouseholdSuccess, updateHousehold, IUpdateHouseholdSuccess, updateLog, updateLogSuccess } from "./home-owner.actions";
+import { addHousehold, addHouseholdSuccess, addMessage, addMessageSuccess, addReservation, addReservationSuccess, allowKidExit, allowKidExitSuccess, cancelKidExit, cancelKidExitSuccess, cancelReservation, cancelReservationSuccess, editReservation, editReservationSuccess, getHomeOwner, getHomeOwnerSuccess, markMessageViewed, markNoticeboardViewed, markPaymentPaid, markPaymentPaidSuccess, markPaymentViewed, removeHousehold,  updateHousehold,  updateLog, updateLogSuccess, UpdateHouseholdSuccess, RemoveHouseholdSuccess } from "./home-owner.actions";
 
 @Injectable()
 export class HomeOwnerEffects {
@@ -63,7 +63,7 @@ export class HomeOwnerEffects {
                     return this._homeOwnerService.updateHousehold(d.household).
                         pipe(map(householdId=> {
                             var household = new Household(householdId, d.household);
-                            return IUpdateHouseholdSuccess({ household })
+                            return UpdateHouseholdSuccess({ household })
                         }),
                             catchError(err => {
                                 this._snackBarService.open(err.message, 'CANCEL');
@@ -82,7 +82,7 @@ export class HomeOwnerEffects {
                     return this._homeOwnerService.removeHousehold(d.household).
                         pipe(map(householdId => {
                             var household = new Household(householdId, d.household);
-                            return IRemoveHouseholdSuccess({ household })
+                            return RemoveHouseholdSuccess({ household })
                         }),
                             catchError(err => {
                                 this._snackBarService.open(err.message, 'CANCEL');

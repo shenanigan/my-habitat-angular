@@ -7,8 +7,8 @@ import { ICancelReservation } from "../contracts/requests/cancel-reservation";
 import { IEditReservation } from "../contracts/requests/edit-reservation";
 import { KidExitRequest } from "../contracts/requests/kid-exit";
 import { IMarkPaymentPaidRequest } from "../contracts/requests/mark-payment-paid-request";
-import { IRemoveHousehold } from "../contracts/requests/remove-household";
-import { IUpdateHouseholdRequest } from "../contracts/requests/update-household";
+import { RemoveHouseholdRequest } from "../contracts/requests/remove-household";
+import { UpdateHouseholdRequest } from "../contracts/requests/update-household";
 import { UpdateLogRequest } from "../contracts/requests/update-log";
 import { IAddEntity } from "../contracts/responses/add";
 import { HomeOwner } from "../entities/home-owner";
@@ -16,8 +16,8 @@ import { HomeOwner } from "../entities/home-owner";
 export interface IHomeOwnerService {
     getHomeOwner(): Observable<HomeOwner>
     addHousehold(household: AddHouseholdRequest): Observable<string>
-    updateHousehold(household: IUpdateHouseholdRequest): Observable<string>
-    removeHousehold(household: IRemoveHousehold): Observable<string>
+    updateHousehold(household: UpdateHouseholdRequest): Observable<string>
+    removeHousehold(household: RemoveHouseholdRequest): Observable<string>
     allowKidExit(request: KidExitRequest): Observable<void>
     cancelKidExit(request: CancelKidExitRequest): Observable<void>
     updateLog(request: UpdateLogRequest): Observable<void>
@@ -34,8 +34,8 @@ export interface IHomeOwnerService {
 export abstract class AbstractHomeOwnerService implements IHomeOwnerService {
     abstract getHomeOwner(): Observable<HomeOwner>
     abstract addHousehold(household: AddHouseholdRequest): Observable<string>
-    abstract updateHousehold(household: IUpdateHouseholdRequest): Observable<string>
-    abstract removeHousehold(household: IRemoveHousehold): Observable<string>
+    abstract updateHousehold(household: UpdateHouseholdRequest): Observable<string>
+    abstract removeHousehold(household: RemoveHouseholdRequest): Observable<string>
     abstract allowKidExit(request: KidExitRequest): Observable<void>
     abstract cancelKidExit(request: CancelKidExitRequest): Observable<void>
     abstract updateLog(request: UpdateLogRequest): Observable<void>
