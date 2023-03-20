@@ -32,8 +32,7 @@ export const homeOwnerReducer = createReducer(
     }),
     on(UpdateHouseholdSuccess, (state, { household }) => {
         var updatedHomeOwner = new HomeOwner(state.homeOwner.entityId, state.homeOwner)
-        updatedHomeOwner.households=updatedHomeOwner.households.filter(x=>x.
-            entityId!==household.entityId);
+        updatedHomeOwner.households=updatedHomeOwner.households.filter(x=>x.entityId!==household.entityId);
         updatedHomeOwner.households.push(household);
         return {
             ...state,

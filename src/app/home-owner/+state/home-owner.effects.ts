@@ -61,8 +61,8 @@ export class HomeOwnerEffects {
                 ofType(updateHousehold),
                 switchMap(d => {
                     return this._homeOwnerService.updateHousehold(d.household).
-                        pipe(map(householdId=> {
-                            var household = new Household(householdId, d.household);
+                        pipe(map(_=> {
+                            var household = new Household(d.household.householdId, d.household);
                             return UpdateHouseholdSuccess({ household })
                         }),
                             catchError(err => {
@@ -80,8 +80,8 @@ export class HomeOwnerEffects {
                 ofType(removeHousehold),
                 switchMap(d => {
                     return this._homeOwnerService.removeHousehold(d.household).
-                        pipe(map(householdId => {
-                            var household = new Household(householdId, d.household);
+                        pipe(map(_ => {
+                            var household = new Household(d.household.householdId, d.household);
                             return RemoveHouseholdSuccess({ household })
                         }),
                             catchError(err => {
