@@ -1,5 +1,5 @@
 export interface UpdateHouseholdRequest {
-    householdId?:string
+    householdId:string
     name?: string
     email?:string
     phoneNumber?: string
@@ -7,4 +7,5 @@ export interface UpdateHouseholdRequest {
     permission?: string
     countryCode?: number
     imageUrl?: string
+    type?: string
 }

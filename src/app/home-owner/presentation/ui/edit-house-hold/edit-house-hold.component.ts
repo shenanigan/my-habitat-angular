@@ -167,14 +167,15 @@ export class EditHouseHoldComponent implements OnInit,OnChanges {
         }
       }
       const household:UpdateHouseholdRequest={
-        householdId:this.member?.entityId,
-        email:this.member?.email,
+        householdId:this.member!.entityId,
+        email:this.editHouseholdFormGroup.get('email')?.value?? '',
         name: this.editHouseholdFormGroup.get('name')?.value ?? '',
         phoneNumber: this.editHouseholdFormGroup.get('phoneNumber')?.value ?? '',
         role: this.activeRole?.name ?? '',
         permission: permission,
         countryCode: 973,
-        imageUrl: this.imageUrl
+        imageUrl: this.imageUrl, 
+        type: this.member!.type
       }
       this._store.dispatch(updateHousehold({ household }));
     }
