@@ -6,9 +6,13 @@ export class Payment extends Entity {
         super(paymentId)
         if (obj) {
             Object.assign(this, obj)
+
+            if (this.status) {
+                this.title= `Your annual maintenance is ${this.status.toLowerCase()}`   
+            }
         }
     }
-
+    title?:string
     amount?: number
     type?: string
     createdAt?: Date
