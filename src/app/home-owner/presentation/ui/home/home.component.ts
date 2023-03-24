@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   homeOwner$ = this._store.select(selectHomeOwner());
   hasUnreadMessages: boolean = false;
-  showPopup: boolean = true;
   payment?:Payment;
   private _homeOwnerSubscription: Subscription;
   hidePopup: Array<string> = [];

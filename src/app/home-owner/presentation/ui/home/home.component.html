@@ -47,12 +47,12 @@
             class="d-flex justify-content-between my-3 dues-popup p-2"
             [ngClass]="{'d-none' : hidePopup.includes(index.toString())}">
           <img src="assets/images/ic_defaultuser.svg" class="img-72 ms-1" alt="" />
-          <div>
+          <div class="flex-grow-1">
             <div class="d-flex justify-content-between mb-1">
               <div>
                 <div class="label-15-700 color-primary">Outstanding Dues</div>
-                <div class="label-14-400 color-primary">
-                  {{payment?.title}}
+                <div class="label-14-400 color-primary " style="text-transform: capitalize;">
+                  {{payment.type}}
                 </div>
               </div>
               <mat-icon (click)="hidePopup.push(index.toString())">close</mat-icon>
