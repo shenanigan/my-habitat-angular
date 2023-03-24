@@ -174,7 +174,7 @@ export class EditHouseHoldComponent implements OnInit,OnChanges {
         role: this.activeRole?.name ?? '',
         permission: permission,
         countryCode: 973,
-        imageUrl: this.imageUrl, 
+        imageUrl: imageUrl, 
         type: this.member!.type
       }
       this._store.dispatch(updateHousehold({ household }));

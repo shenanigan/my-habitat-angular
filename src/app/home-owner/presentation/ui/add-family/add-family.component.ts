@@ -139,6 +139,7 @@ export class AddFamilyComponent implements OnInit {
       permission: permission,
       imageUrl: imageUrl,
       phoneNumber: this.addHouseholeFormGroup.get('phoneNumber')?.value ?? '',
+      email:this.addHouseholeFormGroup.get('email')?.value??''
     }
     this._store.dispatch(addHousehold({ household: householdRequest }))
   }
