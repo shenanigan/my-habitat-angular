@@ -23,7 +23,6 @@ export interface TimeSlot {
 })
 export class ConfirmReservationComponent implements OnInit, OnDestroy {
   amenity?: string;
-  showPopup: boolean = true;
   timeSlots: TimeSlot[] = [];
   availableSlotCount = 0;
   selectedSlot?: TimeSlot;
@@ -33,7 +32,8 @@ export class ConfirmReservationComponent implements OnInit, OnDestroy {
   homeOwner?: HomeOwner
   reservation?: Reservation
   _actionsSubscription: Subscription
-
+  hidePopup: Array<string> = [];
+  
   constructor(private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private _actions$: ScannedActionsSubject,

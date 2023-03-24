@@ -19,21 +19,24 @@
       </div>
     </div>
   </div>
-  <ng-container *ngFor="let payment of (homeOwner$| async)?.payments;">
-    <div *ngIf="payment.status?.toLowerCase()==='pending'? 'showPopup' :'' " class="d-flex justify-content-between mb-4 dues-popup p-2">
+  <ng-container *ngFor="let payment of (homeOwner$| async)?.payments;let index=index">
+    <div 
+      *ngIf="payment.status?.toLowerCase()==='pending' " 
+      class="d-flex justify-content-between mb-4 dues-popup p-2"
+      [ngClass]="{'d-none' : hidePopup.includes(index.toString())}">
       <img src="assets/images/ic_defaultuser.svg" class="img-72 ms-1" alt="" />
-      <div>
+      <div class="flex-grow-1">
         <div class="d-flex justify-content-between mb-1">
           <div>
             <div class="label-15-700 color-primary">Outstanding Dues</div>
-            <div class="label-14-400 color-primary">
-              Your annual maintenance is pending.
+            <div class="label-14-400 color-primary" style="text-transform: capitalize;">
+              {{payment.type}}
             </div>
           </div>
-          <mat-icon (click)="showPopup = false">close</mat-icon>
+          <mat-icon (click)="hidePopup.push(index.toString())">close</mat-icon>
         </div>
         <div class="d-flex justify-content-between align-items-center">
-          <label class="label-14-400 color-primary">Amount: BD 10.50</label>
+          <label class="label-14-400 color-primary">Amount: {{payment.amount +' '+ payment.currency }} </label>
           <button class="pay-now-button" routerLink="/home-owner/payments" >Pay Now</button>
         </div>
       </div>

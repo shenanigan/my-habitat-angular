@@ -8,7 +8,6 @@ export class Payment extends Entity {
             Object.assign(this, obj)
         }
     }
-
     amount?: number
     type?: string
     createdAt?: Date

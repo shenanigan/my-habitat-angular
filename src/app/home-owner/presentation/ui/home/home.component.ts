@@ -7,6 +7,7 @@ import { CancelKidExitRequest } from 'src/app/home-owner/domain/contracts/reques
 import { UpdateLogRequest } from 'src/app/home-owner/domain/contracts/requests/update-log';
 import { Household } from 'src/app/home-owner/domain/entities/household';
 import { Log } from 'src/app/home-owner/domain/entities/log';
+import { Payment } from 'src/app/home-owner/domain/entities/payment';
 import { IRealTimeService } from 'src/app/shared/domain/abstractions/irealtime.service';
 import { AblyEvents } from 'src/app/shared/infrastructure/real-time/ably-events';
 import { cancelKidExit, getHomeOwner, updateLog } from '../../../+state/home-owner.actions';
@@ -21,7 +22,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   homeOwner$ = this._store.select(selectHomeOwner());
   hasUnreadMessages: boolean = false;
+  payment?:Payment;
   private _homeOwnerSubscription: Subscription;
+  hidePopup: Array<string> = [];
 
   constructor(private _bottomSheet: MatBottomSheet,
     @Inject(AblyEvents) private _realtimeService: IRealTimeService,
@@ -71,4 +74,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     this._store.dispatch(cancelKidExit({ request }))
   }
+
+  
 }
