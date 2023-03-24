@@ -1,76 +1,125 @@
 <div class="home-container">
-    <div class="d-flex justify-content-between  p-3">
-        <img src="assets/images/logo_landing.svg">
-        <span><img routerLink="/Profile" class="profile-pic opacity-50"
-                src="assets/images/ic_default_myprofile.svg"></span>
-    </div>
+  <div class="d-flex justify-content-between p-3">
+    <img src="assets/images/logo_landing.svg" />
+    <span
+      ><img
+        routerLink="/Profile"
+        class="profile-pic opacity-50"
+        src="assets/images/ic_default_myprofile.svg"
+    /></span>
+  </div>
 </div>
-<div class="d-flex flex-column p-3  middle-container">
-    <div class="title-label">Hi, {{(homeOwner$ | async)?.truncatedName}}
-    </div>
-    <p class="mt-2 paragraph-label">Welcome to Bahrain's Smart Community <br> Management System</p>
-    <div class="d-flex justify-content-flex-start flex-wrap p-2">
-        <span class="span-background columncount" routerLink="/noticeboard" style="position: relative;">
-            <div class="notification" *ngIf="(homeOwner$ | async)?.hasViewedNoticeboard === false"></div>
-            <img src="assets/images/card_ic_notice.svg">
-            <div class="label-10-100 color-primary">Noticeboard</div>
-        </span>
-        <span class="span-background columncount" routerLink="/home-owner/reservations">
-            <img src="assets/images/card_ic_reservation.svg">
-            <div class="label-10-100 color-primary">Reservation</div>
-        </span>
-        <span class="span-background columncount" routerLink="/home-owner/payments" style="position: relative;">
-            <div class="notification" *ngIf="(homeOwner$ | async)?.hasViewedPayments === false"></div>
-            <img src="assets/images/card_ic_payments.svg">
-            <div class="label-10-100 color-primary">Payments</div>
-        </span>
-        <span class="span-background columncount" (click)="openKidExit()">
-            <img src="assets/images/card_ic_kidexit.svg">
-            <div class="label-10-100 color-primary">Kid Exit</div>
-        </span>
+<div class="d-flex flex-column p-3 middle-container">
+  <div class="title-label">Hi, {{ (homeOwner$ | async)?.truncatedName }}</div>
+  <p class="mt-2 paragraph-label">
+    Welcome to Bahrain's Smart Community <br />
+    Management System
+  </p>
+  <div class="d-flex justify-content-flex-start flex-wrap p-2">
+    <span
+      class="span-background columncount"
+      routerLink="/noticeboard"
+      style="position: relative"
+    >
+      <div
+        class="notification"
+        *ngIf="(homeOwner$ | async)?.hasViewedNoticeboard === false"
+      ></div>
+      <img src="assets/images/card_ic_notice.svg" />
+      <div class="label-10-100 color-primary">Noticeboard</div>
+    </span>
+    <span
+      class="span-background columncount"
+      routerLink="/home-owner/reservations"
+    >
+      <img src="assets/images/card_ic_reservation.svg" />
+      <div class="label-10-100 color-primary">Reservation</div>
+    </span>
+    <span
+      class="span-background columncount"
+      routerLink="/home-owner/payments"
+      style="position: relative"
+    >
+      <div
+        class="notification"
+        *ngIf="(homeOwner$ | async)?.hasViewedPayments === false"
+      ></div>
+      <img src="assets/images/card_ic_payments.svg" />
+      <div class="label-10-100 color-primary">Payments</div>
+    </span>
+    <span class="span-background columncount" (click)="openKidExit()">
+      <img src="assets/images/card_ic_kidexit.svg" />
+      <div class="label-10-100 color-primary">Kid Exit</div>
+    </span>
 
-        <span class="span-background columncount" routerLink="chat" style="position: relative;">
-            <div class="notification" *ngIf="hasUnreadMessages"></div>
-            <img src="assets/images/card_ic_societymanager.svg">
-            <div class="label-10-100 color-primary">Management</div>
-        </span>
-        <span class="span-background  columncount" routerLink="household">
-            <img src="assets/images/card_ic_household.svg">
-            <div class="label-10-100 color-primary">Household</div>
-        </span>
-        <span></span>
-    </div>
-    
-    <ng-container *ngFor="let payment of (homeOwner$| async)?.payments;let index=index">
-        <div 
-            *ngIf="payment.status?.toLowerCase()==='pending' " 
-            class="d-flex justify-content-between my-3 dues-popup p-2"
-            [ngClass]="{'d-none' : hidePopup.includes(index.toString())}">
-          <img src="assets/images/ic_defaultuser.svg" class="img-72 ms-1" alt="" />
-          <div class="flex-grow-1">
-            <div class="d-flex justify-content-between mb-1">
-              <div>
-                <div class="label-15-700 color-primary">Outstanding Dues</div>
-                <div class="label-14-400 color-primary " style="text-transform: capitalize;">
-                  {{payment.type}}
-                </div>
-              </div>
-              <mat-icon (click)="hidePopup.push(index.toString())">close</mat-icon>
-            </div>
-            <div class="d-flex justify-content-between align-items-center">
-              <label class="label-14-400 color-primary">Amount: {{payment.amount+' '+ payment.currency! }}</label>
-              <button class="pay-now-button" routerLink="/home-owner/payments" >Pay Now</button>
+    <span
+      class="span-background columncount"
+      routerLink="chat"
+      style="position: relative"
+    >
+      <div class="notification" *ngIf="hasUnreadMessages"></div>
+      <img src="assets/images/card_ic_societymanager.svg" />
+      <div class="label-10-100 color-primary">Management</div>
+    </span>
+    <span class="span-background columncount" routerLink="household">
+      <img src="assets/images/card_ic_household.svg" />
+      <div class="label-10-100 color-primary">Household</div>
+    </span>
+    <span></span>
+  </div>
+
+  <ng-container
+    *ngFor="let payment of (homeOwner$ | async)?.payments; let index = index"
+  >
+    <div
+      *ngIf="payment.status?.toLowerCase() === 'pending'"
+      class="d-flex justify-content-between my-3 dues-popup p-2"
+      [ngClass]="{ 'd-none': hidePopup.includes(index.toString()) }"
+    >
+      <img src="assets/images/ic_defaultuser.svg" class="img-72 ms-1" alt="" />
+      <div class="flex-grow-1">
+        <div class="d-flex justify-content-between mb-1">
+          <div>
+            <div class="label-15-700 color-primary">Outstanding Dues</div>
+            <div
+              class="label-14-400 color-primary"
+              style="text-transform: capitalize"
+            >
+              {{ payment.type }}
             </div>
           </div>
+          <mat-icon (click)="hidePopup.push(index.toString())">close</mat-icon>
         </div>
-    </ng-container>
-
-    <div class="flex-column-reverse d-flex">
-        <div *ngFor="let log of (homeOwner$ | async)?.logs" class="mt-3">
-            <app-log [log]="log" (onApprove)="approve(log)" (onDeny)="deny(log)"></app-log>
+        <div class="d-flex justify-content-between align-items-center">
+          <label class="label-14-400 color-primary"
+            >Amount: {{ payment.amount + " " + payment.currency! }}</label
+          >
+          <button class="pay-now-button" routerLink="/home-owner/payments">
+            Pay Now
+          </button>
         </div>
-        <div *ngFor="let household of (homeOwner$ | async)?.pendingKidExits" class="mt-3">
-            <app-row-pending-kid-exit [household]="household" (onCancel)="cancel($event)"></app-row-pending-kid-exit>
-        </div>
+      </div>
     </div>
+  </ng-container>
+
+  <div class="flex-column-reverse d-flex">
+    <ng-container *ngFor="let log of (homeOwner$ | async)?.logs">
+      <div *ngIf="log.showLog" class="mt-3">
+        <app-log
+          [log]="log"
+          (onApprove)="approve(log)"
+          (onDeny)="deny(log)"
+        ></app-log>
+      </div>
+    </ng-container>
+    <div
+      *ngFor="let household of (homeOwner$ | async)?.pendingKidExits"
+      class="mt-3"
+    >
+      <app-row-pending-kid-exit
+        [household]="household"
+        (onCancel)="cancel($event)"
+      ></app-row-pending-kid-exit>
+    </div>
+  </div>
 </div>
