@@ -1,3 +1,4 @@
+import { formatDate } from "@angular/common";
 import { Entity } from "src/app/shared/domain/entity";
 import { Household } from "./household";
 
@@ -11,7 +12,6 @@ export class Log extends Entity {
             }
         }
     }
-
     status?: string // PENDING, APPROVED, PRE-APPROVED, DENIED, EXPIRED
     requestTime?: Date
     approvedTime?: Date
@@ -19,4 +19,34 @@ export class Log extends Entity {
     isExit?: boolean
     reason?: string
     household?: Household
+
+    get showLog():boolean{
+        let time:Date|undefined
+        if(this?.status){
+            switch (this.status){
+                case 'PENDING':
+                    time = this.requestTime
+                    break
+                case 'APPROVED':
+                    time = this.approvedTime
+                    break
+                case 'DENIED':
+                    time = this.rejectedTime
+                    break
+            }
+        }
+       return dateFormat(time)
+    }
+}
+
+function dateFormat(date?:Date):boolean{
+    if(date==undefined) return false;
+        const now= new Date();
+        const requestDateTime= new Date(date);
+        const oneWeek=24*60*60*1000*7;
+        const isMoreThanAWeek = now.getTime() - requestDateTime.getTime() > oneWeek;
+        if(!isMoreThanAWeek){
+            return true;
+        }
+        return false;
 }
