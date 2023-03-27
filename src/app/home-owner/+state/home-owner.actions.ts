@@ -9,6 +9,7 @@ import { IEditReservation } from "../domain/contracts/requests/edit-reservation"
 import { KidExitRequest } from "../domain/contracts/requests/kid-exit";
 import { IMarkPaymentPaidRequest } from "../domain/contracts/requests/mark-payment-paid-request";
 import {  RemoveHouseholdRequest } from "../domain/contracts/requests/remove-household";
+import { UpdateHomeOwnerRequest } from "../domain/contracts/requests/update-homeOwner";
 import { UpdateHouseholdRequest } from "../domain/contracts/requests/update-household";
 import { UpdateLogRequest } from "../domain/contracts/requests/update-log";
 import { HomeOwner } from "../domain/entities/home-owner";
@@ -19,6 +20,9 @@ import { Reservation } from "../domain/entities/reservation";
 
 export const getHomeOwner = createAction('[HomeOwner] Get Home Owner')
 export const getHomeOwnerSuccess = createAction('[HomeOwner] Get Home Owner Success', props<{ homeOwner: HomeOwner }>())
+
+export const updateHomeOwner = createAction('[HomeOwner] Update Home Owner', props<{ homeOwner: UpdateHomeOwnerRequest }>())
+export const updateHomeOwnerSuccess = createAction('[HomeOwner] Update Home Owner Success', props<{ homeOwner: UpdateHomeOwnerRequest }>())
 
 export const addHousehold = createAction('[HomeOwner] Add Household', props<{ household: AddHouseholdRequest }>())
 export const addHouseholdSuccess = createAction('[HomeOwner] Add Household Success', props<{ household: Household }>())

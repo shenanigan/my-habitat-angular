@@ -21,6 +21,7 @@ import { IAddEntity } from "../../domain/contracts/responses/add";
 import { CancelKidExitRequest } from "../../domain/contracts/requests/cancel-kid-exit";
 import { UpdateHouseholdRequest } from "../../domain/contracts/requests/update-household";
 import { RemoveHouseholdRequest } from "../../domain/contracts/requests/remove-household";
+import { UpdateHomeOwnerRequest } from "../../domain/contracts/requests/update-homeOwner";
 
 
 @Injectable()
@@ -32,6 +33,11 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
     super(_storageService);
   }
 
+  updateHomeOwner(request: UpdateHomeOwnerRequest): Observable<string> {
+    return this._http.post<HomeOwner>(environment.homeOwnerURL + `HomeOwner/UpdateProfile`, request, super.headers())
+      .pipe(map(response => response.entityId),
+        catchError(this.handleError));
+  }
 
   addHousehold(request: AddHouseholdRequest): Observable<string> {
     return this._http.post<Household>(environment.homeOwnerURL + `HomeOwner/AddHousehold`, request, super.headers())

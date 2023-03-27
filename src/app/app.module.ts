@@ -22,6 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { AbstractImageStorageService } from './shared/domain/services/iimage-storage.service';
+import { AzureImageStorageService } from './shared/infrastructure/storage/azure.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,12 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: AbstractImageStorageService,
+      useClass: AzureImageStorageService,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

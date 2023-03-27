@@ -13,8 +13,6 @@ import { StorageService } from '../shared/infrastructure/storage/storage.service
 })
 export class ProfileComponent implements OnInit {
 
-  userImage='assets/images/ic_default_myprofile.svg';
-  
   homeOwner$ = this._store.select(selectHomeOwner());
 
 
