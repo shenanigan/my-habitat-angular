@@ -9,7 +9,7 @@ import { Message } from "../domain/entities/message";
 import { Payment } from "../domain/entities/payment";
 import { Reservation } from "../domain/entities/reservation";
 import { AbstractHomeOwnerService } from "../domain/services/ihome-owner.service";
-import { addHousehold, addHouseholdSuccess, addMessage, addMessageSuccess, addReservation, addReservationSuccess, allowKidExit, allowKidExitSuccess, cancelKidExit, cancelKidExitSuccess, cancelReservation, cancelReservationSuccess, editReservation, editReservationSuccess, getHomeOwner, getHomeOwnerSuccess, markMessageViewed, markNoticeboardViewed, markPaymentPaid, markPaymentPaidSuccess, markPaymentViewed, removeHousehold,  updateHousehold,  updateLog, updateLogSuccess, UpdateHouseholdSuccess, RemoveHouseholdSuccess } from "./home-owner.actions";
+import { addHousehold, addHouseholdSuccess, addMessage, addMessageSuccess, addReservation, addReservationSuccess, allowKidExit, allowKidExitSuccess, cancelKidExit, cancelKidExitSuccess, cancelReservation, cancelReservationSuccess, editReservation, editReservationSuccess, getHomeOwner, getHomeOwnerSuccess, markMessageViewed, markNoticeboardViewed, markPaymentPaid, markPaymentPaidSuccess, markPaymentViewed, removeHousehold,  updateHousehold,  updateLog, updateLogSuccess, UpdateHouseholdSuccess, RemoveHouseholdSuccess, updateHomeOwner, updateHomeOwnerSuccess } from "./home-owner.actions";
 
 @Injectable()
 export class HomeOwnerEffects {
@@ -27,6 +27,23 @@ export class HomeOwnerEffects {
                 switchMap(_ => {
                     return this._homeOwnerService.getHomeOwner().
                         pipe(map(homeOwner => getHomeOwnerSuccess({ homeOwner })),
+                            catchError(err => {
+                                this._snackBarService.open(err.message, 'CANCEL');
+                                return of(failed(err))
+                            })
+                        )
+                })
+            )
+        )
+
+    updateHomeOwner$ =
+        createEffect(() =>
+            this._actions$.pipe(
+                ofType(updateHomeOwner),
+                switchMap((d) => {
+                    const homeOwner=d.homeOwner
+                    return this._homeOwnerService.updateHomeOwner(homeOwner).
+                        pipe(map(_ => updateHomeOwnerSuccess({ homeOwner })),
                             catchError(err => {
                                 this._snackBarService.open(err.message, 'CANCEL');
                                 return of(failed(err))

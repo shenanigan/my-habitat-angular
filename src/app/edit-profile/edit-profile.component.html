@@ -10,8 +10,8 @@
        <form [formGroup]="editProfileFormGroup">
           <div class="d-flex justify-content-center" (click)="selectImage()">
              <img class="photo-container" style="object-fit: none;"
-                [src]="image?.base64String ? 'data:image/'+image?.format+ ';base64,' + image?.base64String : 'assets/images/ic_defaultcamera.svg'"
-                [ngStyle]="image?.base64String ? {'object-fit': 'cover'} : {'object-fit': 'none'}">
+             [src]=" imageUrl" onerror="this.src= 'assets/images/ic_defaultcamera.svg'"
+             [ngStyle]="imageUrl ? {'object-fit': 'cover'} : {'object-fit': 'none'}">
           </div>
  
           <ng-container >

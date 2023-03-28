@@ -1,7 +1,9 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import {  Store } from '@ngrx/store';
+import { environment } from 'src/environments/environment';
+import { updateHomeOwnerSuccess } from '../home-owner/+state/home-owner.actions';
 import { selectHomeOwner } from '../home-owner/+state/home-owner.selector';
 import { StorageService } from '../shared/infrastructure/storage/storage.service';
 
@@ -13,15 +15,13 @@ import { StorageService } from '../shared/infrastructure/storage/storage.service
 })
 export class ProfileComponent implements OnInit {
 
-  userImage='assets/images/ic_default_myprofile.svg';
-  
   homeOwner$ = this._store.select(selectHomeOwner());
-
-
+  readSASToken = environment.azureRWSASToken;
   constructor(private _storageService: StorageService,
     private _location: Location,
     private _router: Router,
-    private _store:Store) { }
+    private _store:Store) {
+    }
 
   ngOnInit(): void {
   }

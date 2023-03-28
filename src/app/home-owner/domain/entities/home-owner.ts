@@ -66,6 +66,7 @@ export class HomeOwner extends Entity {
             }
         }
     }
+    imageUrl?:string
     societyId?: string
     name?: string
     email?: string

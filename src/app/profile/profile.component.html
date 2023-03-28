@@ -8,7 +8,10 @@
   </div>
   <div class="bottom-container">
     <div class="img-center">
-      <img class="circular-img" src="{{userImage}}" />
+      <img 
+        class="circular-img" 
+        [src]="(homeOwner$ | async)?.imageUrl?((homeOwner$ | async)?.imageUrl) + readSASToken:'assets/images/ic_default_myprofile.svg' " 
+        [ngStyle]="(homeOwner$ | async)?.imageUrl ? {'object-fit': 'cover'} : {'object-fit': 'none'}"/>
     </div>
     <div class="user-info">
       <!-- <div class="header-label">{{userName}}</div> -->

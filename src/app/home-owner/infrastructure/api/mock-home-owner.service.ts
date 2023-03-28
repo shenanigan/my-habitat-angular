@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, Subscriber } from "rxjs";
 import { BaseService } from "src/app/shared/infrastructure/api/base.service";
 import { Apollo } from "apollo-angular";
 import { IHomeOwnerService } from "../../domain/services/ihome-owner.service";
@@ -19,6 +19,8 @@ import { IAddEntity } from "../../domain/contracts/responses/add";
 import { CancelKidExitRequest } from "../../domain/contracts/requests/cancel-kid-exit";
 import { UpdateHouseholdRequest } from "../../domain/contracts/requests/update-household";
 import { RemoveHouseholdRequest } from "../../domain/contracts/requests/remove-household";
+import { UpdateHomeOwnerRequest } from "../../domain/contracts/requests/update-homeOwner";
+import { subscribe } from "graphql";
 
 
 @Injectable()
@@ -97,6 +99,12 @@ export class MockHomeOwnerService extends BaseService implements IHomeOwnerServi
 
 
             subscriber.next(homeOwner)
+            subscriber.complete()
+        })
+    }
+
+    updateHomeOwner(homeOwner: UpdateHomeOwnerRequest): Observable<string> {
+        return new Observable(subscriber=>{
             subscriber.complete()
         })
     }
