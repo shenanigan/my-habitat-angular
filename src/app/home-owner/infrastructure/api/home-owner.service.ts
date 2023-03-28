@@ -80,6 +80,7 @@ export class HomeOwnerService extends BaseService implements IHomeOwnerService {
       homeOwner {
         name
         email
+        imageUrl
         phoneNumber
         countryCode
         homeOwnerId

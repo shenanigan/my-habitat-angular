@@ -1,4 +1,4 @@
-import { Component,  OnInit } from '@angular/core';
+import { Component,  OnDestroy,  OnInit } from '@angular/core';
 import { Camera, CameraResultType, Photo } from '@capacitor/camera';
 import { ActionsSubject, Store } from '@ngrx/store';
 import { async, Observable, Subscription, take } from 'rxjs';
@@ -11,16 +11,18 @@ import { UpdateHomeOwnerRequest } from '../home-owner/domain/contracts/requests/
 import { updateHomeOwner, updateHomeOwnerSuccess } from '../home-owner/+state/home-owner.actions';
 
 import { ofType } from '@ngrx/effects';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss']
 })
-export class EditProfileComponent implements OnInit {
+export class EditProfileComponent implements OnInit,OnDestroy {
  
   homeOwner$ = this._store.select(selectHomeOwner());
   // userImage='assets/images/ic_default_myprofile.svg';
+  readSASToken = environment.azureRWSASToken;
   image?: Photo;
   imageUrl?:string;
   subscription?: Observable<any>;
@@ -45,9 +47,15 @@ export class EditProfileComponent implements OnInit {
                 this._actionsSubscription=this._actionsSubject
                 .pipe(ofType(updateHomeOwnerSuccess))
                 .subscribe((_)=>{
-                  this._location.back()
+                  if(this._actionsSubscription){
+                    this._location.back()
+                  }
+                 
                 })
               }
+  ngOnDestroy(): void {
+    this._actionsSubscription.unsubscribe()
+  }
 
   private _actionsSubscription:Subscription;
 
@@ -57,7 +65,8 @@ export class EditProfileComponent implements OnInit {
     email: new FormControl('')
   })
   ngOnInit(): void {
-    this.homeOwner$.subscribe((homeOwner)=>{
+    this.homeOwner$.pipe(take(1)).subscribe((homeOwner)=>{
+      this.imageUrl=homeOwner.imageUrl+this.readSASToken
       this.editProfileFormGroup.get('name')?.patchValue(homeOwner.name!)
       this.editProfileFormGroup.get('phoneNumber')?.patchValue(homeOwner.phoneNumber!)
       this.editProfileFormGroup.get('email')?.patchValue(homeOwner.email!)
@@ -70,7 +79,6 @@ export class EditProfileComponent implements OnInit {
       this._imageService.saveImage(uuidv4(), this.image.base64String, this.image.format).pipe(take(1)).subscribe(imageUrl => {
         this._updateHomeOwner(imageUrl)
       });
-      debugger
     } else {
        this._updateHomeOwner()
     }
@@ -82,7 +90,6 @@ export class EditProfileComponent implements OnInit {
       email:this.editProfileFormGroup.get('email')?.value??'',
       imageUrl:imageUrl
     }
-    debugger
     this._store.dispatch(updateHomeOwner({homeOwner}))
   }
 
@@ -90,4 +97,6 @@ export class EditProfileComponent implements OnInit {
   back() {
     this._location.back()
   }
+
+  
 }

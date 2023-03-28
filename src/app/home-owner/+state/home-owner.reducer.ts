@@ -24,12 +24,18 @@ export const homeOwnerReducer = createReducer(
     }),
     on(updateHomeOwnerSuccess,(state,{homeOwner})=>{
         var updatedHomeOwner= new HomeOwner(state.homeOwner.entityId,state.homeOwner)
-        updatedHomeOwner.name=homeOwner.name,
-        updatedHomeOwner.email=homeOwner.email,
-        updatedHomeOwner.imageUrl=homeOwner.imageUrl
+        if(homeOwner?.name){
+            updatedHomeOwner.name=homeOwner.name;
+        }
+        if(homeOwner?.email){
+            updatedHomeOwner.email=homeOwner.email;
+        }
+        if(homeOwner?.imageUrl){
+            updatedHomeOwner.imageUrl=homeOwner.imageUrl
+        }
         return{
             ...state,
-            updatedHomeOwner
+            homeOwner: updatedHomeOwner
         }
     }),
 
