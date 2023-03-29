@@ -34,7 +34,7 @@
              <input matInput placeholder="Email" formControlName="email">
           </mat-form-field>
  
-          <button mat-flat-button color="primary"
+          <button mat-flat-button color="primary" [disabled]="!editProfileFormGroup.valid"
              class="mat-flat-button w-100 my-3" (click)="onSave()">Save</button>
  
        </form>

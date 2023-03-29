@@ -63,7 +63,7 @@
              </mat-chip-list>
           </div>
  
-          <button  mat-flat-button color="primary" 
+          <button  mat-flat-button color="primary" [disabled]="!editHouseholdFormGroup.valid"
              class="mat-flat-button w-100 my-3" (click)="save()">Save</button>
  
           <!-- <button  mat-flat-button color="warn" 
