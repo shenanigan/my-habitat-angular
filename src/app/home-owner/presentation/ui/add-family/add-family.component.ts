@@ -65,7 +65,7 @@ export class AddFamilyComponent implements OnInit {
 
   addHouseholeFormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    phoneNumber: new FormControl(''),
+    phoneNumber: new FormControl('',[Validators.required,Validators.pattern("^\\d{7,12}$")]),
     email: new FormControl('')
   })
 
