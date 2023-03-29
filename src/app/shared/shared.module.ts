@@ -15,10 +15,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { HeaderComponent } from './presentation/component/header/header.component';
 import { RowHomeOwnerComponent } from './presentation/component/row-home-owner/row-home-owner.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { LoaderComponent } from './presentation/component/loader/loader.component';
 
 @NgModule({
-  exports: [HeaderComponent, QRCodeModule],
-  declarations: [HeaderComponent, RowHomeOwnerComponent],
+  exports: [HeaderComponent, QRCodeModule,LoaderComponent],
+  declarations: [HeaderComponent, RowHomeOwnerComponent, LoaderComponent],
   imports: [
     CommonModule,
     MatPaginatorModule,

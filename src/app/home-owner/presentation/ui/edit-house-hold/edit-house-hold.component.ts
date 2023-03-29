@@ -177,7 +177,6 @@ export class EditHouseHoldComponent implements OnInit,OnChanges {
         imageUrl: imageUrl, 
         type: this.member!.type
       }
-      debugger
       this._store.dispatch(updateHousehold({ household }));
     }
   

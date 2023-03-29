@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { LoaderService } from 'src/app/loader.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -26,11 +27,13 @@ export class HeaderComponent implements OnInit {
   @Output() onRightClick2: EventEmitter<void> = new EventEmitter();
   @Output() onFavouriteClick: EventEmitter<void> = new EventEmitter();
   constructor(private _location: Location,
-    private _store: Store) { }
+    private _store: Store,
+    public loaderService:LoaderService) { }
 
-  get canShowLoader(): boolean {
-    return environment.production
-  }
+  // get canShowLoader(): boolean {
+  //   debugger
+  //   return environment.production
+  // }
 
   ngOnInit(): void {
 
