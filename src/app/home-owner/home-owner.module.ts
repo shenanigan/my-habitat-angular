@@ -49,6 +49,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { BookingSummaryComponent } from './presentation/ui/booking-summary/booking-summary.component';
 import { RowPendingKidExitComponent } from './presentation/component/row-pending-kid-exit/row-pending-kid-exit.component';
 import { EditHouseHoldComponent } from './presentation/ui/edit-house-hold/edit-house-hold.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { EditHouseHoldComponent } from './presentation/ui/edit-house-hold/edit-h
     MatIconModule,
     MatChipsModule,
     SharedModule,
+    MatProgressBarModule,
     NgImageFullscreenViewModule,
     StoreModule.forFeature(homeOwnerFeatureName, homeOwnerReducer),
     EffectsModule.forFeature([HomeOwnerEffects]),

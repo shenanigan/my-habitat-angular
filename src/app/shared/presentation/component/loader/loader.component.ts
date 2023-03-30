@@ -13,8 +13,5 @@ export class LoaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  get canShowLoader(): boolean {
-    return environment.production
-  }
-
+  
 }

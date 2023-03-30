@@ -16,6 +16,7 @@ import { environment } from 'src/environments/environment';
 import { Dialog } from '@capacitor/dialog';
 import { RemoveHouseholdRequest } from 'src/app/home-owner/domain/contracts/requests/remove-household';
 import { UpdateHouseholdRequest } from 'src/app/home-owner/domain/contracts/requests/update-household';
+import { LoaderService } from 'src/app/loader.service';
 
 @Component({
   selector: 'app-edit-hsouse-hold',
@@ -84,6 +85,7 @@ export class EditHouseHoldComponent implements OnInit,OnChanges {
 
   constructor(private _store: Store,
     private _imageService: AbstractImageStorageService,
+    public loaderService:LoaderService,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
 
     this.type = data[0].type
