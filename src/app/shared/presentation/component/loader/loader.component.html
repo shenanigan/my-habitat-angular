@@ -1,0 +1,9 @@
+<div *ngIf="loaderService.isLoading | async" class="position-fixed  w-100">
+    <mat-progress-bar mode="query"></mat-progress-bar>
+</div>
+<div *ngIf="canShowLoader">
+    <div *ngIf="loaderService.isLoading | async" class="loader-overlay"></div>
+</div>
+
+
+

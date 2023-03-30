@@ -18,12 +18,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { EditFamilyComponent } from './edit-family/edit-family.component';
 import { GraphQLModule } from './graphql.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { AbstractImageStorageService } from './shared/domain/services/iimage-storage.service';
 import { AzureImageStorageService } from './shared/infrastructure/storage/azure.service';
+import { SharedModule } from './shared/shared.module';
+import { InterceptorService } from './interceptor.service';
 
 @NgModule({
   declarations: [
@@ -52,12 +54,17 @@ import { AzureImageStorageService } from './shared/infrastructure/storage/azure.
     HttpClientModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
+    SharedModule
   ],
   providers: [
     {
       provide: AbstractImageStorageService,
       useClass: AzureImageStorageService,
     },
+    {
+      provide: HTTP_INTERCEPTORS, 
+      useClass: InterceptorService, multi: true 
+    }
   ],
   bootstrap: [AppComponent],
 })

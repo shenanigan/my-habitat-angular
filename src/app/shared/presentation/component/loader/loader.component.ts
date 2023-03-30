@@ -1,0 +1,21 @@
+import { Component, OnInit } from '@angular/core';
+import { LoaderService } from 'src/app/loader.service';
+import { environment } from 'src/environments/environment';
+
+@Component({
+  selector: 'app-loader',
+  templateUrl: './loader.component.html',
+  styleUrls: ['./loader.component.scss']
+})
+export class LoaderComponent implements OnInit {
+
+  constructor(public loaderService:LoaderService) { }
+
+  ngOnInit(): void {
+  }
+  get canShowLoader(): boolean {
+    // debugger
+    return environment.production
+  }
+
+}
