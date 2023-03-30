@@ -10,6 +10,7 @@ import { Role } from 'src/app/shared/domain/role';
 import { Camera, CameraResultType, Photo } from '@capacitor/camera';
 import { AbstractImageStorageService } from 'src/app/shared/domain/services/iimage-storage.service';
 import { v4 as uuidv4 } from 'uuid';
+import { LoaderService } from 'src/app/loader.service';
 
 @Component({
   selector: 'app-add-family',
@@ -71,6 +72,7 @@ export class AddFamilyComponent implements OnInit {
 
   constructor(private _store: Store,
     private _imageService: AbstractImageStorageService,
+    public loaderService:LoaderService,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
 
     this.type = data[0].type

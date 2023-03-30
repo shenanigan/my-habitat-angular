@@ -35,11 +35,11 @@ export class Log extends Entity {
                     break
             }
         }
-       return dateFormat(time)
+       return timelineForOneWeek(time)
     }
 }
 
-function dateFormat(date?:Date):boolean{
+function timelineForOneWeek(date?:Date):boolean{
     if(date==undefined) return false;
         const now= new Date();
         const requestDateTime= new Date(date);

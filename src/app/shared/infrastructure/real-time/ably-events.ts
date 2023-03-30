@@ -35,10 +35,8 @@ export class AblyEvents implements IRealTimeService {
       let homeOwnerChannel = this.client.channels.get(homeOwnerId);
       let societyChannel = this.client.channels.get(societyId);
       this.client.connection.on('disconnected', () => {
-        debugger;
-      })
+       })
       this.client.connection.on('connected', () => {
-        debugger
         homeOwnerChannel.subscribe('ADD_MESSAGE', (m) => {
           const message: IMessage = m.data
           if (message.sentById !== homeOwnerId) {
@@ -81,7 +79,7 @@ export class AblyEvents implements IRealTimeService {
       this.client = new Ably.Realtime(this.options);
       let homeOwnerChannel = this.client.channels.get(homeOwnerId);
       this.client.connection.on('disconnected', () => {
-        debugger;
+      
       })
       this.client.connection.on('connected', () => {
         homeOwnerChannel.subscribe('LOG_ACTION', (message) => {

@@ -37,7 +37,6 @@ export class BookingSummaryComponent implements OnInit, OnDestroy {
   }
 
   edit(reservation: Reservation) {
-    debugger
     this._router.navigate(['/home-owner/confirm-reservation'], {
       state: {
         reservation
