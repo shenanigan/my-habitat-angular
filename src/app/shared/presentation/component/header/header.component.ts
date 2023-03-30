@@ -30,10 +30,6 @@ export class HeaderComponent implements OnInit {
     private _store: Store,
     public loaderService:LoaderService) { }
 
-  // get canShowLoader(): boolean {
-  //   debugger
-  //   return environment.production
-  // }
 
   ngOnInit(): void {
 

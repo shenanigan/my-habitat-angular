@@ -44,7 +44,6 @@ export class ConfirmReservationComponent implements OnInit, OnDestroy {
 
     this._actionsSubscription = this._actions$.pipe(
       ofType(...[addReservationSuccess, editReservationSuccess])).subscribe(action => {
-        debugger
         this._router.navigate(['/home-owner/booking-summary'], {
           state: {
             reservation: action.reservation
@@ -83,7 +82,6 @@ export class ConfirmReservationComponent implements OnInit, OnDestroy {
     this._store.dispatch(getHomeOwner());
   }
   ngOnDestroy(): void {
-    debugger
     this._actionsSubscription.unsubscribe()
   }
 
