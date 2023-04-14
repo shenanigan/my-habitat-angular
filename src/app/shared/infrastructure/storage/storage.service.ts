@@ -52,12 +52,12 @@ export class StorageService {
 
   isHomeOwner() {
     var decodedToken = this.getDecodedAccessToken()
-    return decodedToken?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'HomeOwner';
+    return decodedToken?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'].includes('HomeOwner'); 
   }
 
   isSecurityGuard() {
     var decodedToken = this.getDecodedAccessToken()
-    return decodedToken?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'SecurityGuard';
+    return decodedToken?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'].includes('SecurityGuard');
   }
 
   getToken(): string | undefined {
